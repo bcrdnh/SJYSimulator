@@ -11,42 +11,164 @@ function start () {
     point: 100,
     parts: [
       {
-        name: '世界',
+        name: '世界观设定',
         options: [
           {
-            name: '危机四伏',
-            summary: 'this is option1',
-            specialName: 'testSP0',
-            cost: -10
+            name: '地狱',
+            summary: '在这里，你活不过五分钟。',
+            specialName: 'testSP4',
+            cost: -120
           },
           {
-            name: '风平浪静',
-            summary: 'this is option2',
-            specialName: 'testSP1',
+            name: '邪恶',
+            summary: '似乎每一个人都非常的不友善。',
+            specialName: 'testSP3',
+            cost: -30
+          },
+          {
+            name: '普通',
+            summary: '普通的世界，有善意也有邪恶。',
+            specialName: 'testSP4',
             cost: 0
           },
           {
-            name: '充满',
-            summary: 'this is option3',
-            specialName: 'testSP2',
-            cost: 10
+            name: '善良',
+            summary: '这个世界对你非常温柔。',
+            specialName: 'testSP4',
+            cost: 30
           },
+          {
+            name: '天堂',
+            summary: '简直是天堂！',
+            specialName: 'testSP4',
+            cost: 120
+          }
         ]
       },
       {
-        name: 'part 2',
+        name: '体质',
         options: [
           {
-            name: 'ex option 1',
-            summary: 'this is ex option',
+            name: '脆弱',
+            summary: '打小你身体就不好，经常会生病。',
             specialName: 'testSP3',
-            cost: -60
+            cost: -30
           },
           {
-            name: 'ex option 2',
-            summary: 'this is ex option',
+            name: '一般',
+            summary: '偶感风寒。',
             specialName: 'testSP4',
-            cost: 60
+            cost: 0
+          },
+          {
+            name: '强壮',
+            summary: '从来不会得病。',
+            specialName: 'testSP4',
+            cost: 30
+          }
+        ]
+      },
+      {
+        name: '心态',
+        options: [
+          {
+            name: '悲观',
+            summary: '悲观的你在出现意外时会掉更多的头发。',
+            specialName: 'testSP3',
+            cost: -30
+          },
+          {
+            name: '平平淡淡',
+            summary: '生活总是有起有落。',
+            specialName: 'testSP4',
+            cost: 0
+          },
+          {
+            name: '乐观',
+            summary: '乐观的人头发更浓密，大概。',
+            specialName: 'testSP4',
+            cost: 30
+          }
+        ]
+      },
+      {
+        name: '运气',
+        options: [
+          {
+            name: '非常差',
+            summary: '走在路上会经常会死掉。',
+            specialName: 'testSP3',
+            cost: -80
+          },
+          {
+            name: '差劲',
+            summary: '走在路上会踩到讨厌的东西。',
+            specialName: 'testSP4',
+            cost: -30
+          },
+          {
+            name: '还行',
+            summary: '走在路上会到达目的地。',
+            specialName: 'testSP4',
+            cost: 0
+          },
+          {
+            name: '不错',
+            summary: '走在路上会捡到钱。',
+            specialName: 'testSP4',
+            cost: 30
+          },
+          {
+            name: '幸运',
+            summary: '走在路上会捡到中大奖的彩票。',
+            specialName: 'testSP4',
+            cost: 80
+          }
+        ]
+      },
+      {
+        name: '商业头脑',
+        options: [
+          {
+            name: '没有观念',
+            summary: '你的金钱概念非常差劲，经常会被奸商欺骗。',
+            specialName: 'testSP3',
+            cost: -30
+          },
+          {
+            name: '普通人',
+            summary: '至少你还会使用余额宝。',
+            specialName: 'testSP4',
+            cost: 0
+          },
+          {
+            name: '大师',
+            summary: '许多上市公司的老板都会来找你取经。',
+            specialName: 'testSP4',
+            cost: 30
+          }
+        ]
+      },
+      {
+        name: '身体素质',
+        options: [
+          {
+            name: '笨拙',
+            summary: '你笨手笨脚的，不是很擅长运动。',
+            specialName: 'testSP3',
+            cost: -30
+          },
+          {
+            name: '普通人',
+            summary: '至少你还会使用余额宝。',
+            specialName: 'testSP4',
+            cost: 0
+          },
+          {
+            name: '大师',
+            summary: '许多上市公司的老板都会来找你取经。',
+            specialName: 'testSP4',
+            cost: 30
           }
         ]
       }
@@ -95,19 +217,55 @@ function start () {
     ]
   }
   const part00 = {
-    name: 'part 2',
+    name: '特质(多选)',
     options: [
       {
-        name: 'ex option 1',
-        summary: 'this is ex option',
-        specialName: 'testSP3',
-        cost: -60
+        name: '卷舌',
+        summary: '可以把舌头卷起来。',
+        specialName: '卷舌',
+        cost: 0
       },
       {
-        name: 'ex option 2',
-        summary: 'this is ex option',
-        specialName: 'testSP4',
-        cost: 60
+        name: '大力',
+        summary: '你力气比一般人大一些。',
+        specialName: '魔法天赋',
+        cost: 10
+      },
+      {
+        name: '魔法天赋',
+        summary: '你从小就可以使用一些魔法，但大家似乎都不相信。',
+        specialName: '魔法天赋',
+        cost: 10
+      },
+      {
+        name: '帅',
+        summary: '真的帅。',
+        specialName: '魔法天赋',
+        cost: 30
+      },
+      {
+        name: '魔法天赋',
+        summary: '你从小就可以使用一些魔法，但大家似乎都不相信。',
+        specialName: '魔法天赋',
+        cost: 10
+      },
+      {
+        name: '大豪斯',
+        summary: '你有一栋世世代代相传的豪宅。',
+        specialName: '大豪斯',
+        cost: 30
+      },
+      {
+        name: '破屋',
+        summary: '你住在四处漏风的破房子中。',
+        specialName: '破屋',
+        cost: -30
+      },
+      {
+        name: '卷发',
+        summary: '头发自来卷。',
+        specialName: '卷发',
+        cost: -30
       }
     ]
   }
@@ -116,33 +274,36 @@ function start () {
 }
 
 function saveCrazySJY () {
-  setVar('playerName', 'sjy')
+  setVar('playerName', '狂暴家翊')
   const startOptions = {
     baseStates: new Map(),
     special: new Map()
   }
-  // +80
+  // +30
   startOptions.baseStates.set('power', 120)
     .set('stamina', 100)
-    .set('inte', 50)
-    .set('health', 150)
-    .set('hair', 100)
-  startOptions.special.set('a', 1)
+    .set('inte', 40)
+    .set('health', 120)
+    .set('hair', 90)
+  startOptions.special.set('狂暴', 1)
+  startOptions.special.set('弱智', 1)
+  startOptions.special.set('大力', 1)
 }
 
 function saveWorkerSJY () {
-  setVar('playerName', 'sjy')
+  setVar('playerName', '苦工家翊')
   const startOptions = {
     baseStates: new Map(),
     special: new Map()
   }
-  // +50
+  // +30
   startOptions.baseStates.set('power', 80)
     .set('stamina', 100)
     .set('inte', 120)
-    .set('health', 100)
+    .set('health', 80)
     .set('hair', 50)
-  startOptions.special.set('b', 1)
+  startOptions.special.set('吃苦耐劳', 1)
+  startOptions.special.set('爱惜头发', 1)
 }
 
 function saveVampireSJY () {
@@ -157,7 +318,9 @@ function saveVampireSJY () {
     .set('inte', 90)
     .set('health', 90)
     .set('hair', 160)
-  startOptions.special.set('b', 1)
+  startOptions.special.set('帅', 1)
+  startOptions.special.set('吸血鬼', 1)
+  startOptions.special.set('大豪斯', 1)
 }
 </script>
 

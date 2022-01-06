@@ -34,18 +34,67 @@ const state = () => ({
         options: [
           {
             name: 'ex option 1',
-            summary: 'this is ex option',
+            summary: 'this is ex option, effect v1',
             specialName: 'testSP3',
-            cost: -60
+            cost: -20
           },
           {
             name: 'ex option 2',
-            summary: 'this is ex option',
+            summary: 'this is ex option, effect v1',
             specialName: 'testSP4',
-            cost: 60
+            cost: 20
+          }
+        ]
+      },
+      {
+        name: 'part 3',
+        options: [
+          {
+            name: 'ex option 3',
+            summary: 'this is ex option, effect v2',
+            specialName: 'testSP5',
+            cost: -20
+          },
+          {
+            name: 'ex option 4',
+            summary: 'this is ex option, effect v2',
+            specialName: 'testSP6',
+            cost: 20
           }
         ]
       }
+    ],
+    otherParts: [
+      {
+        name: 'other 1',
+        summary: 'this is other1',
+        specialName: 'testo1',
+        cost: -60
+      },
+      {
+        name: 'other 2',
+        summary: 'this is other2',
+        specialName: 'testo2',
+        cost: 60
+      },
+      {
+        name: 'other 3',
+        summary: 'this is other3',
+        specialName: 'testo3',
+        cost: -10
+      },
+      {
+        name: 'other 4',
+        summary: 'this is other4',
+        specialName: 'testo4',
+        cost: 0
+      },
+      {
+        name: 'other 5',
+        summary: 'this is other5',
+        specialName: 'testo5',
+        cost: 10
+      },
     ],
     baseStates: [
       {
@@ -83,6 +132,11 @@ const state = () => ({
         varName: 'fv2',
         name: 'tsfvvv23',
         default: 10
+      },
+      {
+        varName: 'hv',
+        name: 'effectOver',
+        default: 100
       }
     ]
   },

@@ -14,6 +14,7 @@ export function getDaramRouteById (id) {
 }
 
 export function getSpecialByName (name) {
+  if (!specialMap.has(name)) console.error('[util/getSpecialByName]:no this special:' + name)
   return specialMap.get(name)
 }
 

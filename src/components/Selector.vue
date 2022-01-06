@@ -15,7 +15,7 @@ defineExpose({
 <template>
   <div class="selector" v-if="show">
     <span v-for="b in buttonList">
-      <a-button @click="b.action();show=false">{{ b.name }}</a-button>
+      <a-button @click="b.action();show=false" block>{{ b.name }}</a-button>
     </span>
   </div>
 </template>

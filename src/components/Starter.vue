@@ -37,6 +37,19 @@ function select (partName, specialName) {
   startOptions.value.special.set(newOption.specialName, 1)
   restPoint.value -= newOption.cost
 }
+function otherSelect (specialName) {
+  let option = null
+  for (const op of starter.value.otherParts) {
+    if (op.specialName === specialName) option = op
+  }
+  if (startOptions.value.special.has(option.specialName)) {
+    startOptions.value.special.delete(option.specialName)
+    restPoint.value += option.cost
+  } else {
+    startOptions.value.special.set(option.specialName, 1)
+    restPoint.value -= option.cost
+  }
+}
 function changeState (change, varName) {
   const nowValue = startOptions.value.baseStates.get(varName)
   for (const bs of starter.value.baseStates) {
@@ -88,6 +101,21 @@ function next () {
           </div>
         </div>
       </div>
+      <div>
+        <div class="outerBox">
+          <div class="innerBox">
+            <div
+              v-for="button in starter.otherParts"
+              @click="otherSelect(button.specialName)"
+              :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
+            >
+              {{ button.name }}
+              {{ button.summary }}
+              {{ button.cost }}
+            </div>
+          </div>
+        </div>
+      </div>
     </a-space>
     <a-button @click="next()">ok</a-button>
   </div>
@@ -102,6 +130,7 @@ function next () {
   align-items: center;
   justify-content: center;
   overflow: auto;
+  background-color: #ffffff;
 }
 .starter::-webkit-scrollbar {
   width: 6px;

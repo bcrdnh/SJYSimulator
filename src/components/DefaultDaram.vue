@@ -6,12 +6,17 @@ import { setVar } from '../assets/utils.js'
 import Player from './Player.vue'
 import stateBorder from './StateBorder.vue'
 import specialBorder from './SpecialBorder.vue'
-import ev0to5 from '../assets/defaultDaram/event.json'
+import selector from './Selector.vue'
+import ev0to5 from '../assets/defaultDaram/event.js'
 const player = ref(null)
 const border = ref(null)
+const selector = ref(null)
 const router = useRouter()
 const store = useStore()
 const evPool = store.state.event.eventPool
+const wevp = store.state.event.wEventPool
+const getSpecial = store.getters['sys/getSpecial']
+const getStates = store.getters['sys/getStates']
 
 onMounted(() => {
   start()
@@ -37,32 +42,100 @@ function over () {
 }
 
 function turn0to5 () {
-  evPool.addEventObj(ev0to5)
-  const age = store.getters['sys/getStates']('age')
+  let luckCorrection = 0
+  if (getSpecial('testSP0')) luckCorrection = 10
+  if (getSpecial('testSP2')) luckCorrection = -10
+  wevp.addWEventArr([ev0to5.ev01, ev0to5.ev03], 50 + luckCorrection)
+  wevp.addWEventArr([ev0to5.ev02, ev0to5.ev04], 50)
+  const age = getStates('age')
   const ageInc = () => store.dispatch('sys/changeVar', {varName: 'age', num: 1})
-  console.log(age)
   if (age <= 5) {
-    player.value.setDaram(evPool.getEvent(), () => {
+    player.value.setDaram(wevp.getWEvent(), () => {
       ageInc()
       turn0to5()
     })
   } else {
-    player.value.setDaram([
-      '{playerName} is really a bad gay',
-      'he dead',
-      'over!'
-    ], () => {
-      over()
-    })
+    turnLoop()
   }
 }
 
+function turnLoop () {
+  if (getStates('hv') <= 0) {
+    player.value.setDaram([
+      '{playerName} dead!',
+      'over'
+    ], over())
+  }
+  let luckCorrection = 0
+  if (getSpecial('testSP0')) luckCorrection = 10
+  if (getSpecial('testSP2')) luckCorrection = -10
+  dayPart0()
+}
+
+function dayPart0 () {
+  if (getSpecial('testO1')) {
+    
+  }
+}
+function dayPart1 () {
+  selector.value.setSelect([
+    {
+      name: 'gowork',
+      action: () => {
+        player.value.setDaram([
+          'u decide go to work',
+          'u worked',
+          {
+            content: "u gain 3 v1",
+            clas: "blue",
+            changeVar: {
+              varName: "v1",
+              num: 3
+            }
+          }
+        ], dayPart2())
+      }
+    },
+    {
+      name: 'gobed',
+      action: () => {
+        player.value.setDaram([
+          'u decide go to bed',
+          'u sleeped',
+          {
+            content: "u gain 3 v2",
+            clas: "blue",
+            changeVar: {
+              varName: "v2",
+              num: 3
+            }
+          }
+        ], dayPart2())
+      }
+    }
+  ])
+}
+function dayPart2 () {
+  player.value.setDaram([
+    'after one day',
+    'u tried, u lose 10 vp',
+    {
+      content: 'u lose 10 vp',
+      clas: 'red',
+      changeVar: {
+        varName: 'vp',
+        num: -10
+      }
+    }
+  ], turnLoop())
+}
 </script>
 
 <template>
   <div class="controller">
     <stateBorder ref="border"></stateBorder>
     <specialBorder></specialBorder>
+    <selector ref="selector"></selector>
     <Player ref="player" class="player"></Player>
   </div>
 </template>

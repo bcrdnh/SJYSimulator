@@ -109,3 +109,40 @@ class WeightEventPool {
     this.weightList = []
   }
 }
+
+class TiggerPool {
+  constructor () {
+    // 最后发现其实用数组更好，懒得换了
+    this.pool = new Map()
+    this.mark = 0
+  }
+  addTigger (spName, rate=100, event=['default tigger'], repeatable=false, condition=()=>true) {
+    if (!this.pool.has(spName)) {
+      this.pool.set(spName, {
+        rate,
+        event,
+        repeatable,
+        condition,
+        triggered: false
+      })      
+    }
+  }
+  tigger (player, special, callback) {
+    if (this.mark >= this.pool.size - 1) {
+      callback()
+      return
+    }
+    let count = 0
+    let event = ['didnt set tigger event']
+    const setDaram = player.value.setDaram || player.setDaram
+    for (const tig of this.pool) {
+      if (count++ < this.mark) continue
+      if (special.has(tig[0]) && (!tig[1].triggered || tig[1].repeatable) && tig[1].condition()) {
+        this.mark = count - 1
+        event = tig[1].event
+        setDaram(event, this.tigger(player, special, callback))
+        break
+      }
+    }
+  }
+}
