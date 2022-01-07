@@ -26,14 +26,37 @@ onMounted(() => {
 
 function beforeEvenyThingStart () {
   setVar('age', 0)
-  border.value.addDisplayVar('power', '数据1')
-  border.value.addDisplayVar('stamina', '数据1')
-  border.value.addDisplayVar('inte', '数据1')
-  border.value.addDisplayVar('health', '数据1')
-  border.value.addDisplayVar('hair', '数据1')
+  border.value.addDisplayVar('power', '力量')
+  border.value.addDisplayVar('stamina', '耐力')
+  border.value.addDisplayVar('inte', '智力')
+  border.value.addDisplayVar('health', '生命值')
+  border.value.addDisplayVar('hair', '头发')
+    tiggerPool.addTigger('破屋', [
+    '由于昨晚住在破屋中，没能睡好，头发-2',
+    {
+      content: "头发-2",
+      clas: "red",
+      changeVar: {
+        varName: "hair",
+        num: -2
+      }
+    }
+  ], 15, true)
+  tiggerPool.addTigger('永恒霸王', [
+    '使用霸王洗发液洗头，由于洗发液用不完所以不会心疼，多洗了两次头。头发增加了一些',
+    {
+      content: "头发+2",
+      clas: "blue",
+      changeVar: {
+        varName: "hair",
+        num: 2
+      }
+    }
+  ], 15, true)
 }
 
 function startStage () {
+  // 开始的随机数据积累阶段
   
 }
 
