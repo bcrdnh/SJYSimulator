@@ -2,9 +2,10 @@
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
 
 const starter = ref(store.state.sys.starter)
 const startOptions = ref({
@@ -19,6 +20,7 @@ for (const f of starter.value.fixedBaseStates) {
 }
 
 const restPoint = ref(store.state.sys.starter.point)
+const playerName = ref('默认名称')
 function select (partName, specialName) {
   let part = null
   let oldOPtion = null
@@ -65,15 +67,18 @@ function next () {
   if (restPoint.value < 0) {
     message.error('not enought point')
   } else {
+    store.dispatch('sys/setVar', {playerName, playerName})
     store.dispatch('sys/finishStarter', startOptions.value)
-    router.push('/defaultDaram')
+    console.log(route)
+    router.push(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
   }
 }
 </script>
 
 <template>
   <div class="starter">
-    point: {{ restPoint }}
+    <a-input v-model:value="playerName" placeholder="请输入......" />
+    可用点数: {{ restPoint }}
     <a-space direction="vertical">
       <div v-for="baseState in starter.baseStates">
           <span>{{ baseState.name }}:</span>
@@ -94,24 +99,25 @@ function next () {
               @click="select(p.name, button.specialName)"
               :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
             >
-              {{ button.name }}
-              {{ button.summary }}
-              {{ button.cost }}
+              <div class="btnName">{{ button.name }}</div>
+              <div class="btnSummary">{{ button.summary }}</div>
+              <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
             </div>
           </div>
         </div>
       </div>
       <div>
         <div class="outerBox">
+          <div class="pname">{{ starter.otherPartsName }}</div>
           <div class="innerBox">
             <div
               v-for="button in starter.otherParts"
               @click="otherSelect(button.specialName)"
               :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
             >
-              {{ button.name }}
-              {{ button.summary }}
-              {{ button.cost }}
+              <div class="btnName">{{ button.name }}</div>
+              <div class="btnSummary">{{ button.summary }}</div>
+              <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
             </div>
           </div>
         </div>
@@ -123,8 +129,8 @@ function next () {
 
 <style>
 .starter {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,9 +175,27 @@ function next () {
   flex-wrap: wrap;
 }
 .button {
-  width: 80px;
-  height: 60px;
+  width: 90px;
+  /* min-width: 80px; */
+  /* height: 60px; */
+  height: fit-content;
+  min-height: 60px;
+  margin-right: 10px;
+  margin-bottom: 8px;
   transition: all .3s;
+}
+.btnName {
+  font-weight: bold;
+}
+.btnSummary {
+  font-style: italic;
+  color: gray;
+}
+.btnCostR {
+  color: chartreuse;
+}
+.btnCostG {
+  color: tomato;
 }
 .selected {
   background-color: #27272727;

@@ -64,35 +64,36 @@ const state = () => ({
         ]
       }
     ],
+    otherPartsName: 'opart',
     otherParts: [
       {
         name: 'other 1',
         summary: 'this is other1',
-        specialName: 'testo1',
-        cost: -60
+        specialName: 'testO1',
+        cost: -10
       },
       {
         name: 'other 2',
         summary: 'this is other2',
-        specialName: 'testo2',
-        cost: 60
+        specialName: 'testO2',
+        cost: 10
       },
       {
         name: 'other 3',
         summary: 'this is other3',
-        specialName: 'testo3',
+        specialName: 'testO3',
         cost: -10
       },
       {
         name: 'other 4',
         summary: 'this is other4',
-        specialName: 'testo4',
+        specialName: 'testO4',
         cost: 0
       },
       {
         name: 'other 5',
         summary: 'this is other5',
-        specialName: 'testo5',
+        specialName: 'testO5',
         cost: 10
       },
     ],

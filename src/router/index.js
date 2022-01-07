@@ -13,10 +13,13 @@ export const router = createRouter({
       path: '/defaultDaram',
       component: DefaultDaram
     },
-    ,
     {
       path: '/SJYStoryEnter',
       component: () => import('../components/SJYStory/SJYStoryEnter.vue')
-    }
+    },
+    {
+      path: '/SJYStory',
+      component: () => import('../components/SJYStory/SJYStory.vue')
+    },
   ]
 })

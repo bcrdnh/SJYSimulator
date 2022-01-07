@@ -1,24 +1,24 @@
-import { useStore } from "vuex"
-const getSpecial = useStore().getters['sys/getSpecial']
+import { store } from '../../store'
+const special = store.state.sys.globalVariable.special
 
 let v1up = 10
 let v1lose = -5
-if (getSpecial('testSP3')) {
+if (special.has('testSP3')) {
   v1up = 8
   v1lose = -6
 }
-if (getSpecial('testSP4')) {
+if (special.has('testSP4')) {
   v1up = 12
   v1lose = -4
 }
 
 let v2up = 8
 let v2lose = -4
-if (getSpecial('testSP5')) {
+if (special.has('testSP5')) {
   v2up = 6
   v2lose = -5
 }
-if (getSpecial('testSP6')) {
+if (special.has('testSP6')) {
   v2up = 10
   v2lose = -3
 }

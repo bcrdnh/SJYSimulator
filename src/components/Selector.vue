@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-const ButtonList = ref([])
+const buttonList = ref([])
 const show = ref(false)
 function setSelect (list) {
-  ButtonList.value = list
+  buttonList.value = list
   show.value = true
 }
 
@@ -13,10 +13,12 @@ defineExpose({
 </script>
 
 <template>
-  <div class="selector" v-if="show">
-    <span v-for="b in buttonList">
-      <a-button @click="b.action();show=false" block>{{ b.name }}</a-button>
-    </span>
+  <div>
+    <div class="selector" v-if="show">
+      <span v-for="b in buttonList">
+        <a-button @click="b.action();show=false" block>{{ b.name }}</a-button>
+      </span>      
+    </div>
   </div>
 </template>
 

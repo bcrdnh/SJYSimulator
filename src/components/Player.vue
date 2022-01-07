@@ -45,6 +45,10 @@ function setDaram (DaramPart, Callback = null) {
   callback.value = Callback
   play()
 }
+function clear () {
+  daramPart.value = []
+  callback.value = null
+}
 
 const count = ref(0)
 const locked = ref(false)
@@ -63,11 +67,20 @@ function play () {
   }
 }
 function afterOnePara () {
-  
+  return
+}
+function lock () {
+  locked.value = true
+}
+function unlock () {
+  locked.value = false
 }
 
 defineExpose({
-  setDaram
+  setDaram,
+  lock,
+  unlock,
+  clear
 })
 </script>
 

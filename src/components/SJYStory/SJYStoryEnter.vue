@@ -8,7 +8,7 @@ const router = useRouter()
 function start () {
   const starter = {
     name: 'SJYStory starter',
-    point: 100,
+    point: 120,
     parts: [
       {
         name: '世界观设定',
@@ -27,7 +27,7 @@ function start () {
           },
           {
             name: '普通',
-            summary: '普通的世界，有善意也有邪恶。',
+            summary: '普通的世界，有善良也有邪恶。',
             specialName: 'testSP4',
             cost: 0
           },
@@ -150,7 +150,7 @@ function start () {
         ]
       },
       {
-        name: '身体素质',
+        name: '运动能力',
         options: [
           {
             name: '笨拙',
@@ -160,13 +160,13 @@ function start () {
           },
           {
             name: '普通人',
-            summary: '至少你还会使用余额宝。',
+            summary: '你的体育成绩不算出众，平均水平。',
             specialName: 'testSP4',
             cost: 0
           },
           {
-            name: '大师',
-            summary: '许多上市公司的老板都会来找你取经。',
+            name: '强健',
+            summary: '曾经取得过12块奥运金牌。',
             specialName: 'testSP4',
             cost: 30
           }
@@ -198,54 +198,54 @@ function start () {
         max: 100,
         min: 80
       },
+    ],
+    fixedBaseStates: [
       {
         varName: 'health',
-        name: '',
-        cost: 1,
-        default: 100,
-        max: 150,
-        min: 50
+        name: '生命值',
+        default: 100
       },
       {
         varName: 'hair',
-        name: '',
-        cost: 1,
-        default: 100,
-        max: 150,
-        min: 50
-      },
-    ]
-  }
-  const part00 = {
-    name: '特质(多选)',
-    options: [
+        name: '头发',
+        default: 100
+      }
+    ],
+    otherPartsName: '额外选项',
+    otherParts: [
       {
         name: '卷舌',
-        summary: '可以把舌头卷起来。',
+        summary: '你可以把舌头卷起来。',
         specialName: '卷舌',
         cost: 0
       },
       {
         name: '大力',
         summary: '你力气比一般人大一些。',
-        specialName: '魔法天赋',
+        specialName: '大力',
         cost: 10
       },
       {
-        name: '魔法天赋',
-        summary: '你从小就可以使用一些魔法，但大家似乎都不相信。',
-        specialName: '魔法天赋',
+        name: '永恒霸王',
+        summary: '你有一瓶用不完的霸王洗发水。',
+        specialName: '永恒霸王',
         cost: 10
       },
       {
         name: '帅',
-        summary: '真的帅。',
-        specialName: '魔法天赋',
+        summary: '那是真的帅。',
+        specialName: '帅',
+        cost: 30
+      },
+      {
+        name: '弱智',
+        summary: '你是弱智。',
+        specialName: '弱智',
         cost: 30
       },
       {
         name: '魔法天赋',
-        summary: '你从小就可以使用一些魔法，但大家似乎都不相信。',
+        summary: '你从小就可以使用一些魔法，但大家似乎都不相信魔法这种东西。',
         specialName: '魔法天赋',
         cost: 10
       },
@@ -260,17 +260,11 @@ function start () {
         summary: '你住在四处漏风的破房子中。',
         specialName: '破屋',
         cost: -30
-      },
-      {
-        name: '卷发',
-        summary: '头发自来卷。',
-        specialName: '卷发',
-        cost: -30
       }
     ]
   }
   store.dispatch('sys/setStarter', starter)
-  router.push('/starter')
+  router.push({path: '/starter', query: {mainPage: '/SJYStory'}})
 }
 
 function saveCrazySJY () {
@@ -328,88 +322,101 @@ function saveVampireSJY () {
   <div class="sjyEnter">
     <div class="chose">
       <a-card class="page">
-        <div class="line xxl">name</div>
-        <div class="line s">summary</div>
+        <div class="line xxl">狂暴家翊</div>
+        <div class="line s">长时间的加班让他失去了人性，变得非常狂暴</div>
         <div class="divid"></div>
         <div class="line">
-          <span style="margin-right: 36px;">llll : 20</span>
-          <span style="margin-right: 36px;">stmn : 20</span>
-          <span>inte : 20</span>
+          <span style="margin-right: 36px;">力量 : 120</span>
+          <span style="margin-right: 36px;">耐力 : 100</span>
+          <span>智力 : 40</span>
         </div>
         <div class="line">
-          <span style="margin-right: 36px;">heal : 20</span>
-          <span>hair : 20</span>
+          <span style="margin-right: 36px;">生命值 : 120</span>
+          <span>头发 : 90</span>
         </div>
         <div class="divid"></div>
         <div class="line">
-          <div class="line xl">special</div>
-          <div>special summary</div>
+          <div class="line xl">狂暴</div>
+          <div>这种家翊非常狂暴，攻击性极强。</div>
+          <div class="line xl">弱智</div>
+          <div>这种家翊没什么智力。</div>
+          <div class="line xl">大力</div>
+          <div>小心家翊可怕的怪力！。</div>
         </div>
         <div class="divid"></div>
-        <a-button block>chose this!</a-button>
+        <a-button block disabled>开发中</a-button>
       </a-card>
+
       <a-card class="page">
-        <div class="line xxl">name</div>
-        <div class="line s">summary</div>
+        <div class="line xxl">苦工家翊</div>
+        <div class="line s">他还在加班！他已经三天没下班了！</div>
         <div class="divid"></div>
         <div class="line">
-          <span style="margin-right: 36px;">llll : 20</span>
-          <span style="margin-right: 36px;">stmn : 20</span>
-          <span>inte : 20</span>
+          <span style="margin-right: 36px;">力量 : 80</span>
+          <span style="margin-right: 36px;">耐力 : 100</span>
+          <span>智力 : 120</span>
         </div>
         <div class="line">
-          <span style="margin-right: 36px;">heal : 20</span>
-          <span>hair : 20</span>
+          <span style="margin-right: 36px;">生命值 : 80</span>
+          <span>头发 : 50</span>
         </div>
         <div class="divid"></div>
         <div class="line">
-          <div class="line xl">special</div>
-          <div>special summary</div>
+          <div class="line xl">吃苦耐劳</div>
+          <div>他经常加班并且不敢发出任何怨言，老板很喜欢他。</div>
+          <div class="line xl">爱惜头发</div>
+          <div>他非常的爱惜他的头发，虽然不多。</div>
         </div>
         <div class="divid"></div>
-        <a-button block>chose this!</a-button>
+        <a-button block disabled>开发中</a-button>
       </a-card>
+
       <a-card class="page">
-        <div class="line xxl">name</div>
-        <div class="line s">summary</div>
+        <div class="line xxl">吸血鬼家翊</div>
+        <div class="line s">为什么是吸血鬼？</div>
         <div class="divid"></div>
         <div class="line">
-          <span style="margin-right: 36px;">llll : 20</span>
-          <span style="margin-right: 36px;">stmn : 20</span>
-          <span>inte : 20</span>
+          <span style="margin-right: 36px;">力量 : 90</span>
+          <span style="margin-right: 36px;">耐力 : 90</span>
+          <span>智力 : 90</span>
         </div>
         <div class="line">
-          <span style="margin-right: 36px;">heal : 20</span>
-          <span>hair : 20</span>
+          <span style="margin-right: 36px;">生命值 : 90</span>
+          <span>头发 : 160</span>
         </div>
         <div class="divid"></div>
         <div class="line">
-          <div class="line xl">special</div>
-          <div>special summary</div>
+          <div class="line xl">吸血鬼</div>
+          <div>他是吸血鬼。为什么是吸血鬼？</div>
+          <div class="line xl">帅</div>
+          <div>他长得非常的帅。</div>
+          <div class="line xl">大豪斯</div>
+          <div>作为吸血鬼，他理所当然的拥有一座豪宅。</div>
         </div>
         <div class="divid"></div>
-        <a-button block>chose this!</a-button>
+        <a-button block disabled>开发中</a-button>
       </a-card>
+      
       <a-card class="page">
-        <div class="line xxl">name</div>
-        <div class="line s">summary</div>
+        <div class="line xxl">自定义</div>
+        <div class="line s">自定义你的角色</div>
         <div class="divid"></div>
         <div class="line">
-          <span style="margin-right: 36px;">llll : 20</span>
-          <span style="margin-right: 36px;">stmn : 20</span>
-          <span>inte : 20</span>
+          <span style="margin-right: 36px;">力量 : 80</span>
+          <span style="margin-right: 36px;">耐力 : 80</span>
+          <span>智力 : 80</span>
         </div>
         <div class="line">
-          <span style="margin-right: 36px;">heal : 20</span>
-          <span>hair : 20</span>
+          <span style="margin-right: 36px;">生命值 : 100</span>
+          <span>头发 : 100</span>
         </div>
         <div class="divid"></div>
         <div class="line">
-          <div class="line xl">special</div>
-          <div>special summary</div>
+          <div class="line xl">自定义！</div>
+          <div>使用点数自定义你的属性与特质！</div>
         </div>
         <div class="divid"></div>
-        <a-button block>chose this!</a-button>
+        <a-button @click="start()" block>选择这个！</a-button>
       </a-card>
     </div>
   </div>
@@ -422,6 +429,7 @@ function saveVampireSJY () {
   /* height: 360px;
   width: 300px; */
   margin: 12px;
+  min-width: 330px;
   /* padding: 12px;
   background-color: rgba(70, 70, 70, 0.14);
   border: 3px solid #f0f0f0;

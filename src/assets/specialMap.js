@@ -139,4 +139,186 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
+  ['卷舌', {
+    display: true,
+    displayName: '卷舌',
+    summary: '你可以把舌头卷起来。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['魔法天赋', {
+    display: true,
+    displayName: '魔法天赋',
+    summary: '你从小就可以使用一些魔法，但大家似乎都不相信魔法这种东西。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['永恒霸王', {
+    display: true,
+    displayName: '永恒霸王',
+    summary: '你有一瓶用不完的霸王洗发水。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['破屋', {
+    display: true,
+    displayName: '破屋',
+    summary: '你住在四处漏风的破房子中。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sjg0', {
+    display: false,
+    displayName: 'sjg0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sjg1', {
+    display: false,
+    displayName: 'sjg1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sjg2', {
+    display: false,
+    displayName: 'sjg2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sjg3', {
+    display: false,
+    displayName: 'sjg3',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sjg4', {
+    display: false,
+    displayName: 'sjg4',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['tz0', {
+    display: false,
+    displayName: 'tz0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['tz1', {
+    display: false,
+    displayName: 'tz1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['tz2', {
+    display: false,
+    displayName: 'tz2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['xt0', {
+    display: false,
+    displayName: 'xt0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['xt1', {
+    display: false,
+    displayName: 'xt1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['xt2', {
+    display: false,
+    displayName: 'xt2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq0', {
+    display: false,
+    displayName: 'yq0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq1', {
+    display: false,
+    displayName: 'yq1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq2', {
+    display: false,
+    displayName: 'yq2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq3', {
+    display: false,
+    displayName: 'yq3',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq4', {
+    display: false,
+    displayName: 'yq4',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sytn0', {
+    display: false,
+    displayName: 'sytn0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sytn1', {
+    display: false,
+    displayName: 'sytn1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['sytn2', {
+    display: false,
+    displayName: 'sytn2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['ydnl0', {
+    display: false,
+    displayName: 'ydnl0',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['ydnl1', {
+    display: false,
+    displayName: 'ydnl1',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['ydnl2', {
+    display: false,
+    displayName: 'ydnl2',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
 ])

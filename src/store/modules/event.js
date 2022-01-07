@@ -2,6 +2,7 @@ import { randomNum, changeVar } from './../../assets/utils.js'
 const state = () => ({
   eventPool: new EventPool(),
   wEventPool: new WeightEventPool(),
+  tiggerPool: new TiggerPool(),
   afterPara: new Set([
     () => {
       changeVar('turn', 1)
@@ -51,11 +52,13 @@ class EventPool {
     for (const ev of arr) {
       this.addEvent(ev)
     }
+    return this
   }
   addEventObj (obj) {
     Object.values(obj).forEach(ev => {
       this.addEvent(ev)
     })
+    return this
   }
   getEvent () {
     if (this.pool.size <= 0) return
@@ -116,7 +119,7 @@ class TiggerPool {
     this.pool = new Map()
     this.mark = 0
   }
-  addTigger (spName, rate=100, event=['default tigger'], repeatable=false, condition=()=>true) {
+  addTigger (spName, event=['default tigger'], rate=100, repeatable=false, condition=()=>true) {
     if (!this.pool.has(spName)) {
       this.pool.set(spName, {
         rate,
@@ -128,21 +131,46 @@ class TiggerPool {
     }
   }
   tigger (player, special, callback) {
-    if (this.mark >= this.pool.size - 1) {
+    console.warn('new tigger start!')
+    let count = 0
+    let event = ['didnt set tigger event']
+    const setDaram = player.setDaram ? player.setDaram : player.value.setDaram
+    for (const tig of this.pool) {
+      console.log('now comes to new loop, now count is ' + count +',now mark is ' + this.mark)
+      if (count++ < this.mark) continue
+      console.log('didnt continue, now going to panduan')
+      console.log('=====================================')
+      console.log('special.has(tig[0]):' + special.has(tig[0]))
+      console.log('!tig[1].triggered:' + !tig[1].triggered)
+      console.log('tig[1].repeatable:' + tig[1].repeatable)
+      console.log('(!tig[1].triggered || tig[1].repeatable):' + (!tig[1].triggered || tig[1].repeatable))
+      console.log('tig[1].condition():' + tig[1].condition())
+      console.log('=====================================')
+      if (special.has(tig[0]) && (!tig[1].triggered || tig[1].repeatable) && tig[1].condition()) {
+        this.mark = count
+        event = tig[1].event
+        tig[1].triggered = true
+        console.log('tigger success, now count is ' + count +',now mark is ' + this.mark)
+        console.log('and this time, event is:' + event)
+        setDaram(event, () => {
+          this.tigger(player, special, callback)
+        })
+        console.log('set over, try to break')
+        return
+      }
+      console.log('tigger fail, loop')
+    }
+    this.mark = count
+    console.log('loop over, function is over, now count is ' + count +',now mark is ' + this.mark)
+    if (this.mark >= this.pool.size) {
+      console.log('tigger over, try callback')
+      this.mark = 0
       callback()
       return
     }
-    let count = 0
-    let event = ['didnt set tigger event']
-    const setDaram = player.value.setDaram || player.setDaram
-    for (const tig of this.pool) {
-      if (count++ < this.mark) continue
-      if (special.has(tig[0]) && (!tig[1].triggered || tig[1].repeatable) && tig[1].condition()) {
-        this.mark = count - 1
-        event = tig[1].event
-        setDaram(event, this.tigger(player, special, callback))
-        break
-      }
-    }
+  }
+  clear () {
+    this.pool.clear()
+    this.mark = 0
   }
 }
