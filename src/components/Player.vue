@@ -110,4 +110,7 @@ defineExpose({
 .blue {
   color: aquamarine;
 }
+.red {
+  color: crimson;
+}
 </style>
