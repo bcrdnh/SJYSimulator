@@ -219,12 +219,18 @@ const mutations = {
   },
   changeSpecial (state, {name, num}) {
     let special = state.globalVariable.special
+    if (typeof num !== 'Number') {
+      num = 1
+    }
     if (!special.has(name)) {
       console.error('[store/sys.js/changeSpecial]:' + name + ' is undifine in store!')
     }
     special.set(name, special.get(name) + num)
   },
   setSpecial (state, {name, num}) {
+    if (typeof num !== 'Number') {
+      num = 1
+    }
     state.globalVariable.special.set(name, num)
   },
   setItems (state, { id, value }) {

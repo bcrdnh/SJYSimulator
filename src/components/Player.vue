@@ -52,6 +52,7 @@ function setDaram (DaramPart, Callback = null) {
 function clear () {
   daramPart.value = []
   callback.value = null
+  count.value = 0
 }
 
 const count = ref(0)
