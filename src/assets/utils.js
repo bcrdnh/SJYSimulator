@@ -18,6 +18,19 @@ export function getSpecialByName (name) {
   return specialMap.get(name)
 }
 
+export function setSpecial (name) {
+  if (!specialMap.has(name)) {
+    console.error('[utils/setSpecialByName]: ' + name + ' is not definition in specialMap')
+  }
+  const store = useStore()
+  store.dispatch('sys/setSpecial', {name, num: 1})
+}
+
+export function changeSpecial (name, num) {
+  const store = useStore()
+  store.dispatch('sys/changeSpecial', {name, num})
+}
+
 export function setVar (varName, content) {
   const store = useStore()
   store.dispatch('sys/setVar', {varName, content})
@@ -26,4 +39,27 @@ export function setVar (varName, content) {
 export function changeVar (varName, content) {
   const store = useStore()
   store.dispatch('sys/changeVar', {varName, content})
+}
+
+export function bondingSelect (labels, darams, player, selector, next) {
+  let param = []
+  const setSelect = selector.value.setSelect ? selector.value.setSelect : selector.setSelect
+  const unlock = player.value.unlock ? player.value.unlock : player.unlock
+  const lock = player.value.lock ? player.value.lock : player.lock
+  const setDaram = player.value.setDaram ? player.value.setDaram : player.setDaram
+  for (const name of labels) {
+    param.push(
+      {
+        name: name,
+        action: () => {
+          unlock()
+          setDaram(darams[labels.indexOf(name)], () => {
+            next()
+          })
+        }
+      }
+    )
+  }
+  lock()
+  setSelect(param)
 }

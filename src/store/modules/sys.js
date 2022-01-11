@@ -168,6 +168,12 @@ const actions = {
   setStarter ({ commit }, starter) {
     commit('setStarter', starter)
   },
+  changeSpecial ({ commit }, context) {
+    commit('changeSpecial', context)
+  },
+  setSpecial ({ commit }, context) {
+    commit('setSpecial', context)
+  },
   changeVar ({ commit }, context) {
     commit('changeVar', context)
   },
@@ -210,6 +216,16 @@ const mutations = {
   setVar (state, {varName, content}) {
     let baseStates = state.globalVariable.baseStates
     baseStates.set(varName, content)
+  },
+  changeSpecial (state, {name, num}) {
+    let special = state.globalVariable.special
+    if (!special.has(name)) {
+      console.error('[store/sys.js/changeSpecial]:' + name + ' is undifine in store!')
+    }
+    special.set(name, special.get(name) + num)
+  },
+  setSpecial (state, {name, num}) {
+    state.globalVariable.special.set(name, num)
   },
   setItems (state, { id, value }) {
     state.items[id] = value

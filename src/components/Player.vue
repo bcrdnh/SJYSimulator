@@ -18,10 +18,7 @@ function printMsg (msg='') {
       clas: msg.clas ? msg.clas : '',
       style: msg.style ? msg.style : ''
     })
-    if (msg.action && typeof msg.action === 'function') msg.action()
-    if (msg.changeVar && typeof msg.changeVar === 'object') store.dispatch('sys/changeVar', msg.changeVar)
-    if (msg.setVar && typeof msg.setVar === 'object') store.dispatch('sys/setVar', msg.setVar)
-    // TODO: items
+    handleMsg(msg)
   }
 }
 function prefixContent (content) {
@@ -33,6 +30,13 @@ function prefixContent (content) {
     content = content.replace(reg, str)
   }
   return content
+}
+function handleMsg (msg) {
+  if (msg.action && typeof msg.action === 'function') msg.action()
+  if (msg.changeVar && typeof msg.changeVar === 'object') store.dispatch('sys/changeVar', msg.changeVar)
+  if (msg.setVar && typeof msg.setVar === 'object') store.dispatch('sys/setVar', msg.setVar)
+  if (msg.changeSpecial && typeof msg.changeSpecial === 'object') store.dispatch('sys/changeSpecial', msg.changeSpecial)
+  if (msg.setSpecial && typeof msg.setSpecial === 'object') store.dispatch('sys/setSpecial', msg.setSpecial)
 }
 
 const daramPart = ref([])
@@ -52,10 +56,12 @@ function clear () {
 
 const count = ref(0)
 const locked = ref(false)
+const msgBox = ref(null)
 function play () {
   if (locked.value) return
   if (count.value < daramPart.value.length) {
     printMsg(daramPart.value[count.value++])
+    msgBox.scrollTop = msgBox.scrollHeight
   } else {
     count.value = 0
     afterOnePara()
@@ -66,6 +72,7 @@ function play () {
     console.error('[player.vue]:play() finished without anything!')
   }
 }
+
 function afterOnePara () {
   return
 }
@@ -86,7 +93,7 @@ defineExpose({
 
 <template>
   <div class="player">
-    <div class="msgBox" @click="play()">
+    <div ref="msgBox" class="msgBox" @click="play()">
       <div v-for="p in msgList" :class="p.clas">{{ p.content }}</div>
     </div>
   </div>
@@ -104,8 +111,9 @@ defineExpose({
 .msgBox {
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: scroll;
   justify-content: left;
+  border:  2px solid #000000;
 }
 .blue {
   color: aquamarine;
