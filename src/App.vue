@@ -15,6 +15,7 @@ function SJYStory () {
   <a-space>
     <a-button @click="defaultDaram()">test</a-button>
     <a-button @click="SJYStory()">SJYStory</a-button>
+    <div>版本号：2.0.3</div>
   </a-space>
   <router-view></router-view>
 </template>
