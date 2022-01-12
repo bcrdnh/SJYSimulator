@@ -1,8 +1,10 @@
+import { bondingSelect } from '../../assets/utils.js'
+
 export const preloadPlot0 = [
   '？？？：你好？',
   '？？？：喂？听得到吗？同学？',
-  '：嗯？',
-  '你是',
+  '{playerName}：嗯？',
+  '你是{playerName}',
   '你回过神来，你对面的桌子后坐着一排穿着正装的秃头中年大叔。',
   '你环顾四周，发现你正坐在一间会议室里。',
   '会议室的墙上挂着横幅“XX公司校园招聘会”',
@@ -20,15 +22,15 @@ export const preloadPlot1_labels = [
 export const preloadPlot1_darams = [
   ['你决定圆个场'],
   [
-    '：你知道医生怎么说吗？',
-    '：doctor',
+    '{playerName}：你知道医生怎么说吗？',
+    '{playerName}：doctor',
     '……',
     '沉默',
     '真烂啊，你自己都看不下去了，你只能圆个场。',
   ],
   [
     '你感到一股力量充满了全身',
-    '：傻逼！',
+    '{playerName}：傻逼！',
     '你很惊讶自己怎么会这么说。',
     '对面显然更惊讶，对面试有所不满的人他们也见过，却没见过如此突然的。',
     '但不愧是社会人，他们很快就冷静了下来，甚至给了你一个台阶。',
@@ -37,12 +39,14 @@ export const preloadPlot1_darams = [
 ]
 
 const preloadPlot2 = [
-  '：抱歉，第一次面试，我有点紧张。',
+  '{playerName}：抱歉，第一次面试，我有点紧张。',
   '大叔：没事，紧张是正常的。',
   '对方接受了你的说法。',
   '大叔：好，接下来做一下自我介绍吧。',
-  '：好的，我……',
-  '你开始回想起你那不长也不短的人生。 ' ,
+  '{playerName}：好的，我……',
+  '你开始回想起你那不长也不短的人生。' ,
+  '小学之前的事情都忘记了，大概从6岁开始的事情你还有印象。',
+  '你记得...'
 ]
 
 const preloadPlot3 = [
@@ -57,7 +61,9 @@ const preloadPlot3 = [
 ]
 
 export const preloadPart0 = (player, selector, next) => {
-  player.value.setDaram(preloadPlot0, preloadPart1(player, selector, next))
+  player.value.setDaram(preloadPlot0, () => {
+    preloadPart1(player, selector, next)
+  })
 }
 const preloadPart1 = (player, selector, next) => {
   bondingSelect(
@@ -65,9 +71,11 @@ const preloadPart1 = (player, selector, next) => {
     preloadPlot1_darams,
     player,
     selector,
-    preloadPart2(player, selector, next)
+    () => {
+      preloadPart2(player, selector, next)
+    }
   )
 }
 const preloadPart2 = (player, selector, next) => {
-  player.value.setDaram(preloadPlot2, next())
+  player.value.setDaram(preloadPlot2, next)
 }

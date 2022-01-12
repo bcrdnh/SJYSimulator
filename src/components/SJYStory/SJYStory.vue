@@ -9,7 +9,7 @@ import SpecialBorder from '../SpecialBorder.vue'
 import Selector from '../Selector.vue'
 import { preloadPart0 } from '../../assets/SJYStory/preloadPlot.js'
 import { NEv, SSRGoodEv, SRGoodEv, SRBadEv } from '../../assets/SJYStory/startStage.js'
-import { endStartStage, dayStartPlot, dayMorning_labels, dayMorning_Darams } from '../../assets/SJYStory/everyDay.js'
+import { endStartStage, dayStartPlot, dayMorning_labels, dayMorning_Darams, dayNoon_labels, dayNoon_Darams, dayAfternoon_labels, dayAfternoon_Darams, dayEvening_labels, dayEvening_Darams } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
 const selector = ref(null)
@@ -19,6 +19,7 @@ const store = useStore()
 const getSpecial = store.getters['sys/getSpecial']
 const getStates = store.getters['sys/getStates']
 const special = store.state.sys.globalVariable.special
+const tiggerPool = newTiggerPool()
 
 let luckCorrection = 0
 
@@ -26,7 +27,10 @@ onMounted(() => {
   beforeEvenyThingStart()
 })
 function beforeEvenyThingStart () {
+  // console.log(store.state.sys)
+  setVar('playerName', store.state.sys.playerName)
   setVar('age', 6)
+  setVar('day', 1)
   border.value.addDisplayVar('power', '力量')
   border.value.addDisplayVar('stamina', '耐力')
   border.value.addDisplayVar('inte', '智力')
@@ -81,30 +85,42 @@ function startStage () {
 }
 
 function dayStart () {
-  const tiggerPool = newTiggerPool()
   player.value.setDaram(dayStartPlot, () => {
     tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
   })
 }
 
 function dayP1 () {
-  bondingSelect(dayMorning_labels, dayMorning_Darams, player, selector, dayP2)
+  player.value.setDaram(['你决定......'], () => {
+    bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
+  })
 }
 
 function dayP2 () {
-  
+  player.value.setDaram(['到午休时间了，该吃点什么呢？'], () => {
+    bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
+  })
 }
 
 function dayP3 () {
-  
+  player.value.setDaram(['午休结束了，到了下午的工作时间了。'], () => {
+    bondingSelect(dayAfternoon_labels(), dayAfternoon_Darams(), player, selector, dayP4)
+  })
 }
 
 function dayP4 () {
-  
+  player.value.setDaram(['下班了，你决定.....'], () => {
+    bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, dayOver)
+  })
 }
 
 function dayOver () {
-  
+  changeVar('day', 1)
+  if (getStates('day') > 1) (
+    player.value.setDaram(['{playerName}短暂的一生结束了。'], () => {
+      router.push('/')
+    })
+  )
 }
 
 function checkEnd () {

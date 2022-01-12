@@ -1,5 +1,6 @@
 import { useStore } from "vuex"
 import { specialMap } from "./specialMap"
+import { store } from '../store'
 
 // 闭区间
 export function randomNum (minNum = 0, maxNum = 100) {
@@ -22,23 +23,23 @@ export function setSpecial (name) {
   if (!specialMap.has(name)) {
     console.error('[utils/setSpecialByName]: ' + name + ' is not definition in specialMap')
   }
-  const store = useStore()
+  // const store = useStore()
   store.dispatch('sys/setSpecial', {name, num: 1})
 }
 
 export function changeSpecial (name, num) {
-  const store = useStore()
+  // const store = useStore()
   store.dispatch('sys/changeSpecial', {name, num})
 }
 
 export function setVar (varName, content) {
-  const store = useStore()
+  // const store = useStore()
   store.dispatch('sys/setVar', {varName, content})
 }
 
 export function changeVar (varName, content) {
-  const store = useStore()
-  store.dispatch('sys/changeVar', {varName, content})
+  // const store = useStore()
+  store.dispatch('sys/changeVar', {varName, num: content})
 }
 
 export function bondingSelect (labels, darams, player, selector, next) {

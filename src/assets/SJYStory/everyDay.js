@@ -13,29 +13,74 @@ export const endStartStage = [
 ]
 
 export const dayStartPlot = [
-
+  '新的一天开始了！',
+  '今天是你入职的第一天！'
 ]
 
 export const dayMorning_labels = () => {
-  return []
+  return [
+    '上班',
+    '翘班'
+  ]
 }
 
 export const dayMorning_Darams = () => {
-  return []
+  return [
+    [
+      '你上班。'
+    ],
+    [
+      '你玩了个爽。'
+    ]
+  ]
 }
 
 export const dayNoon_labels = () => {
-  return []
+  return [
+    '热干面',
+    '盖浇饭'
+  ]
 }
 
 export const dayNoon_Darams = () => {
-  return []
+  return [
+    ['呸，真难吃。'],
+    ['一般般吧。']
+  ]
 }
 
 export const dayAfternoon_labels = () => {
-  return []
+  return [
+    '上班',
+    '翘班'
+  ]
 }
 
 export const dayAfternoon_Darams = () => {
-  return []
+  return [
+    [
+      '你上班。'
+    ],
+    [
+      '你玩了个爽。'
+    ]
+  ]
+}
+
+export const dayEvening_labels = () => {
+  return [
+    '回家吧',
+    '出去玩'
+  ]
+}
+
+export const dayEvening_Darams = () => {
+  return [
+    [
+      '你上班。'
+    ],
+    [
+      '你玩了个爽。'
+    ]
+  ]
 }

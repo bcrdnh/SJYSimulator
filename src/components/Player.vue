@@ -68,7 +68,7 @@ function play () {
     }, 100)
   } else {
     count.value = 0
-    afterOnePara()
+    // afterOnePara()
     if (callback.value && typeof callback.value === 'function') {
       callback.value()
       return

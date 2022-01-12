@@ -16,31 +16,31 @@ function start () {
           {
             name: '地狱',
             summary: '在这里，你活不过五分钟。',
-            specialName: 'testSP4',
+            specialName: 'sjg0',
             cost: -120
           },
           {
             name: '邪恶',
             summary: '似乎每一个人都非常的不友善。',
-            specialName: 'testSP3',
+            specialName: 'sjg1',
             cost: -30
           },
           {
             name: '普通',
             summary: '普通的世界，有善良也有邪恶。',
-            specialName: 'testSP4',
+            specialName: 'sjg2',
             cost: 0
           },
           {
             name: '善良',
             summary: '这个世界对你非常温柔。',
-            specialName: 'testSP4',
+            specialName: 'sjg3',
             cost: 30
           },
           {
             name: '天堂',
             summary: '简直是天堂！',
-            specialName: 'testSP4',
+            specialName: 'sjg4',
             cost: 120
           }
         ]
@@ -51,19 +51,19 @@ function start () {
           {
             name: '脆弱',
             summary: '打小你身体就不好，经常会生病。',
-            specialName: 'testSP3',
+            specialName: 'tz0',
             cost: -30
           },
           {
             name: '一般',
             summary: '偶感风寒。',
-            specialName: 'testSP4',
+            specialName: 'tz1',
             cost: 0
           },
           {
             name: '强壮',
             summary: '从来不会得病。',
-            specialName: 'testSP4',
+            specialName: 'tz2',
             cost: 30
           }
         ]
@@ -74,19 +74,19 @@ function start () {
           {
             name: '悲观',
             summary: '悲观的你在出现意外时会掉更多的头发。',
-            specialName: 'testSP3',
+            specialName: 'xt0',
             cost: -30
           },
           {
             name: '平平淡淡',
             summary: '生活总是有起有落。',
-            specialName: 'testSP4',
+            specialName: 'xt1',
             cost: 0
           },
           {
             name: '乐观',
             summary: '乐观的人头发更浓密，大概。',
-            specialName: 'testSP4',
+            specialName: 'xt2',
             cost: 30
           }
         ]
@@ -97,31 +97,31 @@ function start () {
           {
             name: '非常差',
             summary: '走在路上会经常会死掉。',
-            specialName: 'testSP3',
+            specialName: 'yq0',
             cost: -80
           },
           {
             name: '差劲',
             summary: '走在路上会踩到讨厌的东西。',
-            specialName: 'testSP4',
+            specialName: 'yq1',
             cost: -30
           },
           {
             name: '还行',
             summary: '走在路上会到达目的地。',
-            specialName: 'testSP4',
+            specialName: 'yq2',
             cost: 0
           },
           {
             name: '不错',
             summary: '走在路上会捡到钱。',
-            specialName: 'testSP4',
+            specialName: 'yq3',
             cost: 30
           },
           {
             name: '幸运',
             summary: '走在路上会捡到中大奖的彩票。',
-            specialName: 'testSP4',
+            specialName: 'yq4',
             cost: 80
           }
         ]
@@ -132,19 +132,19 @@ function start () {
           {
             name: '没有观念',
             summary: '你的金钱概念非常差劲，经常会被奸商欺骗。',
-            specialName: 'testSP3',
+            specialName: 'sytn0',
             cost: -30
           },
           {
             name: '普通人',
             summary: '至少你还会使用余额宝。',
-            specialName: 'testSP4',
+            specialName: 'sytn1',
             cost: 0
           },
           {
             name: '大师',
             summary: '许多上市公司的老板都会来找你取经。',
-            specialName: 'testSP4',
+            specialName: 'sytn2',
             cost: 30
           }
         ]
@@ -155,19 +155,19 @@ function start () {
           {
             name: '笨拙',
             summary: '你笨手笨脚的，不是很擅长运动。',
-            specialName: 'testSP3',
+            specialName: 'ydnl0',
             cost: -30
           },
           {
             name: '普通人',
             summary: '你的体育成绩不算出众，平均水平。',
-            specialName: 'testSP4',
+            specialName: 'ydnl1',
             cost: 0
           },
           {
             name: '强健',
             summary: '曾经取得过12块奥运金牌。',
-            specialName: 'testSP4',
+            specialName: 'ydnl2',
             cost: 30
           }
         ]
@@ -430,6 +430,7 @@ function saveVampireSJY () {
   width: 300px; */
   margin: 12px;
   min-width: 330px;
+  min-height: 400px;
   /* padding: 12px;
   background-color: rgba(70, 70, 70, 0.14);
   border: 3px solid #f0f0f0;

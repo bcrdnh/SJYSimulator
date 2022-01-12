@@ -147,7 +147,8 @@ const state = () => ({
     items: new Map()
   },
   states: {},
-  items: {}
+  items: {},
+  playerName: '默认名称'
 })
 
 const getters = {
@@ -214,6 +215,8 @@ const mutations = {
     }
   },
   setVar (state, {varName, content}) {
+    // console.log(varName)
+    // console.log(content)
     let baseStates = state.globalVariable.baseStates
     baseStates.set(varName, content)
   },
@@ -235,6 +238,9 @@ const mutations = {
   },
   setItems (state, { id, value }) {
     state.items[id] = value
+  },
+  setPlayerName (state, name) {
+    state.playerName = name
   }
 }
 
