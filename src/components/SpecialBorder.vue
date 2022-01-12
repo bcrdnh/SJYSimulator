@@ -21,7 +21,7 @@ for (const s of store.state.sys.globalVariable.special) {
   </a-space>
 </template>
 
-<style>
+<style scoped>
 .stateBorder {
   display: flex;
   flex-direction: row;

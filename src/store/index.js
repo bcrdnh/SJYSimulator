@@ -4,7 +4,6 @@ import sys from './modules/sys'
 
 export const store = createStore({
   modules: {
-    event,
     sys
   }
 })

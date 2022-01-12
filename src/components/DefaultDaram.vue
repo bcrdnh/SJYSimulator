@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { setVar } from '../assets/utils.js'
+import { setVar, newEventPool, newTiggerPool, newWeightEventPool } from '../assets/utils.js'
 import Player from './Player.vue'
 import StateBorder from './StateBorder.vue'
 import SpecialBorder from './SpecialBorder.vue'
@@ -13,9 +13,9 @@ const border = ref(null)
 const selector = ref(null)
 const router = useRouter()
 const store = useStore()
-const evPool = store.state.event.eventPool
-const wevp = store.state.event.wEventPool
-const tiggerPool = store.state.event.tiggerPool
+const evPool = newEventPool()
+const wevp = newWeightEventPool()
+const tiggerPool = newTiggerPool()
 const getSpecial = store.getters['sys/getSpecial']
 const getStates = store.getters['sys/getStates']
 const special = store.state.sys.globalVariable.special
@@ -172,12 +172,12 @@ function dayPart2 () {
   <div class="controller">
     <StateBorder ref="border"></StateBorder>
     <SpecialBorder></SpecialBorder>
-    <Selector ref="selector"></selector>
     <Player ref="player" class="player"></Player>
+    <Selector ref="selector"></selector>
   </div>
 </template>
 
-<style>
+<style scoped>
 .controller {
   width: 100vw;
   height: 100vh;
@@ -190,7 +190,7 @@ function dayPart2 () {
   padding: 24px;
 }
 .player {
-  flex: 1;
+  height: 100%;
   width: 100%;
 }
 </style>

@@ -32,7 +32,7 @@ defineExpose({
   </a-space>
 </template>
 
-<style>
+<style scoped>
 .stateBorder {
   display: flex;
   flex-direction: row;

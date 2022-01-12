@@ -77,18 +77,27 @@ function next () {
 
 <template>
   <div class="starter">
-    <a-input v-model:value="playerName" placeholder="请输入......" />
     可用点数: {{ restPoint }}
     <a-space direction="vertical">
-      <div v-for="baseState in starter.baseStates">
-          <span>{{ baseState.name }}:</span>
-          <span><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
-          <span>{{ startOptions.baseStates.get(baseState.varName) }}</span>
-          <span><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
+      <div class="outerBox">
+        <div class="pname">name</div>
+        <a-input v-model:value="playerName" placeholder="请输入......" />
       </div>
-      <div v-for="fixedState in starter.fixedBaseStates">
-        <span>{{ fixedState.name }}:</span>
-        <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
+      <div class="outerBox">
+        <div class="pname">baseState</div>
+        <div v-for="baseState in starter.baseStates" class="baseState">
+          <span style="min-width: 64px;">{{ baseState.name }}:</span>
+          <span style="margin-right: 24px;"><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
+          <span style="min-width: 16px;">{{ startOptions.baseStates.get(baseState.varName) }}</span>
+          <span style="margin-left: 24px;"><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
+        </div>
+      </div>
+      <div class="outerBox">
+        <div class="pname">otherState</div>
+        <div v-for="fixedState in starter.fixedBaseStates" class="baseState">
+          <span>{{ fixedState.name }}:</span>
+          <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
+        </div>
       </div>
       <div v-for="p in starter.parts">
         <div class="outerBox">
@@ -127,10 +136,11 @@ function next () {
   </div>
 </template>
 
-<style>
+<style scoped>
 .starter {
-  width: 100%;
+  width: 60%;
   height: 100%;
+  margin-left: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,32 +148,20 @@ function next () {
   overflow: auto;
   background-color: #ffffff;
 }
-.starter::-webkit-scrollbar {
-  width: 6px;
-  height: 100%;
-  transition: all .3s;
-}
-.starter::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 20px;
-  box-shadow: inset 0 0 5px #d8d8d8;
-  background: #535353;
-}
-/*滚动条轨道*/
-.starter::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: inset 0 0 5px #d8d8d8;
-  border-radius: 20px;
-  background: #ededed;
+.baseState {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
 }
 .outerBox {
   border: 3px solid #f0f0f0;
   border-radius: 15px;
-  padding: 24px;
+  padding: 2px 24px 12px 24px;
+  margin-top: 24px;
 }
 .pname {
   position: relative;
-  top: -36px;
+  top: -16px;
   left: -12px;
   background-color: #ffffff;
   width: fit-content;

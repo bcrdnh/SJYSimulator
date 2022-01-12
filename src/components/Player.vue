@@ -62,7 +62,10 @@ function play () {
   if (locked.value) return
   if (count.value < daramPart.value.length) {
     printMsg(daramPart.value[count.value++])
-    msgBox.scrollTop = msgBox.scrollHeight
+    // msgBox.value.scrollTop = msgBox.value.scrollHeight
+    setTimeout(() => {
+      msgBox.value.scrollTop = msgBox.value.scrollHeight
+    }, 100)
   } else {
     count.value = 0
     afterOnePara()
@@ -100,10 +103,10 @@ defineExpose({
   </div>
 </template>
 
-<style>
+<style scoped>
 .player {
-  /* width: 100%;
-  height: 100%; */
+  /* width: 100%;*/
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,7 +117,27 @@ defineExpose({
   width: 100%;
   overflow: scroll;
   justify-content: left;
-  border:  2px solid #000000;
+  background-color: #ffffff;
+  border:  1px solid #000000;
+  transition: all .3s;
+}
+.msgBox::-webkit-scrollbar {
+  width: 6px;
+  height: 100%;
+  transition: all .3s;
+}
+.msgBox::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px #d8d8d8;
+  background: #535353;
+}
+/*滚动条轨道*/
+.msgBox::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px #d8d8d8;
+  border-radius: 20px;
+  background: #ededed;
 }
 .blue {
   color: aquamarine;

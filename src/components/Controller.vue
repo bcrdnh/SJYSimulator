@@ -17,7 +17,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .player {
   width: 100vw;
   height: 100vh;

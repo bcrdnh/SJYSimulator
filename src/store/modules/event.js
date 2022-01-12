@@ -11,22 +11,21 @@ const state = () => ({
 })
 
 const getters = {
+  getNewEventPool: state => () => {
+    return new EventPool()
+  },
+  getNewWEventPool: state => () => {
+    return new WeightEventPool()
+  },
+  getNewTiggerPool: state => () => {
+    return new TiggerPool()
+  }
 }
 
 const actions = {
-  // use {componentName_functionName}
-  registerEvent ({ state, commit }, { name, event }) {
-    if (state.Events.hasOwnProperty(name)) {
-      console.error('syserr: already has this event:' + name)
-    }
-    commit('registerEvent', { name, event })
-  }
 }
 
 const mutations = {
-  registerEvent (state, { name, event }) {
-    state.Events[name] = event
-  }
 }
 
 export default {
@@ -34,7 +33,7 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }
 
 class EventPool {
