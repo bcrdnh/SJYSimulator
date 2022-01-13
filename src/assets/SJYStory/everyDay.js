@@ -14,7 +14,7 @@ export const endStartStage = [
 
 export const dayStartPlot = [
   '新的一天开始了！',
-  '今天是你入职的第一天！'
+  '今天是你入职的第{day}天！'
 ]
 
 export const dayMorning_labels = () => {

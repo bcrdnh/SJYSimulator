@@ -1,47 +1,40 @@
-import { useStore } from "vuex"
 import { specialMap } from "./specialMap"
 import { store } from '../store'
+import { router } from "../router"
+import { gsap } from "gsap"
 
-// 闭区间
+// 闭区间，整数
 export function randomNum (minNum = 0, maxNum = 100) {
   return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
 }
 
-export function getDaramRouteById (id) {
-  const list = {
-    0: '/defaultDaram'
-  }
-  return list[id]
-}
-
+// =====================
+// special糖
 export function getSpecialByName (name) {
   if (!specialMap.has(name)) console.error('[util/getSpecialByName]:no this special:' + name)
   return specialMap.get(name)
 }
-
 export function setSpecial (name) {
   if (!specialMap.has(name)) {
     console.error('[utils/setSpecialByName]: ' + name + ' is not definition in specialMap')
   }
-  // const store = useStore()
   store.dispatch('sys/setSpecial', {name, num: 1})
 }
-
 export function changeSpecial (name, num) {
-  // const store = useStore()
   store.dispatch('sys/changeSpecial', {name, num})
 }
 
+// =====================
+// states糖
 export function setVar (varName, content) {
-  // const store = useStore()
   store.dispatch('sys/setVar', {varName, content})
 }
-
 export function changeVar (varName, content) {
-  // const store = useStore()
   store.dispatch('sys/changeVar', {varName, num: content})
 }
 
+// ===================
+// 显示选项糖
 export function bondingSelect (labels, darams, player, selector, next) {
   let param = []
   const setSelect = selector.value.setSelect ? selector.value.setSelect : selector.setSelect
@@ -65,6 +58,7 @@ export function bondingSelect (labels, darams, player, selector, next) {
   setSelect(param)
 }
 
+// 偷懒
 export function newEventPool () {
   return new EventPool()
 }
@@ -73,6 +67,42 @@ export function newWeightEventPool () {
 }
 export function newTiggerPool () {
   return new TiggerPool()
+}
+
+// ====================
+// 动画效果
+//   每次切换页面加个动画效果,固定找类叫root的dom操作
+export function changePage (path) {
+  gsap.fromTo(".root", {
+    y: '0'
+  },{
+    y: '110%',
+    duration: 0.5,
+    ease: "back.in(1.7)",
+    onComplete: () => {
+      router.push(path)
+      gsap.fromTo(".root", {
+        y: '-110%'
+      }, {
+        y: '0%',
+        duration: 0.3,
+        ease: "power1.out",
+        delay: 0.3
+      })
+    }
+  })
+}
+// 从下方淡入
+export function fadeIn (target, delay = 0) {
+  gsap.fromTo(target, {
+    y: 50,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 0.2,
+    delay
+  })
 }
 
 class EventPool {

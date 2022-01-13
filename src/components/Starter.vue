@@ -80,76 +80,82 @@ function next () {
 
 <template>
   <div class="starter">
-    可用点数: {{ restPoint }}
-    <a-space direction="vertical">
-      <div class="outerBox">
-        <div class="pname">name</div>
-        <a-input v-model:value="playerName" placeholder="请输入......" />
-      </div>
-      <div class="outerBox">
-        <div class="pname">baseState</div>
-        <div v-for="baseState in starter.baseStates" class="baseState">
-          <span style="min-width: 64px;">{{ baseState.name }}:</span>
-          <span style="margin-right: 24px;"><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
-          <span style="min-width: 16px;">{{ startOptions.baseStates.get(baseState.varName) }}</span>
-          <span style="margin-left: 24px;"><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
-        </div>
-      </div>
-      <div class="outerBox">
-        <div class="pname">otherState</div>
-        <div v-for="fixedState in starter.fixedBaseStates" class="baseState">
-          <span>{{ fixedState.name }}:</span>
-          <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
-        </div>
-      </div>
-      <div v-for="p in starter.parts">
-        <div class="outerBox">
-          <div class="pname">{{ p.name }}</div>
-          <div class="innerBox">
-            <div
-              v-for="button in p.options"
-              @click="select(p.name, button.specialName)"
-              :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
-            >
-              <div class="btnName">{{ button.name }}</div>
-              <div class="btnSummary">{{ button.summary }}</div>
-              <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="starterContent a-space">
+      可用点数: {{ restPoint }}
       <div>
         <div class="outerBox">
-          <div class="pname">{{ starter.otherPartsName }}</div>
-          <div class="innerBox">
-            <div
-              v-for="button in starter.otherParts"
-              @click="otherSelect(button.specialName)"
-              :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
-            >
-              <div class="btnName">{{ button.name }}</div>
-              <div class="btnSummary">{{ button.summary }}</div>
-              <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
+          <div class="pname">name</div>
+          <a-input v-model:value="playerName" placeholder="请输入......" />
+        </div>
+        <div class="outerBox">
+          <div class="pname">baseState</div>
+          <div v-for="baseState in starter.baseStates" class="baseState">
+            <span style="min-width: 64px;">{{ baseState.name }}:</span>
+            <span style="margin-right: 24px;"><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
+            <span style="min-width: 16px;">{{ startOptions.baseStates.get(baseState.varName) }}</span>
+            <span style="margin-left: 24px;"><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
+          </div>
+        </div>
+        <div class="outerBox">
+          <div class="pname">otherState</div>
+          <div v-for="fixedState in starter.fixedBaseStates" class="baseState">
+            <span>{{ fixedState.name }}:</span>
+            <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
+          </div>
+        </div>
+        <div v-for="p in starter.parts">
+          <div class="outerBox">
+            <div class="pname">{{ p.name }}</div>
+            <div class="innerBox">
+              <div
+                v-for="button in p.options"
+                @click="select(p.name, button.specialName)"
+                :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
+              >
+                <div class="btnName">{{ button.name }}</div>
+                <div class="btnSummary">{{ button.summary }}</div>
+                <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="outerBox">
+            <div class="pname">{{ starter.otherPartsName }}</div>
+            <div class="innerBox">
+              <div
+                v-for="button in starter.otherParts"
+                @click="otherSelect(button.specialName)"
+                :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
+              >
+                <div class="btnName">{{ button.name }}</div>
+                <div class="btnSummary">{{ button.summary }}</div>
+                <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </a-space>
-    <a-button @click="next()">ok</a-button>
+      <a-button @click="next()">ok</a-button>
+    </div>
+    
   </div>
 </template>
 
 <style scoped>
 .starter {
-  width: 60%;
+  /* width: 100%; */
   height: 100%;
-  margin-left: 20%;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: auto;
   background-color: #ffffff;
+}
+.starterContent {
+  /* height: 100%; */
 }
 .baseState {
   display: flex;
@@ -203,5 +209,10 @@ function next () {
 }
 .button:hover {
   background-color: #27272727;
+}
+.a-space {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

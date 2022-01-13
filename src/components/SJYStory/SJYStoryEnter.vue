@@ -1,9 +1,20 @@
 <script setup>
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { setVar } from '../../assets/utils.js'
+import { setVar, fadeIn, changePage } from '../../assets/utils.js'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import "swiper/css/effect-cards"
+// import './style.css'
+import SwiperCore, { EffectCards } from 'swiper';
+import { onMounted } from 'vue'
+SwiperCore.use([EffectCards]);
 const store = useStore()
 const router = useRouter()
+
+onMounted(() => {
+  fadeIn('.mySwiper', 0.3)
+})
 
 function start () {
   const starter = {
@@ -264,7 +275,8 @@ function start () {
     ]
   }
   store.dispatch('sys/setStarter', starter)
-  router.push({path: '/starter', query: {mainPage: '/SJYStory'}})
+  changePage({path: '/starter', query: {mainPage: '/SJYStory'}})
+  // router.push({path: '/starter', query: {mainPage: '/SJYStory'}})
 }
 
 function saveCrazySJY () {
@@ -283,7 +295,6 @@ function saveCrazySJY () {
   startOptions.special.set('弱智', 1)
   startOptions.special.set('大力', 1)
 }
-
 function saveWorkerSJY () {
   setVar('playerName', '苦工家翊')
   const startOptions = {
@@ -299,7 +310,6 @@ function saveWorkerSJY () {
   startOptions.special.set('吃苦耐劳', 1)
   startOptions.special.set('爱惜头发', 1)
 }
-
 function saveVampireSJY () {
   setVar('playerName', 'sjy')
   const startOptions = {
@@ -320,121 +330,155 @@ function saveVampireSJY () {
 
 <template>
   <div class="sjyEnter">
-    <div class="chose">
-      <a-card class="page">
-        <div class="line xxl">狂暴家翊</div>
-        <div class="line s">长时间的加班让他失去了人性，变得非常狂暴</div>
-        <div class="divid"></div>
-        <div class="line">
-          <span style="margin-right: 36px;">力量 : 120</span>
-          <span style="margin-right: 36px;">耐力 : 100</span>
-          <span>智力 : 40</span>
-        </div>
-        <div class="line">
-          <span style="margin-right: 36px;">生命值 : 120</span>
-          <span>头发 : 90</span>
-        </div>
-        <div class="divid"></div>
-        <div class="line">
-          <div class="line xl">狂暴</div>
-          <div>这种家翊非常狂暴，攻击性极强。</div>
-          <div class="line xl">弱智</div>
-          <div>这种家翊没什么智力。</div>
-          <div class="line xl">大力</div>
-          <div>小心家翊可怕的怪力！。</div>
-        </div>
-        <div class="divid"></div>
-        <a-button block disabled>开发中</a-button>
-      </a-card>
-
-      <a-card class="page">
-        <div class="line xxl">苦工家翊</div>
-        <div class="line s">他还在加班！他已经三天没下班了！</div>
-        <div class="divid"></div>
-        <div class="line">
-          <span style="margin-right: 36px;">力量 : 80</span>
-          <span style="margin-right: 36px;">耐力 : 100</span>
-          <span>智力 : 120</span>
-        </div>
-        <div class="line">
-          <span style="margin-right: 36px;">生命值 : 80</span>
-          <span>头发 : 50</span>
-        </div>
-        <div class="divid"></div>
-        <div class="line">
-          <div class="line xl">吃苦耐劳</div>
-          <div>他经常加班并且不敢发出任何怨言，老板很喜欢他。</div>
-          <div class="line xl">爱惜头发</div>
-          <div>他非常的爱惜他的头发，虽然不多。</div>
-        </div>
-        <div class="divid"></div>
-        <a-button block disabled>开发中</a-button>
-      </a-card>
-
-      <a-card class="page">
-        <div class="line xxl">吸血鬼家翊</div>
-        <div class="line s">为什么是吸血鬼？</div>
-        <div class="divid"></div>
-        <div class="line">
-          <span style="margin-right: 36px;">力量 : 90</span>
-          <span style="margin-right: 36px;">耐力 : 90</span>
-          <span>智力 : 90</span>
-        </div>
-        <div class="line">
-          <span style="margin-right: 36px;">生命值 : 90</span>
-          <span>头发 : 160</span>
-        </div>
-        <div class="divid"></div>
-        <div class="line">
-          <div class="line xl">吸血鬼</div>
-          <div>他是吸血鬼。为什么是吸血鬼？</div>
-          <div class="line xl">帅</div>
-          <div>他长得非常的帅。</div>
-          <div class="line xl">大豪斯</div>
-          <div>作为吸血鬼，他理所当然的拥有一座豪宅。</div>
-        </div>
-        <div class="divid"></div>
-        <a-button block disabled>开发中</a-button>
-      </a-card>
-      
-      <a-card class="page">
-        <div class="line xxl">自定义</div>
-        <div class="line s">自定义你的角色</div>
-        <div class="divid"></div>
-        <div class="line">
-          <span style="margin-right: 36px;">力量 : 80</span>
-          <span style="margin-right: 36px;">耐力 : 80</span>
-          <span>智力 : 80</span>
-        </div>
-        <div class="line">
-          <span style="margin-right: 36px;">生命值 : 100</span>
-          <span>头发 : 100</span>
-        </div>
-        <div class="divid"></div>
-        <div class="line">
-          <div class="line xl">自定义！</div>
-          <div>使用点数自定义你的属性与特质！</div>
-        </div>
-        <div class="divid"></div>
-        <a-button @click="start()" block>选择这个！</a-button>
-      </a-card>
-    </div>
+    <swiper :effect="'cards'" :grabCursor="true" class="mySwiper" :loop="true">
+        <swiper-slide>
+          <a-card class="page" :bodyStyle="{height: '100%'}">
+            <div class="pageContent">
+              <div class="line xxl">狂暴家翊</div>
+              <div class="line s">长时间的加班让他失去了人性，变得非常狂暴</div>
+              <div class="divid"></div>
+              <div class="line">
+                <span style="margin-right: 36px;">力量 : 120</span>
+                <span style="margin-right: 36px;">耐力 : 100</span>
+                <span>智力 : 40</span>
+              </div>
+              <div class="line">
+                <span style="margin-right: 36px;">生命值 : 120</span>
+                <span>头发 : 90</span>
+              </div>
+              <div class="divid"></div>
+              <div class="line">
+                <div class="line xl">狂暴</div>
+                <div>这种家翊非常狂暴，攻击性极强。</div>
+                <div class="line xl">弱智</div>
+                <div>这种家翊没什么智力。</div>
+                <div class="line xl">大力</div>
+                <div>小心家翊可怕的怪力！。</div>
+              </div>
+              <div class="divid"></div>
+            </div>
+            <div class="pageFooter">
+              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+            </div>
+          </a-card>
+        </swiper-slide>
+        <swiper-slide>
+          <a-card class="page" :bodyStyle="{height: '100%'}">
+            <div class="pageContent">
+              <div class="line xxl">苦工家翊</div>
+              <div class="line s">他还在加班！他已经三天没下班了！</div>
+              <div class="divid"></div>
+              <div class="line">
+                <span style="margin-right: 36px;">力量 : 80</span>
+                <span style="margin-right: 36px;">耐力 : 100</span>
+                <span>智力 : 120</span>
+              </div>
+              <div class="line">
+                <span style="margin-right: 36px;">生命值 : 80</span>
+                <span>头发 : 50</span>
+              </div>
+              <div class="divid"></div>
+              <div class="line">
+                <div class="line xl">吃苦耐劳</div>
+                <div>他经常加班并且不敢发出任何怨言，老板很喜欢他。</div>
+                <div class="line xl">爱惜头发</div>
+                <div>他非常的爱惜他的头发，虽然不多。</div>
+              </div>
+              <div class="divid"></div>          
+            </div>
+            <div class="pageFooter">
+              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+            </div>
+          </a-card>
+        </swiper-slide>
+        <swiper-slide>
+          <a-card class="page" :bodyStyle="{height: '100%'}">
+            <div class="pageContent">
+              <div class="line xxl">吸血鬼家翊</div>
+              <div class="line s">为什么是吸血鬼？</div>
+              <div class="divid"></div>
+              <div class="line">
+                <span style="margin-right: 36px;">力量 : 90</span>
+                <span style="margin-right: 36px;">耐力 : 90</span>
+                <span>智力 : 90</span>
+              </div>
+              <div class="line">
+                <span style="margin-right: 36px;">生命值 : 90</span>
+                <span>头发 : 160</span>
+              </div>
+              <div class="divid"></div>
+              <div class="line">
+                <div class="line xl">吸血鬼</div>
+                <div>他是吸血鬼。为什么是吸血鬼？</div>
+                <div class="line xl">帅</div>
+                <div>他长得非常的帅。</div>
+                <div class="line xl">大豪斯</div>
+                <div>作为吸血鬼，他理所当然的拥有一座豪宅。</div>
+              </div>
+              <div class="divid"></div>
+            </div>
+            <div class="pageFooter">
+              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+            </div>
+          </a-card>
+        </swiper-slide>
+        <swiper-slide>
+          <a-card class="page" :bodyStyle="{height: '100%'}">
+            <div class="pageContent">
+              <div class="line xxl">自定义</div>
+              <div class="line s">自定义你的角色</div>
+              <div class="divid"></div>
+              <div class="line">
+                <span style="margin-right: 36px;">力量 : 80</span>
+                <span style="margin-right: 36px;">耐力 : 80</span>
+                <span>智力 : 80</span>
+              </div>
+              <div class="line">
+                <span style="margin-right: 36px;">生命值 : 100</span>
+                <span>头发 : 100</span>
+              </div>
+              <div class="divid"></div>
+              <div class="line">
+                <div class="line xl">自定义！</div>
+                <div>使用点数自定义你的属性与特质！</div>
+              </div>
+              <div class="divid"></div>
+            </div>
+            <div class="pageFooter">
+              <a-button class="chosethisBtn" @click="start()" block>选择这个！</a-button>
+            </div>
+          </a-card>
+        </swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <style scoped>
 .sjyEnter {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .page {
   /* height: 360px;
   width: 300px; */
   margin: 12px;
-  min-width: 330px;
-  min-height: 400px;
+  width: 330px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -1px -1px 16px #8888885b;
   /* padding: 12px;
-  background-color: rgba(70, 70, 70, 0.14);
-  border: 3px solid #f0f0f0;
-  border-radius: 12px; */
+  background-color: rgba(70, 70, 70, 0.14); */
+  border: 1px solid #f0f0f000;
+}
+.pageContent {
+  height: 80%;
+}
+.pageFooter {
+  height: 20%;
 }
 .line {
   margin-bottom: 6px;
@@ -461,5 +505,24 @@ function saveVampireSJY () {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+.swiper {
+  width: 330px;
+  height: 440px;
+}
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  /* width: 330px;
+  height: 400px; */
+  width: fit-content;
+  height: fit-content;
+}
+</style>
+<style>
+.swiper-3d .swiper-slide-shadow {
+  background: rgba(0, 0, 0, 0);
 }
 </style>
