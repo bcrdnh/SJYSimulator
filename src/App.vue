@@ -26,7 +26,7 @@ function SJYStory () {
     <a-button @click="changePage('/')">restart</a-button>
     <a-button @click="defaultDaram()">test</a-button>
     <a-button @click="SJYStory()">SJY Story</a-button>
-    <div>版本号：2.0.4</div>
+    <div>版本号：2.1.2</div>
   </a-space>
   <div class="root nes-container is-rounded">
     <router-view></router-view>

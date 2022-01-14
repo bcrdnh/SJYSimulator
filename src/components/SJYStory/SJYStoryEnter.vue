@@ -448,7 +448,7 @@ function saveVampireSJY () {
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <button type="button" class="nes-btn">选择这个！</button>
+              <button type="button" class="nes-btn" @click="start()">选择这个！</button>
               <!-- <a-button class="chosethisBtn" @click="start()" block>选择这个！</a-button> -->
             </div>
           </div>

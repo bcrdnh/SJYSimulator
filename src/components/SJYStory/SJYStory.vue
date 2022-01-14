@@ -142,14 +142,13 @@ function checkEnd () {
 
 <style scoped>
 .controller {
-  width: 100vw;
-  height: 100vh;
+  font-family: zpix;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: left;
-  border: 4px solid #f0f0f0;
-  border-radius: 24px;
   padding: 24px;
 }
 .player {

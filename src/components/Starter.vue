@@ -4,6 +4,7 @@ import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { setVar } from '../assets/utils'
+// import '../assets/font.css'
 const store = useStore()
 const router = useRouter()
 const route = useRoute()
@@ -91,10 +92,20 @@ function next () {
         <div class="nes-container with-title outerBox">
           <div class="title">{{ starter.pname&&starter.pname.baseState?starter.pname.baseState:'baseState' }}</div>
           <div v-for="baseState in starter.baseStates" class="baseState">
-            <span style="min-width: 64px;">{{ baseState.name }}:</span>
-            <span style="margin-right: 24px;"><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
-            <span style="min-width: 16px;">{{ startOptions.baseStates.get(baseState.varName) }}</span>
-            <span style="margin-left: 24px;"><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
+            <span style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</span>
+            <span>
+              <!-- <a-button @click="changeState(-1,baseState.varName)"> - </a-button> -->
+              <button type="button" class="nes-btn" @click="new Array(10).forEach(v=>{changeState(-1,baseState.varName)})"> -10 </button>
+              <button type="button" class="nes-btn" @click="changeState(-1,baseState.varName)" style="margin-left: 24px;"> - </button>
+            </span>
+            <span style="min-width: 16px;margin: auto 24px;" class="nes-text is-primary">
+              {{ startOptions.baseStates.get(baseState.varName) }}
+            </span>
+            <span>
+              <!-- <a-button @click="changeState(1,baseState.varName)"> + </a-button> -->
+              <button type="button" class="nes-btn" @click="changeState(1,baseState.varName)" style="margin-right: 24px;"> + </button>
+              <button type="button" class="nes-btn" @click="new Array(10).forEach(v=>{changeState(1,baseState.varName)})"> +10 </button>
+            </span>          
           </div>
         </div>
         <div class="nes-container with-title outerBox">
@@ -111,7 +122,7 @@ function next () {
               <div
                 v-for="button in p.options"
                 @click="select(p.name, button.specialName)"
-                :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
+                :class="{'button': true, 'nes-pointer': true, 'selected': startOptions.special.get(button.specialName)}"
               >
                 <div class="btnName">{{ button.name }}</div>
                 <div class="btnSummary">{{ button.summary }}</div>
@@ -127,7 +138,7 @@ function next () {
               <div
                 v-for="button in starter.otherParts"
                 @click="otherSelect(button.specialName)"
-                :class="{'button': true, 'selected': startOptions.special.get(button.specialName)}"
+                :class="{'button': true, 'nes-pointer': true, 'selected': startOptions.special.get(button.specialName)}"
               >
                 <div class="btnName">{{ button.name }}</div>
                 <div class="btnSummary">{{ button.summary }}</div>
@@ -147,7 +158,7 @@ function next () {
 <style scoped>
 .starter {
   /* width: 100%; */
-  font-family: zpix;
+  font-family: ipix;
   height: 100%;
   padding: 24px;
   display: flex;
@@ -189,15 +200,16 @@ function next () {
   align-items: center;
   flex-wrap: wrap;
 }
-/* .button {
+.button {
   width: 110px;
   height: 110px;
   min-height: 60px;
-  margin-right: 10px;
+  margin-right: 16px;
   margin-bottom: 8px;
+  padding: 8px;
   font-size: 12px;
-  transition: all .3s;
-} */
+  /* transition: all .3s; */
+}
 .btnName {
   font-weight: bold;
   height: 20%;
@@ -216,15 +228,37 @@ function next () {
   height: 20%;
 }
 .selected {
-  background-color: #27272727;
+  border: 4px solid #000;
 }
-/* .button:hover {
-  background-color: #27272727;
-} */
+.button:hover {
+  /* border-bottom: 4px solid #000; */
+}
+.button:hover::after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: relative;
+  left: calc(50% - 10px);
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #000000 transparent;
+  animation: flicker 1.5s step-start infinite ;
+}
 .a-space {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@keyframes flicker {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0
+  }
 }
 </style>
