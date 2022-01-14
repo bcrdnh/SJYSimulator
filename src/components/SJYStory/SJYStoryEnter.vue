@@ -332,109 +332,112 @@ function saveVampireSJY () {
   <div class="sjyEnter">
     <swiper :effect="'cards'" :grabCursor="true" class="mySwiper" :loop="true">
         <swiper-slide>
-          <a-card class="page" :bodyStyle="{height: '100%'}">
+          <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
             <div class="pageContent">
-              <div class="line xxl">狂暴家翊</div>
+              <div class="xxl title">狂暴家翊</div>
               <div class="line s">长时间的加班让他失去了人性，变得非常狂暴</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 36px;">力量 : 120</span>
-                <span style="margin-right: 36px;">耐力 : 100</span>
+                <span style="margin-right: 24px;">力量 : 120</span>
+                <span style="margin-right: 24px;">耐力 : 100</span>
                 <span>智力 : 40</span>
               </div>
               <div class="line">
-                <span style="margin-right: 36px;">生命值 : 120</span>
+                <span style="margin-right: 24px;">生命值 : 120</span>
                 <span>头发 : 90</span>
               </div>
               <div class="divid"></div>
               <div class="line">
-                <div class="line xl">狂暴</div>
+                <div class="line xl">特质——狂暴</div>
                 <div>这种家翊非常狂暴，攻击性极强。</div>
-                <div class="line xl">弱智</div>
+                <div class="line xl">特质——弱智</div>
                 <div>这种家翊没什么智力。</div>
-                <div class="line xl">大力</div>
+                <div class="line xl">特质——大力</div>
                 <div>小心家翊可怕的怪力！。</div>
               </div>
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+              <button type="button" class="nes-btn is-disabled">开发中</button>
+              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
             </div>
-          </a-card>
+          </div>
         </swiper-slide>
         <swiper-slide>
-          <a-card class="page" :bodyStyle="{height: '100%'}">
+          <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
             <div class="pageContent">
-              <div class="line xxl">苦工家翊</div>
+              <div class="title xxl">苦工家翊</div>
               <div class="line s">他还在加班！他已经三天没下班了！</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 36px;">力量 : 80</span>
-                <span style="margin-right: 36px;">耐力 : 100</span>
+                <span style="margin-right: 24px;">力量 : 80</span>
+                <span style="margin-right: 24px;">耐力 : 100</span>
                 <span>智力 : 120</span>
               </div>
               <div class="line">
-                <span style="margin-right: 36px;">生命值 : 80</span>
+                <span style="margin-right: 24px;">生命值 : 80</span>
                 <span>头发 : 50</span>
               </div>
               <div class="divid"></div>
               <div class="line">
-                <div class="line xl">吃苦耐劳</div>
+                <div class="line xl">特质——吃苦耐劳</div>
                 <div>他经常加班并且不敢发出任何怨言，老板很喜欢他。</div>
-                <div class="line xl">爱惜头发</div>
+                <div class="line xl">特质——爱惜头发</div>
                 <div>他非常的爱惜他的头发，虽然不多。</div>
               </div>
               <div class="divid"></div>          
             </div>
             <div class="pageFooter">
-              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+              <button type="button" class="nes-btn is-disabled">开发中</button>
+              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
             </div>
-          </a-card>
+          </div>
         </swiper-slide>
         <swiper-slide>
-          <a-card class="page" :bodyStyle="{height: '100%'}">
+          <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
             <div class="pageContent">
-              <div class="line xxl">吸血鬼家翊</div>
+              <div class="title xxl">吸血鬼家翊</div>
               <div class="line s">为什么是吸血鬼？</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 36px;">力量 : 90</span>
-                <span style="margin-right: 36px;">耐力 : 90</span>
+                <span style="margin-right: 24px;">力量 : 90</span>
+                <span style="margin-right: 24px;">耐力 : 90</span>
                 <span>智力 : 90</span>
               </div>
               <div class="line">
-                <span style="margin-right: 36px;">生命值 : 90</span>
+                <span style="margin-right: 24px;">生命值 : 90</span>
                 <span>头发 : 160</span>
               </div>
               <div class="divid"></div>
               <div class="line">
-                <div class="line xl">吸血鬼</div>
+                <div class="line xl">特质——吸血鬼</div>
                 <div>他是吸血鬼。为什么是吸血鬼？</div>
-                <div class="line xl">帅</div>
+                <div class="line xl">特质——帅</div>
                 <div>他长得非常的帅。</div>
-                <div class="line xl">大豪斯</div>
+                <div class="line xl">特质——大豪斯</div>
                 <div>作为吸血鬼，他理所当然的拥有一座豪宅。</div>
               </div>
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <a-button class="chosethisBtn" block disabled>开发中</a-button>
+              <button type="button" class="nes-btn is-disabled">开发中</button>
+              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
             </div>
-          </a-card>
+          </div>
         </swiper-slide>
         <swiper-slide>
-          <a-card class="page" :bodyStyle="{height: '100%'}">
+          <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
             <div class="pageContent">
-              <div class="line xxl">自定义</div>
+              <div class="title xxl">自定义</div>
               <div class="line s">自定义你的角色</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 36px;">力量 : 80</span>
-                <span style="margin-right: 36px;">耐力 : 80</span>
+                <span style="margin-right: 24px;">力量 : 80</span>
+                <span style="margin-right: 24px;">耐力 : 80</span>
                 <span>智力 : 80</span>
               </div>
               <div class="line">
-                <span style="margin-right: 36px;">生命值 : 100</span>
+                <span style="margin-right: 24px;">生命值 : 100</span>
                 <span>头发 : 100</span>
               </div>
               <div class="divid"></div>
@@ -445,9 +448,10 @@ function saveVampireSJY () {
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <a-button class="chosethisBtn" @click="start()" block>选择这个！</a-button>
+              <button type="button" class="nes-btn">选择这个！</button>
+              <!-- <a-button class="chosethisBtn" @click="start()" block>选择这个！</a-button> -->
             </div>
-          </a-card>
+          </div>
         </swiper-slide>
     </swiper>
   </div>
@@ -462,19 +466,14 @@ function saveVampireSJY () {
   align-items: center;
 }
 .page {
-  /* height: 360px;
-  width: 300px; */
-  margin: 12px;
-  width: 330px;
-  height: 440px;
+  width: 350px;
+  height: 480px;
   display: flex;
   flex-direction: column;
-  box-shadow: -1px -1px 16px #8888885b;
-  /* padding: 12px;
-  background-color: rgba(70, 70, 70, 0.14); */
-  border: 1px solid #f0f0f000;
+  background-color: #ffffff;
 }
 .pageContent {
+  font-family: zpix;
   height: 80%;
 }
 .pageFooter {
@@ -507,16 +506,13 @@ function saveVampireSJY () {
   align-items: center;
 }
 .swiper {
-  width: 330px;
-  height: 440px;
+  width: 350px;
+  height: 480px;
 }
 .swiper-slide {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
-  /* width: 330px;
-  height: 400px; */
   width: fit-content;
   height: fit-content;
 }

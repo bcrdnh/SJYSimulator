@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { changePage } from './assets/utils';
+import fontURL from './assets/aura.ttf?url'
+console.log(fontURL)
 const router = useRouter()
 const showDev = ref(true)
 
@@ -26,7 +28,7 @@ function SJYStory () {
     <a-button @click="SJYStory()">SJY Story</a-button>
     <div>版本号：2.0.4</div>
   </a-space>
-  <div class="root">
+  <div class="root nes-container is-rounded">
     <router-view></router-view>
   </div>
 </template>
@@ -42,9 +44,6 @@ body {
   height: 90%;
   width: 90%;
   min-width: 420px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50px;
-  box-shadow: 2px 2px 16px #8888885b;
   overflow: hidden;
 }
 #app {
@@ -53,11 +52,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgb(113, 204, 196) 50%, rgba(255,255,255,0) 0) 0 0,
-  radial-gradient(circle closest-side, rgb(113, 204, 196) 53%, rgba(255,255,255,0) 0) 0 0,
-  radial-gradient(circle closest-side, rgb(113, 204, 196) 50%, rgba(255,255,255,0) 0) 55px 0 rgb(251, 243, 226);
-  background-size: 110px 200px;
-  background-repeat: repeat-x;
 }
 .devBtn {
   position: fixed;

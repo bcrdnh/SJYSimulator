@@ -21,7 +21,7 @@ for (const f of starter.value.fixedBaseStates) {
 }
 
 const restPoint = ref(store.state.sys.starter.point)
-const playerName = ref('默认名称')
+const playerName = ref('请输入......')
 function select (partName, specialName) {
   let part = null
   let oldOPtion = null
@@ -80,15 +80,16 @@ function next () {
 
 <template>
   <div class="starter">
-    <div class="starterContent a-space">
-      可用点数: {{ restPoint }}
-      <div>
-        <div class="outerBox">
-          <div class="pname">name</div>
-          <a-input v-model:value="playerName" placeholder="请输入......" />
+    <div class="a-space">
+      <div class="restPoing">{{ starter.pname&&starter.pname.restPoint?starter.pname.restPoint:'restPoint' }}: {{ restPoint }}</div>
+      <div class="starterContent">
+        <div class="nes-container with-title outerBox">
+          <div class="title">{{ starter.pname&&starter.pname.name?starter.pname.name:'name' }}</div>
+          <!-- <a-input v-model:value="playerName" :bordered="false" placeholder="请输入......" /> -->
+          <input type="text" id="name_field" class="nes-input" v-model="playerName" placeholder="请输入......">
         </div>
-        <div class="outerBox">
-          <div class="pname">baseState</div>
+        <div class="nes-container with-title outerBox">
+          <div class="title">{{ starter.pname&&starter.pname.baseState?starter.pname.baseState:'baseState' }}</div>
           <div v-for="baseState in starter.baseStates" class="baseState">
             <span style="min-width: 64px;">{{ baseState.name }}:</span>
             <span style="margin-right: 24px;"><a-button @click="changeState(-1,baseState.varName)"> - </a-button></span>
@@ -96,16 +97,16 @@ function next () {
             <span style="margin-left: 24px;"><a-button @click="changeState(1,baseState.varName)"> + </a-button></span>          
           </div>
         </div>
-        <div class="outerBox">
-          <div class="pname">otherState</div>
+        <div class="nes-container with-title outerBox">
+          <div class="title">{{ starter.pname&&starter.pname.otherState?starter.pname.otherState:'otherState' }}</div>
           <div v-for="fixedState in starter.fixedBaseStates" class="baseState">
             <span>{{ fixedState.name }}:</span>
             <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
           </div>
         </div>
         <div v-for="p in starter.parts">
-          <div class="outerBox">
-            <div class="pname">{{ p.name }}</div>
+          <div class="nes-container with-title outerBox">
+            <div class="title">{{ p.name }}</div>
             <div class="innerBox">
               <div
                 v-for="button in p.options"
@@ -120,8 +121,8 @@ function next () {
           </div>
         </div>
         <div>
-          <div class="outerBox">
-            <div class="pname">{{ starter.otherPartsName }}</div>
+          <div class="nes-container with-title outerBox">
+            <div class="title">{{ starter.otherPartsName }}</div>
             <div class="innerBox">
               <div
                 v-for="button in starter.otherParts"
@@ -136,7 +137,8 @@ function next () {
           </div>
         </div>
       </div>
-      <a-button @click="next()">ok</a-button>
+      <button type="button" class="nes-btn" @click="next()">OK</button>
+      <!-- <a-button @click="next()">ok</a-button> -->
     </div>
     
   </div>
@@ -145,6 +147,7 @@ function next () {
 <style scoped>
 .starter {
   /* width: 100%; */
+  font-family: zpix;
   height: 100%;
   padding: 24px;
   display: flex;
@@ -154,8 +157,14 @@ function next () {
   overflow: auto;
   background-color: #ffffff;
 }
+.restPoing {
+  position: fixed;
+  top: 24px;
+  left: 50px;
+  font-size: 16px;
+}
 .starterContent {
-  /* height: 100%; */
+  margin-top: 36px;
 }
 .baseState {
   display: flex;
@@ -163,16 +172,15 @@ function next () {
   margin-bottom: 12px;
 }
 .outerBox {
-  border: 3px solid #f0f0f0;
-  border-radius: 15px;
-  padding: 2px 24px 12px 24px;
-  margin-top: 24px;
+  margin-bottom: 24px;
 }
 .pname {
   position: relative;
   top: -16px;
-  left: -12px;
-  background-color: #ffffff;
+  left: -16px;
+  padding: 8px;
+  background-color: rgb(145, 201, 189);
+  border-radius: 24px;
   width: fit-content;
 }
 .innerBox {
@@ -181,38 +189,42 @@ function next () {
   align-items: center;
   flex-wrap: wrap;
 }
-.button {
-  width: 90px;
-  /* min-width: 80px; */
-  /* height: 60px; */
-  height: fit-content;
+/* .button {
+  width: 110px;
+  height: 110px;
   min-height: 60px;
   margin-right: 10px;
   margin-bottom: 8px;
+  font-size: 12px;
   transition: all .3s;
-}
+} */
 .btnName {
   font-weight: bold;
+  height: 20%;
 }
 .btnSummary {
   font-style: italic;
   color: gray;
+  height: 60%;
 }
 .btnCostR {
   color: chartreuse;
+  height: 20%;
 }
 .btnCostG {
   color: tomato;
+  height: 20%;
 }
 .selected {
   background-color: #27272727;
 }
-.button:hover {
+/* .button:hover {
   background-color: #27272727;
-}
+} */
 .a-space {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 </style>
