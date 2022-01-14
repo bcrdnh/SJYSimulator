@@ -319,7 +319,7 @@ export const SRGoodEv = {
 
 export const NEv = {
   NEv01: [
-    '{age}岁那年，你发现自己岁了。',
+    '{age}岁那年，你发现自己{age}岁了。',
     '什么也没有发生。',
   ],
   NEv02: [

@@ -58,7 +58,12 @@ function changeState (change, varName) {
   const nowValue = startOptions.value.baseStates.get(varName)
   for (const bs of starter.value.baseStates) {
     if (bs.varName === varName) {
-      if (nowValue + change < bs.min || nowValue + change > bs.max) return
+      if (nowValue + change < bs.min) {
+        change = bs.min - nowValue
+      }
+      if (nowValue + change > bs.max) {
+        change = bs.max - nowValue
+      }
       startOptions.value.baseStates.set(varName, nowValue + change)
       restPoint.value -= change * bs.cost
     }
@@ -82,7 +87,14 @@ function next () {
 <template>
   <div class="starter">
     <div class="a-space">
-      <div class="restPoing">{{ starter.pname&&starter.pname.restPoint?starter.pname.restPoint:'restPoint' }}: {{ restPoint }}</div>
+      <div class="nes-badge restPoint">
+        <span :class="restPoint>0?'is-success':'is-error'">
+          <i class="nes-icon trophy is-small"></i>
+           {{ starter.pname&&starter.pname.restPoint?starter.pname.restPoint:'restPoint' }}
+          : {{ restPoint }} 
+        </span>
+      </div>
+      <!-- <div class="restPoing nes-badge nes-text is-primary">{{ starter.pname&&starter.pname.restPoint?starter.pname.restPoint:'restPoint' }}: {{ restPoint }}</div> -->
       <div class="starterContent">
         <div class="nes-container with-title outerBox">
           <div class="title">{{ starter.pname&&starter.pname.name?starter.pname.name:'name' }}</div>
@@ -95,16 +107,16 @@ function next () {
             <span style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</span>
             <span>
               <!-- <a-button @click="changeState(-1,baseState.varName)"> - </a-button> -->
-              <button type="button" class="nes-btn" @click="new Array(10).forEach(v=>{changeState(-1,baseState.varName)})"> -10 </button>
+              <button type="button" class="nes-btn" @click="changeState(-10,baseState.varName)"> -10 </button>
               <button type="button" class="nes-btn" @click="changeState(-1,baseState.varName)" style="margin-left: 24px;"> - </button>
             </span>
-            <span style="min-width: 16px;margin: auto 24px;" class="nes-text is-primary">
+            <span style="min-width: 36px;margin: auto 24px;text-align: center;" class="nes-text is-primary">
               {{ startOptions.baseStates.get(baseState.varName) }}
             </span>
             <span>
               <!-- <a-button @click="changeState(1,baseState.varName)"> + </a-button> -->
               <button type="button" class="nes-btn" @click="changeState(1,baseState.varName)" style="margin-right: 24px;"> + </button>
-              <button type="button" class="nes-btn" @click="new Array(10).forEach(v=>{changeState(1,baseState.varName)})"> +10 </button>
+              <button type="button" class="nes-btn" @click="changeState(10,baseState.varName)"> +10 </button>
             </span>          
           </div>
         </div>
@@ -126,7 +138,10 @@ function next () {
               >
                 <div class="btnName">{{ button.name }}</div>
                 <div class="btnSummary">{{ button.summary }}</div>
-                <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
+                <div class="btnCost">
+                  <span>{{ starter.pname&&starter.pname.cost?starter.pname.cost:'cost' }}： </span>
+                  <span :class="button.cost>0?'nes-text is-success':'nes-text is-error'">{{ button.cost }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -142,7 +157,10 @@ function next () {
               >
                 <div class="btnName">{{ button.name }}</div>
                 <div class="btnSummary">{{ button.summary }}</div>
-                <div :class="button.cost>0?'btnCostG':'btnCostR'">{{ button.cost }}</div>
+                <div class="btnCost">
+                  <span>{{ starter.pname&&starter.pname.cost?starter.pname.cost:'cost' }}： </span>
+                  <span :class="button.cost>0?'nes-text is-success':'nes-text is-error'">{{ button.cost }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -168,11 +186,12 @@ function next () {
   overflow: auto;
   background-color: #ffffff;
 }
-.restPoing {
+.restPoint {
   position: fixed;
   top: 24px;
   left: 50px;
   font-size: 16px;
+  z-index: 10;
 }
 .starterContent {
   margin-top: 36px;
@@ -219,12 +238,7 @@ function next () {
   color: gray;
   height: 60%;
 }
-.btnCostR {
-  color: chartreuse;
-  height: 20%;
-}
-.btnCostG {
-  color: tomato;
+.btnCost {
   height: 20%;
 }
 .selected {
@@ -232,6 +246,7 @@ function next () {
 }
 .button:hover {
   /* border-bottom: 4px solid #000; */
+  animation: flickerBack 1.5s step-start infinite ;
 }
 .button:hover::after {
   content: "";
@@ -259,6 +274,17 @@ function next () {
   }
   100% {
     opacity: 0
+  }
+}
+@keyframes flickerBack {
+  0% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: #e7e7e7;
+  }
+  100% {
+    background-color: #ffffff;
   }
 }
 </style>
