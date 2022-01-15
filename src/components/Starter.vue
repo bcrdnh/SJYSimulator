@@ -4,7 +4,6 @@ import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { changePage } from '../assets/utils'
-// import '../assets/font.css'
 const store = useStore()
 const router = useRouter()
 const route = useRoute()
@@ -74,13 +73,9 @@ function next () {
   if (restPoint.value < 0) {
     message.error('not enought point')
   } else {
-    // store.dispatch('sys/setVar', {varName: 'pn', content: playerName.value})
-    // setVar('playerName', playerName.value)
     store.commit('sys/setPlayerName', playerName.value)
     store.dispatch('sys/finishStarter', startOptions.value)
-    // console.log(route)
     changePage(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
-    // router.push(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
   }
 }
 </script>

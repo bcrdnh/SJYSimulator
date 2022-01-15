@@ -221,9 +221,13 @@ class TiggerPool {
         tig[1].triggered = true
         // console.log('tigger success, now count is ' + count +',now mark is ' + this.mark)
         // console.log('and this time, event is:' + event)
-        setDaram(event, () => {
-          this.tigger(player, special, callback)
-        })
+        if (randomNum(1, 100) <= tig[1].rate) {
+          setDaram(event, () => {
+            this.tigger(player, special, callback)
+          })          
+        } else {
+          continue
+        }
         // console.log('set over, try to break')
         return
       }

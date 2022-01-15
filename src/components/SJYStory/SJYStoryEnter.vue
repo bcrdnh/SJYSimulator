@@ -14,6 +14,7 @@ const router = useRouter()
 
 onMounted(() => {
   fadeIn('.mySwiper', 0.3)
+  store.dispatch('sys/resetStarter')
 })
 
 function start () {
@@ -219,12 +220,12 @@ function start () {
     ],
     fixedBaseStates: [
       {
-        varName: 'health',
+        varName: 'maxHealth',
         name: '生命值',
         default: 100
       },
       {
-        varName: 'hair',
+        varName: 'maxHair',
         name: '头发',
         default: 100
       }
@@ -281,6 +282,8 @@ function start () {
       }
     ]
   }
+  setVar('health', 100)
+  setVar('hair', 100)
   store.dispatch('sys/setStarter', starter)
   changePage({path: '/starter', query: {mainPage: '/SJYStory'}})
   // router.push({path: '/starter', query: {mainPage: '/SJYStory'}})
@@ -345,12 +348,12 @@ function saveVampireSJY () {
               <div class="line s">长时间的加班让他失去了人性，变得非常狂暴</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 24px;">力量 : 120</span>
-                <span style="margin-right: 24px;">耐力 : 100</span>
+                <span style="margin-right: 16px;">力量 : 120</span>
+                <span style="margin-right: 16px;">耐力 : 100</span>
                 <span>智力 : 40</span>
               </div>
               <div class="line">
-                <span style="margin-right: 24px;">生命值 : 120</span>
+                <span style="margin-right: 16px;">生命值 : 120</span>
                 <span>头发 : 90</span>
               </div>
               <div class="divid"></div>
@@ -377,12 +380,12 @@ function saveVampireSJY () {
               <div class="line s">他还在加班！他已经三天没下班了！</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 24px;">力量 : 80</span>
-                <span style="margin-right: 24px;">耐力 : 100</span>
+                <span style="margin-right: 16px;">力量 : 80</span>
+                <span style="margin-right: 16px;">耐力 : 100</span>
                 <span>智力 : 120</span>
               </div>
               <div class="line">
-                <span style="margin-right: 24px;">生命值 : 80</span>
+                <span style="margin-right: 16px;">生命值 : 80</span>
                 <span>头发 : 50</span>
               </div>
               <div class="divid"></div>
@@ -407,12 +410,12 @@ function saveVampireSJY () {
               <div class="line s">为什么是吸血鬼？</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 24px;">力量 : 90</span>
-                <span style="margin-right: 24px;">耐力 : 90</span>
+                <span style="margin-right: 16px;">力量 : 90</span>
+                <span style="margin-right: 16px;">耐力 : 90</span>
                 <span>智力 : 90</span>
               </div>
               <div class="line">
-                <span style="margin-right: 24px;">生命值 : 90</span>
+                <span style="margin-right: 16px;">生命值 : 90</span>
                 <span>头发 : 160</span>
               </div>
               <div class="divid"></div>
@@ -439,12 +442,12 @@ function saveVampireSJY () {
               <div class="line s">自定义你的角色</div>
               <div class="divid"></div>
               <div class="line">
-                <span style="margin-right: 24px;">力量 : 80</span>
-                <span style="margin-right: 24px;">耐力 : 80</span>
+                <span style="margin-right: 16px;">力量 : 80</span>
+                <span style="margin-right: 16px;">耐力 : 80</span>
                 <span>智力 : 80</span>
               </div>
               <div class="line">
-                <span style="margin-right: 24px;">生命值 : 100</span>
+                <span style="margin-right: 16px;">生命值 : 100</span>
                 <span>头发 : 100</span>
               </div>
               <div class="divid"></div>

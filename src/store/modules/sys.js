@@ -166,6 +166,9 @@ const actions = {
   finishStarter ({ commit }, startOprions) {
     commit('finishStarter', startOprions)
   },
+  resetStarter ({ commit }) {
+    commit('resetStarter')
+  },
   setStarter ({ commit }, starter) {
     commit('setStarter', starter)
   },
@@ -191,14 +194,27 @@ const mutations = {
     if (!startOptions.baseStates instanceof Map) {
       console.error('[store/sys.js/finishStarter]:baseStates is not map!')
     } else {
-      state.globalVariable.baseStates = startOptions.baseStates
+      for (const [k, v] of startOptions.baseStates) {
+        state.globalVariable.baseStates.set(k, v)
+      }
+      // state.globalVariable.baseStates = startOptions.baseStates
     }
     if (!startOptions.special instanceof Map) {
       console.error('[store/sys.js/finishStarter]:special is not map!')
     } else {
-      state.globalVariable.special = startOptions.special
+      for (const [k, v] of startOptions.special) {
+        state.globalVariable.special.set(k, v)
+      }
+      // state.globalVariable.special = startOptions.special
     }
     state.globalVariable.baseStates.set('turn', 0)
+  },
+  resetStarter (state) {
+    state.globalVariable = {
+      baseStates: new Map(),
+      special: new Map(),
+      items: new Map()
+    }
   },
   setStarter (state, starter) {
     state.starter = starter

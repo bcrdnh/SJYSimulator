@@ -26,6 +26,14 @@ export const preloadPlot1_darams = [
     '{playerName}：doctor',
     '……',
     '沉默',
+    {
+      content: "被突然的沉默伤害到了，生命值-15",
+      clas: "red",
+      changeVar: {
+        varName: "health",
+        num: -15
+      }
+    },
     '真烂啊，你自己都看不下去了，你只能圆个场。',
   ],
   [
@@ -33,7 +41,15 @@ export const preloadPlot1_darams = [
     '{playerName}：傻逼！',
     '你很惊讶自己怎么会这么说。',
     '对面显然更惊讶，对面试有所不满的人他们也见过，却没见过如此突然的。',
-    '但不愧是社会人，他们很快就冷静了下来，甚至给了你一个台阶。',
+    {
+      content: "你很害怕，头发-15",
+      clas: "red",
+      changeVar: {
+        varName: "hair",
+        num: -15
+      }
+    },
+    '但对方不愧是社会人，他们很快就冷静了下来，甚至给了你一个台阶。',
     '大叔：你说什么？我刚才没听清。'
   ]
 ]

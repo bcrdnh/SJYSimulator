@@ -6,8 +6,8 @@ import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect } f
 import Player from '../Player.vue'
 import StateBorder from '../StateBorder.vue'
 import SpecialBorder from '../SpecialBorder.vue'
-import Selector from '../Selector.vue'
-import fixedSelector from '../fixedSelector.vue'
+import FixedSelector from '../fixedSelector.vue'
+import ComplexBorder from './ComplexBorder.vue'
 import { preloadPart0 } from '../../assets/SJYStory/preloadPlot.js'
 import { NEv, SSRGoodEv, SRGoodEv, SRBadEv } from '../../assets/SJYStory/startStage.js'
 import { endStartStage, dayStartPlot, dayMorning_labels, dayMorning_Darams, dayNoon_labels, dayNoon_Darams, dayAfternoon_labels, dayAfternoon_Darams, dayEvening_labels, dayEvening_Darams } from '../../assets/SJYStory/everyDay.js'
@@ -35,8 +35,6 @@ function beforeEvenyThingStart () {
   border.value.addDisplayVar('power', '力量')
   border.value.addDisplayVar('stamina', '耐力')
   border.value.addDisplayVar('inte', '智力')
-  border.value.addDisplayVar('health', '生命值')
-  border.value.addDisplayVar('hair', '头发')
   tiggerPool.addTigger('破屋', [
     '由于昨晚住在破屋中，没能睡好，头发-2',
     {
@@ -47,7 +45,7 @@ function beforeEvenyThingStart () {
         num: -2
       }
     }
-  ], 15, true)
+  ], 100, true)
   tiggerPool.addTigger('永恒霸王', [
     '使用霸王洗发液洗头，由于洗发液用不完所以不会心疼，多洗了两次头。头发增加了一些',
     {
@@ -134,9 +132,13 @@ function checkEnd () {
 
 <template>
   <div class="controller">
-    <StateBorder ref="border"></StateBorder>
-    <SpecialBorder></SpecialBorder>
-    <fixedSelector ref="selector"></fixedSelector>
+    <!-- <StateBorder v-if="false"></StateBorder>
+    <SpecialBorder v-if="false"></SpecialBorder> -->
+    <div class="mediaPart">
+      <ComplexBorder ref="border" class="complexBorder"></ComplexBorder>
+      <div class="placeholder">预留</div>
+    </div>
+    <FixedSelector ref="selector"></FixedSelector>
     <Player ref="player" class="player"></Player>
   </div>
 </template>
@@ -152,8 +154,24 @@ function checkEnd () {
   justify-content: left;
   padding: 24px;
 }
+.mediaPart {
+  height: 40%;
+  margin-bottom: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .player {
   flex: 1;
   width: 100%;
+  height: 60%;
+}
+.complexBorder {
+  width: 40%;
+  margin-right: 8px;
+}
+.placeholder {
+  flex: 1;
+  border: 4px solid #000000;
 }
 </style>

@@ -119,7 +119,7 @@ defineExpose({
   overflow: scroll;
   justify-content: left;
   background-color: #ffffff;
-  border:  1px solid #000000;
+  border:  4px solid #000000;
   transition: all .3s;
 }
 .msgBox::-webkit-scrollbar {
