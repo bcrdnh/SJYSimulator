@@ -7,6 +7,7 @@ import Player from '../Player.vue'
 import StateBorder from '../StateBorder.vue'
 import SpecialBorder from '../SpecialBorder.vue'
 import Selector from '../Selector.vue'
+import fixedSelector from '../fixedSelector.vue'
 import { preloadPart0 } from '../../assets/SJYStory/preloadPlot.js'
 import { NEv, SSRGoodEv, SRGoodEv, SRBadEv } from '../../assets/SJYStory/startStage.js'
 import { endStartStage, dayStartPlot, dayMorning_labels, dayMorning_Darams, dayNoon_labels, dayNoon_Darams, dayAfternoon_labels, dayAfternoon_Darams, dayEvening_labels, dayEvening_Darams } from '../../assets/SJYStory/everyDay.js'
@@ -135,7 +136,7 @@ function checkEnd () {
   <div class="controller">
     <StateBorder ref="border"></StateBorder>
     <SpecialBorder></SpecialBorder>
-    <Selector ref="selector"></Selector>
+    <fixedSelector ref="selector"></fixedSelector>
     <Player ref="player" class="player"></Player>
   </div>
 </template>

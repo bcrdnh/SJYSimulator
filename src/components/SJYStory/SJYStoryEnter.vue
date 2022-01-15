@@ -20,6 +20,13 @@ function start () {
   const starter = {
     name: 'SJYStory starter',
     point: 120,
+    pname: {
+      restPoint: '剩余点数',
+      name: '角色名称',
+      baseStates: '基本属性',
+      otherStates: '其它属性',
+      otherPartsName: '额外选项'
+    },
     parts: [
       {
         name: '世界观设定',

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
-import { setVar } from '../assets/utils'
+import { changePage } from '../assets/utils'
 // import '../assets/font.css'
 const store = useStore()
 const router = useRouter()
@@ -78,8 +78,9 @@ function next () {
     // setVar('playerName', playerName.value)
     store.commit('sys/setPlayerName', playerName.value)
     store.dispatch('sys/finishStarter', startOptions.value)
-    console.log(route)
-    router.push(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
+    // console.log(route)
+    changePage(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
+    // router.push(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
   }
 }
 </script>
@@ -102,7 +103,7 @@ function next () {
           <input type="text" id="name_field" class="nes-input" v-model="playerName" placeholder="请输入......">
         </div>
         <div class="nes-container with-title outerBox">
-          <div class="title">{{ starter.pname&&starter.pname.baseState?starter.pname.baseState:'baseState' }}</div>
+          <div class="title">{{ starter.pname&&starter.pname.baseStates?starter.pname.baseStates:'baseStates' }}</div>
           <div v-for="baseState in starter.baseStates" class="baseState">
             <span style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</span>
             <span>
@@ -121,7 +122,7 @@ function next () {
           </div>
         </div>
         <div class="nes-container with-title outerBox">
-          <div class="title">{{ starter.pname&&starter.pname.otherState?starter.pname.otherState:'otherState' }}</div>
+          <div class="title">{{ starter.pname&&starter.pname.otherStates?starter.pname.otherStates:'otherStates' }}</div>
           <div v-for="fixedState in starter.fixedBaseStates" class="baseState">
             <span>{{ fixedState.name }}:</span>
             <span> {{ startOptions.baseStates.get(fixedState.varName) }} </span>
@@ -148,7 +149,7 @@ function next () {
         </div>
         <div>
           <div class="nes-container with-title outerBox">
-            <div class="title">{{ starter.otherPartsName }}</div>
+            <div class="title">{{ starter.pname&&starter.pname.otherPartsName?starter.pname.otherPartsName:'otherPartsName' }}</div>
             <div class="innerBox">
               <div
                 v-for="button in starter.otherParts"

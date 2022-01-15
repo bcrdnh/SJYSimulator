@@ -113,6 +113,7 @@ defineExpose({
   justify-content: center;
 }
 .msgBox {
+  user-select: none;
   height: 100%;
   width: 100%;
   overflow: scroll;

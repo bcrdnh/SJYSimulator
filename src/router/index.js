@@ -21,5 +21,9 @@ export const router = createRouter({
       path: '/SJYStory',
       component: () => import('../components/SJYStory/SJYStory.vue')
     },
+    {
+      path: '/cocosPlayer',
+      component: () => import('./../components/CocosPlayer.vue')
+    },
   ]
 })
