@@ -6,7 +6,7 @@ import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect } f
 import Player from '../Player.vue'
 import StateBorder from '../StateBorder.vue'
 import SpecialBorder from '../SpecialBorder.vue'
-import FixedSelector from '../fixedSelector.vue'
+import FixedSelector from '../FixedSelector.vue'
 import ComplexBorder from './ComplexBorder.vue'
 import { preloadPart0 } from '../../assets/SJYStory/preloadPlot.js'
 import { NEv, SSRGoodEv, SRGoodEv, SRBadEv } from '../../assets/SJYStory/startStage.js'
