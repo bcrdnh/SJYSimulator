@@ -30,7 +30,7 @@ function toCocos () {
     <a-button @click="defaultDaram()">test</a-button>
     <a-button @click="SJYStory()">SJY Story</a-button>
     <!-- <a-button @click="toCocos()">test Cocos</a-button> -->
-    <div>版本号：2.1.4</div>
+    <div>版本号：2.1.5</div>
   </a-space>
   <div class="root nes-container is-rounded">
     <router-view></router-view>
