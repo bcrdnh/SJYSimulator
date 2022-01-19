@@ -59,7 +59,7 @@ export const dayStartPlot = [
 ]
 
 export const dayMorning_labels = () => {
-  let labels = ['jixushuijiao', 'shangban', 'chuqutanxian']
+  let labels = ['继续睡', '上班', '出门探险']
   return labels
 }
 export const dayMorning_Darams = () => {
@@ -68,7 +68,7 @@ export const dayMorning_Darams = () => {
   darams[1] = doSleep()
   let evpool = [0]
   if (randomNum() < 20) {
-    darams.push() // 失败事件
+    darams.push(fail) // 失败事件
     return darams
   }
   if (!getVar('jigongbao')) {
@@ -101,23 +101,27 @@ export const dayMorning_Darams = () => {
 const doWork = () => {
   const darams = [
     [
-      '',
-      '',
+      '你收拾收拾便出门上班了。',
+      '你顺利地完成了今天的工作。',
       stateObj('money', 210),
+      stateObj('work', 1),
       stateObj('hair', -70),
       randomState(3)
     ],
     [
-      '',
-      '',
+      '你随便收拾了下就出门上班了。',
+      '你昨天好像没没睡好。',
+      '不太能集中注意力。',
       stateObj('money', 180),
+      stateObj('work', 1),
       stateObj('hair', -70),
       randomState(3)
     ],
     [
-      '',
-      '',
+      '你感到今天非常有干劲！',
+      '你一口气做完了今天的工作！',
       stateObj('money', 240),
+      stateObj('work', 1),
       stateObj('hair', -70),
       randomState(3)
     ]
@@ -127,26 +131,78 @@ const doWork = () => {
 const doSleep = () => {
   const darams = [
     [
-      '',
-      '',
+      '说实话，不是很想去上班。',
+      '你再次躺下了，享受了一次回笼觉。',
       stateObj('hair', 30),
     ],
     [
-      '',
-      '',
+      '你根本不想去上班，所以你又躺下了。',
+      '......',
+      '......睡不着。',
+      '你太过在意工作的事情了所以睡得不是很踏实。',
       stateObj('hair', 25),
     ],
     [
-      '',
-      '',
+      '上班有睡觉快乐吗？',
+      '你将工作完全抛到脑后，安心地睡着了。',
       stateObj('hair', 35),
     ]
   ]
   return darams[randomNum(0, 2)]
 }
 const findFood = () => {
-  if (!getVar('reganmian')) {
-    return [''] // 初次找到事件
+  if (!getVar('热干面')) {
+    return [
+      '你在公司附近逛了逛。',
+      '在公司的楼下，你发现了一家热干面。',
+      '这附近也没有什么好吃的了，也许之后午餐可以选择热干面？',
+      {
+        content: '可以在午餐时选择吃热干面了！',
+        setVar: {
+          varName: '热干面',
+          content: true
+        }
+      },
+      stateObj(hair, 40)
+    ] // 初次找到事件
+  }
+  if (!getVar('麦当劳')) {
+    return [
+      '你去了公司附近的商场。',
+      '也许是写字楼林立的地方总是缺少点生活气息。',
+      '办公区附近的商场显得很冷清。',
+      '你在那里找到了一家麦当劳。',
+      '这家麦当劳看起来有些...奇怪。',
+      '你走进了店中，没有一个人搭理你。',
+      '所有人都在埋头吃着。',
+      '你感到有些有些诡异，离开了这个地方。',
+      {
+        content: '可以在午餐时选择吃麦当劳了！',
+        setVar: {
+          varName: '麦当劳',
+          content: true
+        }
+      },
+      stateObj(hair, 45)
+    ]
+  }
+  if (!getVar('盖浇饭')) {
+    return [
+      '你在公司后面的小街上闻到了食物的香味。',
+      '公司写字楼后方的小街上并没有什么行人，所以也没什么店铺。',
+      '只有偶尔会有附近的居民为了抄近道才穿过这里。',
+      '可香味是从哪来的呢？你仔细的找了找，发现在街头的一个角落，有一家很小的门面。',
+      '是一家很普通的售卖盖浇饭的店铺，店铺中毫不意外的没什么顾客。',
+      '你试了试，味道确实不错，你决定以后多光顾光顾。',
+      {
+        content: '可以在午餐时选择吃盖浇饭了！',
+        setVar: {
+          varName: '盖浇饭',
+          content: true
+        }
+      },
+      stateObj(hair, 40)
+    ] // 初次找到事件
   }
 }
 const findFish = () => {
@@ -157,46 +213,54 @@ const findFish = () => {
 const findPlace = () => {
 
 }
+const fail = [
+  '你出想出门逛逛，毕竟自从你来到这个城市你还没有怎么出去玩玩。',
+  '生活一直被工作所占满。',
+  '你跟着网上的推荐出门走了走。',
+  '......',
+  '实在是有点无聊，这次的推荐不太靠谱。',
+  '你失望地回家了。',
+  stateObj('hair', -5)
+]
 
 export const dayNoon_labels = () => {
   let labels = ['gongsishitang']
-  if (getVar('regammian') && getVar('money') >= 50) {
-    labels.push('mdl')
+  if (getVar('热干面') && getVar('money') >= 50) {
+    labels.push('热干面')
   }
-  if (getVar('maidanglao')) {
-    labels.push('hdl')
+  if (getVar('麦当劳')) {
+    labels.push('麦当劳')
   }
-  if (getVar('gaijiaofan')) {
-    labels.push('gjf')
+  if (getVar('盖浇饭')) {
+    labels.push('盖浇饭')
   }
-  if (getVar('haidilao')) {
-    labels.push('hm')
+  if (getVar('海底捞')) {
+    labels.push('海底捞')
   }
-  if (getVar('jigongbao')) {
-    labels.push('jgb')
+  if (getVar('鸡公煲')) {
+    labels.push('鸡公煲')
   }
   return labels
 }
 
 const MCDAddictionDaram = [
-  '',
-  '',
-  '',
+  '只有麦当劳才能被称作食物！',
+  '只有麦当劳才能拯救我们！',
+  '只有麦当劳！',
   stateObj('hair', -10)
 ]
 export const dayNoon_Darams = () => {
-  let darams = [['', '', '']]
-  if (getVar('reganmian')) {
+  let darams = [['你选择去公司食堂吃饭。', '虽然不是很好吃，但好在不要钱', '你吃完了。']]
+  if (getVar('热干面')) {
     let eatReganmian = [
-      '',
-      '',
-      ''
+      '你来到了那家热干面。',
+      '虽然不是很好吃，但足够饱腹。',
     ]
     if (special.has('MDCAddiction')) {
       eatReganmian = MCDAddictionDaram
     } else if (special.has('dislikeReganmian')) {
-      eatReganmian.push('')
-      eatReganmian.push('')
+      eatReganmian.push('你实在是吃腻了这家热干面。')
+      eatReganmian.push('你硬着头皮吃完了。')
       eatReganmian.push(stateObj('hair', 10))
       eatReganmian.push(stateObj('money', -20))
     } else {
@@ -204,17 +268,16 @@ export const dayNoon_Darams = () => {
       eatReganmian.push(stateObj('money', -20))
       if (getVar('reganmianTime') <= 5) {
         eatReganmian.push({
-          content: '......',
+          content: '你吃完了。',
           changeVar: {
             varName: 'reganmianTime',
             num: 1
           }
         })        
       } else {
-        eatReganmian.push('')
-        eatReganmian.push('')
+        eatReganmian.push('你已经吃腻了这家热干面了。')
         eatReganmian.push({
-          content: '',
+          content: '得到特质“讨厌热干面”',
           setSpecial: {
             name: 'dislikeReganmian',
             num: 1
@@ -224,17 +287,19 @@ export const dayNoon_Darams = () => {
     }
     darams.push(eatReganmian)
   }
-  if (getVar('maidanglao')) {
+  if (getVar('麦当劳')) {
     let eatMCD = [
-      '',
-      '',
-      ''
+      '你再次来到这家麦当劳，点了个套餐。',
+      '你犹豫了下，还是吃了下去。',
+      '......',
+      '好像也没什么不一样，和其它麦当劳一样的味道。',
+      '看来是你想多了。'
     ]
     if (special.has('MDCAddiction')) {
       eatMCD = [
-        '',
-        '',
-        '',
+        '是麦当劳！',
+        '必须...进食...',
+        '你不顾一切地低头吃了起来。',
         stateObj('hair', 12),
         stateObj('money', -30)
       ]
@@ -243,17 +308,20 @@ export const dayNoon_Darams = () => {
       eatReganmian.push(stateObj('money', -30))
       if (getVar('MDCTime') <= 10) {
         eatReganmian.push({
-          content: '......',
+          content: '你吃完了。',
           changeVar: {
             varName: 'MDCTime',
             num: 1
           }
         })
       } else {
-        eatReganmian.push('')
-        eatReganmian.push('')
+        eatReganmian.push('你感到...似乎有什么东西变得不一样了。')
+        eatReganmian.push('吃了这么多次，你已经不再抵触这家麦当劳。')
+        eatReganmian.push('应该说...你好像...变得越来越想吃。')
+        eatReganmian.push('你开始无法思考，在你的脑中只有三个字在回响。')
+        eatReganmian.push('麦当劳。')
         eatReganmian.push({
-          content: '',
+          content: '得到特质“麦当劳的诅咒”',
           setSpecial: {
             name: 'MDCAddiction',
             num: 1
@@ -266,35 +334,48 @@ export const dayNoon_Darams = () => {
     if (special.has('MDCAddiction')) {
       darams.push(MCDAddictionDaram)
     } else {
-      darams.push([
-        '',
-        '',
-        stateObj('hair', 40),
-        stateObj('money', -30)
-      ])
+      if (randomNum() < 75) {
+        darams.push([
+          '你来到了那家街角的盖浇饭。',
+          '老板热情的招呼你进去吃饭。',
+          stateObj('hair', 40),
+          stateObj('money', -30)
+        ])        
+      } else {
+        darams.push([
+          '你来到了那家街角的盖浇饭。',
+          '今天没有开门。',
+          '你随便吃了点别的就回去了。',
+          stateObj('hair', 35),
+          stateObj('money', -30)
+        ])  
+      }
     }
   }
-  if (getVar('haidilao')) {
+  if (getVar('海底捞')) {
     if (special.has('MDCAddiction')) {
       darams.push(MCDAddictionDaram)
     } else {
-      darams.push([
-        '',
-        '',
+      let eatHDL = [
+        '真的要吃这么奢侈吗？',
+        '算了，来都来了，你还是吃了点。',
         stateObj('hair', 60),
         stateObj('money', -100),
         randomState(),
         randomState()
-      ])
+      ]
+      if (randomNum() < 50) {
+        eatHDL.push(randomState())
+      }
+      darams.push(eatHDL)
     }
   }
-  if (getVar('jigongbao')) {
+  if (getVar('鸡公煲')) {
     if (special.has('MDCAddiction')) {
       darams.push(MCDAddictionDaram)
     } else {
       darams.push([
-        '',
-        '',
+        '你享用了鸡公煲。',
         stateObj('hair', 50),
         stateObj('money', -50)
       ])
