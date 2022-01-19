@@ -59,170 +59,349 @@ export const dayStartPlot = [
 ]
 
 export const dayMorning_labels = () => {
-  let labels = ['work']
-  if (getVar('fpark')) {
-    labels.push('fpark')
-  }
-  if (getVar('fwb')) {
-    labels.push('fwb')
-  }
-  if (getVar('fhs')) {
-    labels.push('fhs')
-  }
-  if (getVar('fwhatever')) {
-    labels.push('fwhatever')
-  }
-  labels.push('play')
-  return [
-    '上班',
-    '翘班'
-  ]
+  let labels = ['jixushuijiao', 'shangban', 'chuqutanxian']
+  return labels
 }
-
 export const dayMorning_Darams = () => {
-  const workPart0 = [
-    'something happened',
-    {
-      content: '',
-      changeVar: {
-        varName: 'temp',
-        num: 10
-      }
-    }
-  ]
-  let darams = [['u go to work',]]
-  if (randomNum(0, 100) < 10) {
-    darams[0].push(workPart0)    
+  let darams = [[''], ['']]
+  darams[0] = doWork()
+  darams[1] = doSleep()
+  let evpool = [0]
+  if (randomNum() < 20) {
+    darams.push() // 失败事件
+    return darams
   }
-  if (getVar('fpark')) {
-    darams.push(['fpark'])
+  if (!getVar('jigongbao')) {
+    evpool.push(1)
   }
-  if (getVar('fwb')) {
-    darams.push(['fwb'])
+  if (!getVar('moyu')) {
+    evpool.push(2)
   }
-  if (getVar('fhs')) {
-    darams.push(['fhs'])
+  if (!getVar('ff14')) {
+    evpool.push(3)
   }
-  if (getVar('fwhatever')) {
-    darams.push(['fwhatever'])
+  switch (evpool[randomNum(0, evpool.length - 1)]) {
+    case 0:
+      darams.push() // 普通事件
+      break;
+    case 1:
+      darams.push(findFood())
+      break;
+    case 2:
+      darams.push(findFish())
+      break;
+    case 3:
+      darams.push(findPlace())
+      break;
+    default:
+      break;
   }
-  // 没时间优化了
-  if (!getVar('fpark') && randomNum(0, 100) < 50) {
-    darams.push[
-      'u find park!',
-      {
-        content: 'u can go park',
-        clas: '',
-        setVar: {
-          varName: 'fpark',
-          content: true
-        }
-      }
-    ]
-  } else if (!getVar('fwb') && randomNum(0, 100) < 50) {
-
-  } else if (!getVar('fhs') && randomNum(0, 100) < 50) {
-
-  } else if (!getVar('whatever') && randomNum(0, 100) < 50) {
-
-  } else {
-
-  }
-  return [
+  return darams
+}
+const doWork = () => {
+  const darams = [
     [
-      '你上班。'
+      '',
+      '',
+      stateObj('money', 210),
+      stateObj('hair', -70),
+      randomState(3)
     ],
     [
-      '你玩了个爽。'
+      '',
+      '',
+      stateObj('money', 180),
+      stateObj('hair', -70),
+      randomState(3)
+    ],
+    [
+      '',
+      '',
+      stateObj('money', 240),
+      stateObj('hair', -70),
+      randomState(3)
     ]
   ]
+  return darams[randomNum(0, 2)]
+}
+const doSleep = () => {
+  const darams = [
+    [
+      '',
+      '',
+      stateObj('hair', 30),
+    ],
+    [
+      '',
+      '',
+      stateObj('hair', 25),
+    ],
+    [
+      '',
+      '',
+      stateObj('hair', 35),
+    ]
+  ]
+  return darams[randomNum(0, 2)]
+}
+const findFood = () => {
+  if (!getVar('reganmian')) {
+    return [''] // 初次找到事件
+  }
+}
+const findFish = () => {
+  if (!getVar('bajielindao')) {
+    return ['']
+  }
+}
+const findPlace = () => {
+
 }
 
 export const dayNoon_labels = () => {
-  let labels = ['rgm']
-  if (getVar('mdl')) {
+  let labels = ['gongsishitang']
+  if (getVar('regammian') && getVar('money') >= 50) {
     labels.push('mdl')
   }
-  if (getVar('hdl')) {
+  if (getVar('maidanglao')) {
     labels.push('hdl')
   }
-  if (getVar('gjf')) {
+  if (getVar('gaijiaofan')) {
     labels.push('gjf')
   }
-  if (getVar('hm')) {
+  if (getVar('haidilao')) {
     labels.push('hm')
   }
-  if (getVar('jgb')) {
+  if (getVar('jigongbao')) {
     labels.push('jgb')
   }
-  return [
-    '热干面',
-    '盖浇饭'
-  ]
+  return labels
 }
 
+const MCDAddictionDaram = [
+  '',
+  '',
+  '',
+  stateObj('hair', -10)
+]
 export const dayNoon_Darams = () => {
-  const goHomePart0 = [
-    'something happened',
-    {
-      content: '',
-      changeVar: {
-        varName: 'temp',
-        num: 10
+  let darams = [['', '', '']]
+  if (getVar('reganmian')) {
+    let eatReganmian = [
+      '',
+      '',
+      ''
+    ]
+    if (special.has('MDCAddiction')) {
+      eatReganmian = MCDAddictionDaram
+    } else if (special.has('dislikeReganmian')) {
+      eatReganmian.push('')
+      eatReganmian.push('')
+      eatReganmian.push(stateObj('hair', 10))
+      eatReganmian.push(stateObj('money', -20))
+    } else {
+      eatReganmian.push(stateObj('hair', 40))
+      eatReganmian.push(stateObj('money', -20))
+      if (getVar('reganmianTime') <= 5) {
+        eatReganmian.push({
+          content: '......',
+          changeVar: {
+            varName: 'reganmianTime',
+            num: 1
+          }
+        })        
+      } else {
+        eatReganmian.push('')
+        eatReganmian.push('')
+        eatReganmian.push({
+          content: '',
+          setSpecial: {
+            name: 'dislikeReganmian',
+            num: 1
+          }
+        })
       }
     }
-  ]
-  let darams = [['u go home',]]
-  if (randomNum(0, 100) < 10) {
-    darams[0].push(goHomePart0)    
+    darams.push(eatReganmian)
   }
-  if (getVar('')) {
-    darams.push([''])
+  if (getVar('maidanglao')) {
+    let eatMCD = [
+      '',
+      '',
+      ''
+    ]
+    if (special.has('MDCAddiction')) {
+      eatMCD = [
+        '',
+        '',
+        '',
+        stateObj('hair', 12),
+        stateObj('money', -30)
+      ]
+    } else {
+      eatReganmian.push(stateObj('hair', 45))
+      eatReganmian.push(stateObj('money', -30))
+      if (getVar('MDCTime') <= 10) {
+        eatReganmian.push({
+          content: '......',
+          changeVar: {
+            varName: 'MDCTime',
+            num: 1
+          }
+        })
+      } else {
+        eatReganmian.push('')
+        eatReganmian.push('')
+        eatReganmian.push({
+          content: '',
+          setSpecial: {
+            name: 'MDCAddiction',
+            num: 1
+          }
+        })
+      }
+    }
   }
-  if (getVar('')) {
-    darams.push([''])
+  if (getVar('gaijiaofan')) {
+    if (special.has('MDCAddiction')) {
+      darams.push(MCDAddictionDaram)
+    } else {
+      darams.push([
+        '',
+        '',
+        stateObj('hair', 40),
+        stateObj('money', -30)
+      ])
+    }
   }
-  if (getVar('')) {
-    darams.push([''])
+  if (getVar('haidilao')) {
+    if (special.has('MDCAddiction')) {
+      darams.push(MCDAddictionDaram)
+    } else {
+      darams.push([
+        '',
+        '',
+        stateObj('hair', 60),
+        stateObj('money', -100),
+        randomState(),
+        randomState()
+      ])
+    }
   }
-  if (getVar('')) {
-    darams.push([''])
+  if (getVar('jigongbao')) {
+    if (special.has('MDCAddiction')) {
+      darams.push(MCDAddictionDaram)
+    } else {
+      darams.push([
+        '',
+        '',
+        stateObj('hair', 50),
+        stateObj('money', -50)
+      ])
+    }
   }
-  if (!getVar('')) {
-
-  } else if (!getVar('') && randomNum(0, 100) < 50) {
-
-  } else if (!getVar('') && randomNum(0, 100) < 50) {
-    
-  } else if (!getVar('') && randomNum(0, 100) < 50) {
-    
-  } else if (!getVar('') && randomNum(0, 100) < 50) {
-    
-  } else {
-    
-  }
-  return [
-    ['呸，真难吃。'],
-    ['一般般吧。']
-  ]
+  return darams
 }
 
 export const dayAfternoon_labels = () => {
-  return [
-    '上班',
-    '翘班'
-  ]
+  const labels = ['jixugongzuo']
+  if (getVar('wanshouji')) {
+    label.push('')
+  }
+  if (getVar('duanlianshenti')) {
+    label.push('')
+  }
+  if (getVar('xiuxi')) {
+    label.push('')
+  }
+  if (getVar('bajielindao')) {
+    label.push('')
+  }
+  if (getVar('jiujimoyu')) {
+    label.push('')
+  }
+  return labels
 }
 
 export const dayAfternoon_Darams = () => {
-  return [
+  const darams = [
     [
-      '你上班。'
+      '', 
+      '', 
+      stateObj('work', 1)
     ],
-    [
-      '你玩了个爽。'
-    ]
   ]
+  if (getVar('bajielindao')) {
+    darams.push([
+      '',
+      '',
+      {
+        content: '',
+        clas: '',
+        changeVar: {
+          name: '',
+          num: ''
+        }
+      }
+    ])
+  }
+  if (getVar('wanshouji')) {
+    darams.push([
+      '',
+      '',
+      {
+        content: '',
+        clas: 'nes-text is-primary',
+        changeVar: {
+          name: 'power',
+          num: 3 + Math.floor(powerCorrection() * 3)
+        }
+      }
+    ])
+  }
+  if (getVar('xuexi')) {
+    darams.push([
+      '',
+      '',
+      {
+        content: '',
+        clas: 'nes-text is-primary',
+        changeVar: {
+          name: 'inte',
+          num: 3 + Math.floor(inteCorrection() * 3)
+        }
+      }
+    ])
+  }
+  if (getVar('rumalindao')) {
+    darams.push([
+      '',
+      '',
+      {
+        content: '',
+        clas: 'nes-text is-primary',
+        changeVar: {
+          name: 'charm',
+          num: 3 + Math.floor(charmCorrection() * 3)
+        }
+      }
+    ])
+  }
+  if (getVar('moyu')) {
+    darams.push([
+      '',
+      '',
+      {
+        content: '',
+        clas: 'nes-text is-primary',
+        changeVar: {
+          name: 'brave',
+          num: 3 + Math.floor(braveCorrection() * 3)
+        }
+      }
+    ])
+  }
+  return 
 }
 
 export const dayEvening_labels = () => {
@@ -243,32 +422,206 @@ export const dayEvening_labels = () => {
     labels.push('ff14')
   }
   labels.push('walk')
-  return [
-    '回家吧',
-    '出去玩'
-  ]
+  return 
 }
 
 export const dayEvening_Darams = () => {
-  if (!getVar('mdl')) {
+  let darams = [[''],]
+  return darams
+}
 
-  } else if (!getVar('')) {
+const afterOneDay = [
+  '时间不早了，你躺倒在床上。',
+  '积攒了一天的疲劳让你很快就睡着了......',
+  {
 
-  } else if (!getVar('')) {
-    
-  } else if (!getVar('')) {
-    
-  } else if (!getVar('')) {
-    
-  } else {
-    
-  }
-  return [
+  },
+  '......',
+  '......',
+  '......'
+]
+
+export const weekendMorning_labels = () => {
+  return ['好好休息', '去加班']
+}
+
+export const weekendMorning_darams = () => {
+  const darams = [
     [
-      '你上班。'
+      '',
+      '',
+      {
+        content: '',
+        clas: '',
+        changeVar: {
+          name: 'hair',
+          num: 15
+        }
+      }
     ],
     [
-      '你玩了个爽。'
+      '',
+      '',
     ]
   ]
+  if (getVar('day') === 7 ) {
+    darams[1].push(
+      {
+        content: '',
+        clas: '',
+        changeVar: {
+          name: 'work',
+          num: getVar('inte') >= 50 ? Math.floor((getVar('inte') - 50) / 10) : 1
+        }
+      }
+    )
+  } 
+  if (getVar('day') === 14) {
+    const state = (getVar('charm') + getVar('brave')) / 2
+    darams[1].push(
+      {
+        content: '',
+        clas: '',
+        changeVar: {
+          name: 'work',
+          num: state >= 50 ? Math.floor((state - 50) / 10) : 1
+        }
+      }
+    )
+  }
+  if (getVar('day') === 21) {
+    const state = (getVar('power') + getVar('stamina')) / 2
+    darams[1].push(
+      {
+        content: '',
+        clas: '',
+        changeVar: {
+          name: 'work',
+          num: state >= 50 ? Math.floor((state - 50) / 10) : 1
+        }
+      }
+    )
+  }
+  return darams
+}
+
+const stateObj = (name, x) => {
+  switch (name) {
+    case 'power':
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'power',
+          num: x + Math.floor(powerCorrection() * Math.abs(x))
+        }
+      }
+    case 'stamina':
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'stamina',
+          num: x + Math.floor(staminaCorrection() * Math.abs(x))
+        }
+      }
+    case 'inte': 
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'inte',
+          num: x + Math.floor(inteCorrection() * Math.abs(x))
+        }
+      }
+    case 'charm':
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'charm',
+          num: x + Math.floor(charmCorrection() * Math.abs(x))
+        }
+      }
+    case 'barve': 
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'brave',
+          num: x + Math.floor(braveCorrection() * Math.abs(x))
+        }
+      }
+    case 'money':
+      return {
+          content: x > 0 ? '' : '',
+          clas: x > 0 ? '' : '',
+          changeVar: {
+            name: 'money',
+            num: x
+          }
+      }
+    case 'hair':
+      return {
+        content: x > 0 ? '' : '',
+        clas: x > 0 ? '' : '',
+        changeVar: {
+          name: 'hair',
+          num: x
+        }
+      }
+    case 'work':
+        return {
+          content: x > 0 ? '' : '',
+          clas: x > 0 ? '' : '',
+          changeVar: {
+            name: 'work',
+            num: x
+          }
+        }
+    default:
+      break;
+  }
+}
+const randomState = (x = 3) => {
+  return stateObj(['', '', '', '', ''][randomNum(0, 4)], x)
+}
+
+export const weekendAfternoon_labels = () => {
+  if (getVar('day') === 7) {
+    return ['', '', '', '']
+  }
+  if (getVar('day') === 14) {
+    return ['', '', '', '']
+  }
+  if (getVar('day') === 21) {
+    return ['', '', '', '']
+  }
+}
+
+export const weekendAfternoon_darams = () => {
+  if (getVar('day') === 7) {
+    return [
+      [],
+      [],
+      [],
+      []
+    ]
+  }
+  if (getVar('day') === 14) {
+    return [
+      [],
+      [],
+      [],
+      [],
+    ]
+  }
+  if (getVar('day') === 21) {
+    return [
+      [],
+      [],
+      [],
+      []
+    ]
+  }
 }
