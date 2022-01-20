@@ -431,7 +431,7 @@ const normalEvent = [
 ]
 
 export const dayNoon_labels = () => {
-  let labels = ['gongsishitang']
+  let labels = ['公司食堂']
   if (getVar('热干面') && getVar('money') >= 50) {
     labels.push('热干面')
   }
