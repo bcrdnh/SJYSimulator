@@ -68,13 +68,13 @@ export default {
     </div>
     <div class="content">
       <div v-show="0===nowBorder" class="heal">
-        <div class="healLine">
+        <!-- <div class="healLine">
           <span class="progressName">生命: </span>
           <a-tooltip placement="bottom">
             <template #title style="font-family: zpix;">{{stateInStore('health')}}/{{stateInStore('maxHealth')}}</template>
             <progress class="nes-progress is-primary progress" :value="stateInStore('health')" :max="stateInStore('maxHealth')"></progress>
           </a-tooltip>
-        </div>
+        </div> -->
         <div class="healLine">
           <span class="progressName">头发: </span>
           <a-tooltip placement="bottom">
@@ -82,12 +82,16 @@ export default {
             <progress class="nes-progress progress" :value="stateInStore('hair')" :max="stateInStore('maxHair')"></progress>
           </a-tooltip>
         </div>
+        <div class="healLine">
+          <span class="progressName">金钱: </span>
+          <span style="margin: auto 0;">{{stateInStore('money')}}</span>
+        </div>
       </div>
       <div v-show="1===nowBorder" class="heal">
         <StateBorder ref="sborder"></StateBorder>
       </div>
       <div v-show="2===nowBorder" class="special">
-        <span v-for="s in store.state.sys.globalVariable.special">
+        <span v-for="s in store.state.sys.globalVariable.special" style="margin-right: 8px;">
           <a-tooltip placement="bottom" v-if="getSpecialByName(s[0]).display">
             <template #title>{{getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]}}</template>
             <!-- <a-tag :color="getSpecialByName(s[0]).color?getSpecialByName(s[0]).color:'blue'">
@@ -108,6 +112,7 @@ export default {
   display: flex;
   flex-direction: column;
   border: 4px solid #000000;
+  min-width: 220px;
 }
 .tab {
   display: flex;
@@ -129,9 +134,10 @@ export default {
 .content {
   flex: 1;
   padding: 8px;
-  max-width: 320px;
+  height: calc(100% - 50px);
 }
 .heal {
+  max-width: 320px;
 }
 .healLine {
   display: flex;
@@ -149,6 +155,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow-y: auto;
+  height: 100%;
 }
 </style>
 <style>

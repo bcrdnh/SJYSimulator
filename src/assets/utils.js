@@ -32,6 +32,115 @@ export function judge (judgeFunc, truePlot = ['t'], falsePlot = ['f']) {
   }
 }
 
+export const stateObj = (name, x) => {
+  const special = store.state.sys.globalVariable.special
+  const powerCorrection = () => {
+    let correction = 0
+    if (special.has('power+')) correction += 0.4
+    if (special.has('power-')) correction -= 0.4
+    return correction
+  }
+  const staminaCorrection = () => {
+    if (special.has('stamina+')) return 0.4
+    if (special.has('stamina-')) return -0.4
+    return 0
+  }
+  const inteCorrection = () => {
+    if (special.has('inte+')) return 0.4
+    if (special.has('inte-')) return -0.4
+    return 0
+  }
+  const braveCorrection = () => {
+    if (special.has('brave+')) return 0.4
+    if (special.has('brave-')) return -0.4
+    return 0
+  }
+  const charmCorrection = () => {
+    if (special.has('charm+')) return 0.4
+    if (special.has('charm-')) return -0.4
+    return 0
+  }
+  switch (name) {
+    case 'power':
+      return {
+        content: x > 0 ? '力量上升' : '力量下降',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'power',
+          num: x + Math.floor(powerCorrection() * Math.abs(x))
+        }
+      }
+    case 'stamina':
+      return {
+        content: x > 0 ? '耐力上升' : '耐力下降',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'stamina',
+          num: x + Math.floor(staminaCorrection() * Math.abs(x))
+        }
+      }
+    case 'inte': 
+      return {
+        content: x > 0 ? '智力上升' : '智力下降',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'inte',
+          num: x + Math.floor(inteCorrection() * Math.abs(x))
+        }
+      }
+    case 'charm':
+      return {
+        content: x > 0 ? '魅力上升' : '魅力下降',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'charm',
+          num: x + Math.floor(charmCorrection() * Math.abs(x))
+        }
+      }
+    case 'barve': 
+      return {
+        content: x > 0 ? '勇气上升' : '勇气下降',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'brave',
+          num: x + Math.floor(braveCorrection() * Math.abs(x))
+        }
+      }
+    case 'money':
+      return {
+          content: x > 0 ? '获得金钱' : '付出金钱',
+          clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+          changeVar: {
+            varName: 'money',
+            num: x
+          }
+      }
+    case 'hair':
+      return {
+        content: x > 0 ? '头发再生' : '脱发了',
+        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        changeVar: {
+          varName: 'hair',
+          num: x
+        }
+      }
+    case 'work':
+        return {
+          content: x > 0 ? '获得业绩' : '失去业绩',
+          clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+          changeVar: {
+            varName: 'work',
+            num: x
+          }
+        }
+    default:
+      break;
+  }
+}
+export const randomState = (x = 3) => {
+  return stateObj(['power', 'stamina', 'inte', 'charm', 'brave'][randomNum(0, 4)], x)
+}
+
 // =====================
 // special糖
 export function getSpecialByName (name) {

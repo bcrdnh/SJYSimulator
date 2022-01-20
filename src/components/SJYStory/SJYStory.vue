@@ -25,8 +25,8 @@ import {
   assessment,
   weekendStartPlot,
   beforeWeekendEvening,
-  nohair1,
-  nohair2
+  noHair1,
+  noHair2
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -58,6 +58,16 @@ function beforeEvenyThingStart () {
   setVar('盖浇饭', false)
   setVar('海底捞', false)
   setVar('鸡公煲', false)
+    setVar('玩手机', false)
+  setVar('锻炼身体', false)
+  setVar('休息', false)
+  setVar('巴结领导', false)
+  setVar('究极摸鱼', false)
+    setVar('健身房', false)
+  setVar('酒吧', false)
+  setVar('美发店', false)
+  setVar('工地', false)
+  setVar('FF14', false)
   border.value.addDisplayVar('power', '力量')
   border.value.addDisplayVar('stamina', '耐力')
   border.value.addDisplayVar('inte', '智力')
@@ -126,7 +136,7 @@ function dayStart () {
 
 function dayP1 () {
   if (getStates('hair') <= 0) {
-    player.value.setDaram(nohair1, dayOver)
+    player.value.setDaram(noHair1, dayOver)
     return
   }
   if (getStates('day') % 7 !== 0) {
@@ -142,7 +152,7 @@ function dayP1 () {
 
 function dayP2 () {
   if (getStates('hair') <= 0) {
-    player.value.setDaram(nohair1, dayOver)
+    player.value.setDaram(noHair1, dayOver)
     return
   }
   player.value.setDaram(['到中午了。'], () => {
@@ -153,7 +163,7 @@ function dayP2 () {
 
 function dayP3 () {
   if (getStates('hair') <= 0) {
-    player.value.setDaram(nohair2, dayStart)
+    player.value.setDaram(noHair2, dayStart)
     return
   }
   if (getStates('day') % 7 !== 0) {
@@ -168,7 +178,7 @@ function dayP3 () {
 
 function dayP4 () {
   if (getStates('hair') <= 0) {
-    player.value.setDaram(nohair2, dayStart)
+    player.value.setDaram(noHair2, dayStart)
     return
   }
   if (getStates('day') % 7 !== 0) {

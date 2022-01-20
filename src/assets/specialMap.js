@@ -49,35 +49,35 @@ export const specialMap = new Map([
     color: 'pink'
   }],
   ['testO1', {
-    display: true,
+    display: false,
     displayName: '测试o1',
     summary: 'this is 测试o1 summary',
     stackable: false,
     color: 'pink'
   }],
   ['testO2', {
-    display: true,
+    display: false,
     displayName: '测试o2',
     summary: 'this is 测试o2 summary',
     stackable: false,
     color: 'pink'
   }],
   ['testO3', {
-    display: true,
+    display: false,
     displayName: '测试o3',
     summary: 'this is 测试o3 summary',
     stackable: false,
     color: 'pink'
   }],
   ['testO4', {
-    display: true,
+    display: false,
     displayName: '测试o4',
     summary: 'this is 测试o4 summary',
     stackable: false,
     color: 'pink'
   }],
   ['testO5', {
-    display: true,
+    display: false,
     displayName: '测试o5',
     summary: 'this is 测试o5 summary',
     stackable: false,
@@ -167,160 +167,6 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
-  ['sjg0', {
-    display: false,
-    displayName: 'sjg0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sjg1', {
-    display: false,
-    displayName: 'sjg1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sjg2', {
-    display: false,
-    displayName: 'sjg2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sjg3', {
-    display: false,
-    displayName: 'sjg3',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sjg4', {
-    display: false,
-    displayName: 'sjg4',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['tz0', {
-    display: false,
-    displayName: 'tz0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['tz1', {
-    display: false,
-    displayName: 'tz1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['tz2', {
-    display: false,
-    displayName: 'tz2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['xt0', {
-    display: false,
-    displayName: 'xt0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['xt1', {
-    display: false,
-    displayName: 'xt1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['xt2', {
-    display: false,
-    displayName: 'xt2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['yq0', {
-    display: false,
-    displayName: 'yq0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['yq1', {
-    display: false,
-    displayName: 'yq1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['yq2', {
-    display: false,
-    displayName: 'yq2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['yq3', {
-    display: false,
-    displayName: 'yq3',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['yq4', {
-    display: false,
-    displayName: 'yq4',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sytn0', {
-    display: false,
-    displayName: 'sytn0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sytn1', {
-    display: false,
-    displayName: 'sytn1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['sytn2', {
-    display: false,
-    displayName: 'sytn2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['ydnl0', {
-    display: false,
-    displayName: 'ydnl0',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['ydnl1', {
-    display: false,
-    displayName: 'ydnl1',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
-  ['ydnl2', {
-    display: false,
-    displayName: 'ydnl2',
-    summary: '',
-    stackable: false,
-    color: 'pink'
-  }],
   ['power+', {
     display: false,
     displayName: 'power+',
@@ -391,10 +237,122 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
-  ['MCD', {
+  ['MDCAddiction', {
     display: true,
-    displayName: 'power+',
-    summary: '',
+    displayName: '麦当劳的诅咒',
+    summary: '你被麦当劳所控制。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['dislikeReganmian', {
+    display: true,
+    displayName: '吃腻了热干面',
+    summary: '你不想再吃热干面了。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['gymTalent', {
+    display: true,
+    displayName: '健身达人',
+    summary: '你很熟悉健身房，健身效果增加。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['gymSuperman', {
+    display: true,
+    displayName: '健身超人',
+    summary: '健身房效果进一步增加。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['barTalent', {
+    display: true,
+    displayName: '酒吧达人',
+    summary: '你经常去酒吧，酒吧效果上升。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['barSuperman', {
+    display: true,
+    displayName: '酒吧超人',
+    summary: '酒吧效果进一步上升。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['电子书', {
+    display: true,
+    displayName: '电子书',
+    summary: '你经常读书，智力上升效果更明显。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['超级枕头', {
+    display: true,
+    displayName: '超级枕头',
+    summary: '你拥有超级枕头，睡眠效果有所改善。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['电饼铛', {
+    display: true,
+    displayName: '电饼铛',
+    summary: '你拥有电饼铛，可以自己做点早饭吃了。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['易筋经', {
+    display: true,
+    displayName: '易筋经',
+    summary: '你学会了易筋经，力量和耐力上升效果会更明显。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['自拍杆', {
+    display: true,
+    displayName: '自拍杆',
+    summary: '你经常自拍，魅力和勇气上升效果会更明显。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['存钱罐', {
+    display: true,
+    displayName: '存钱罐',
+    summary: '每天可以获得一点点存款。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['奇怪的手机', {
+    display: true,
+    displayName: '奇怪的手机',
+    summary: '装有催眠APP的手机，你用它催眠了领导，业绩大量提升。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['奇怪的药丸', {
+    display: true,
+    displayName: '奇怪的药丸',
+    summary: '购买后属性大量提升。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['奇怪的股票', {
+    display: true,
+    displayName: '奇怪的股票',
+    summary: '购买后获得大量现金。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['跑步机', {
+    display: true,
+    displayName: '跑步机',
+    summary: '你可以用它锻炼身体。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['旧书', {
+    display: true,
+    displayName: '旧书',
+    summary: '你可以从这些书中学到很多知识。',
     stackable: false,
     color: 'pink'
   }],

@@ -30,204 +30,173 @@ function start () {
     },
     parts: [
       {
-        name: '世界观设定',
+        name: '力量',
         options: [
           {
-            name: '地狱',
-            summary: '在这里，你活不过五分钟。',
-            specialName: 'sjg0',
-            cost: -120
+            name: '无力',
+            summary: '你没能打过豆腐。',
+            specialName: 'power-',
+            cost: -60
           },
           {
-            name: '邪恶',
-            summary: '似乎每一个人都非常的不友善。',
-            specialName: 'sjg1',
-            cost: -30
-          },
-          {
-            name: '普通',
-            summary: '普通的世界，有善良也有邪恶。',
-            specialName: 'sjg2',
-            cost: 0
-          },
-          {
-            name: '善良',
-            summary: '这个世界对你非常温柔。',
-            specialName: 'sjg3',
-            cost: 30
-          },
-          {
-            name: '天堂',
-            summary: '简直是天堂！',
-            specialName: 'sjg4',
-            cost: 120
-          }
-        ]
-      },
-      {
-        name: '体质',
-        options: [
-          {
-            name: '脆弱',
-            summary: '打小你身体就不好，经常会生病。',
-            specialName: 'tz0',
-            cost: -30
-          },
-          {
-            name: '一般',
-            summary: '偶感风寒。',
-            specialName: 'tz1',
+            name: '平凡',
+            summary: '你偶尔会锻炼一下，保持着平均水准的力量。',
+            specialName: 'testO1',
             cost: 0
           },
           {
             name: '强壮',
-            summary: '从来不会得病。',
-            specialName: 'tz2',
-            cost: 30
-          }
+            summary: '你一拳可以打穿钢板。',
+            specialName: 'power+',
+            cost: 60
+          },
         ]
       },
       {
-        name: '心态',
+        name: '耐力',
         options: [
           {
-            name: '悲观',
-            summary: '悲观的你在出现意外时会掉更多的头发。',
-            specialName: 'xt0',
-            cost: -30
+            name: '虚弱',
+            summary: '打小你身体就不好。',
+            specialName: 'stamina-',
+            cost: -60
           },
           {
-            name: '平平淡淡',
-            summary: '生活总是有起有落。',
-            specialName: 'xt1',
+            name: '一般',
+            summary: '你的耐力在同龄人中还算不错。',
+            specialName: 'testO2',
             cost: 0
           },
           {
-            name: '乐观',
-            summary: '乐观的人头发更浓密，大概。',
-            specialName: 'xt2',
-            cost: 30
+            name: '持久',
+            summary: '你曾经跑3200米都没有喘气。',
+            specialName: 'stamina+',
+            cost: 60
           }
         ]
       },
       {
-        name: '运气',
+        name: '智力',
         options: [
           {
-            name: '非常差',
-            summary: '走在路上会经常会死掉。',
-            specialName: 'yq0',
-            cost: -80
+            name: '有点笨',
+            summary: '你显得比其它人笨一点，就一点。',
+            specialName: 'inte-',
+            cost: -60
           },
           {
-            name: '差劲',
-            summary: '走在路上会踩到讨厌的东西。',
-            specialName: 'yq1',
-            cost: -30
+            name: '凡庸',
+            summary: '你每次考试成绩都是中等水平。',
+            specialName: 'testO3',
+            cost: 0
+          },
+          {
+            name: '聪明',
+            summary: '你曾今证明了哥德巴赫猜想。',
+            specialName: 'inte+',
+            cost: 60
+          }
+        ]
+      },
+      {
+        name: '魅力',
+        options: [
+          {
+            name: '不修边幅',
+            summary: '你不太注重自己的外表。',
+            specialName: 'charm-',
+            cost: -60
+          },
+          {
+            name: '平庸',
+            summary: '好歹你还知道用洗面奶洗脸。',
+            specialName: 'testO4',
+            cost: 0
+          },
+          {
+            name: '超凡脱俗',
+            summary: '超凡脱俗。',
+            specialName: 'charm+',
+            cost: 60
+          },
+        ]
+      },
+      {
+        name: '勇气',
+        options: [
+          {
+            name: '胆小',
+            summary: '在需要上台演讲的场合会紧张。',
+            specialName: 'brave-',
+            cost: -60
           },
           {
             name: '还行',
-            summary: '走在路上会到达目的地。',
-            specialName: 'yq2',
+            summary: '你在很多人面前也不会紧张。',
+            specialName: 'testO5',
             cost: 0
           },
           {
-            name: '不错',
-            summary: '走在路上会捡到钱。',
-            specialName: 'yq3',
-            cost: 30
-          },
-          {
-            name: '幸运',
-            summary: '走在路上会捡到中大奖的彩票。',
-            specialName: 'yq4',
-            cost: 80
+            name: '大胆',
+            summary: '无论有多少人在看着你，你都不会害怕。',
+            specialName: 'brave+',
+            cost: 60
           }
         ]
       },
-      {
-        name: '商业头脑',
-        options: [
-          {
-            name: '没有观念',
-            summary: '你的金钱概念非常差劲，经常会被奸商欺骗。',
-            specialName: 'sytn0',
-            cost: -30
-          },
-          {
-            name: '普通人',
-            summary: '至少你还会使用余额宝。',
-            specialName: 'sytn1',
-            cost: 0
-          },
-          {
-            name: '大师',
-            summary: '许多上市公司的老板都会来找你取经。',
-            specialName: 'sytn2',
-            cost: 30
-          }
-        ]
-      },
-      {
-        name: '运动能力',
-        options: [
-          {
-            name: '笨拙',
-            summary: '你笨手笨脚的，不是很擅长运动。',
-            specialName: 'ydnl0',
-            cost: -30
-          },
-          {
-            name: '普通人',
-            summary: '你的体育成绩不算出众，平均水平。',
-            specialName: 'ydnl1',
-            cost: 0
-          },
-          {
-            name: '强健',
-            summary: '曾经取得过12块奥运金牌。',
-            specialName: 'ydnl2',
-            cost: 30
-          }
-        ]
-      }
     ],
     baseStates: [
       {
         varName: 'power',
         name: '力量',
         cost: 1,
-        default: 80,
+        default: 30,
         max: 100,
-        min: 80
+        min: 0
       },
       {
         varName: 'stamina',
         name: '耐力',
         cost: 1,
-        default: 80,
+        default: 30,
         max: 100,
-        min: 80
+        min: 0
       },
       {
         varName: 'inte',
         name: '智力',
         cost: 1,
-        default: 80,
+        default: 30,
         max: 100,
-        min: 80
+        min: 0
+      },
+      {
+        varName: 'charm',
+        name: '魅力',
+        cost: 1,
+        default: 30,
+        max: 100,
+        min: 0
+      },
+      {
+        varName: 'brave',
+        name: '勇气',
+        cost: 1,
+        default: 30,
+        max: 100,
+        min: 0
       },
     ],
     fixedBaseStates: [
       {
-        varName: 'maxHealth',
-        name: '生命值',
-        default: 100
+        varName: 'money',
+        name: '金钱',
+        default: 200
       },
       {
         varName: 'maxHair',
         name: '头发',
-        default: 100
+        default: 150
       }
     ],
     otherPartsName: '额外选项',
@@ -263,12 +232,6 @@ function start () {
         cost: 30
       },
       {
-        name: '魔法天赋',
-        summary: '你从小就可以使用一些魔法，但大家似乎都不相信魔法这种东西。',
-        specialName: '魔法天赋',
-        cost: 10
-      },
-      {
         name: '大豪斯',
         summary: '你有一栋世世代代相传的豪宅。',
         specialName: '大豪斯',
@@ -279,11 +242,23 @@ function start () {
         summary: '你住在四处漏风的破房子中。',
         specialName: '破屋',
         cost: -30
+      },
+      {
+        name: '旧书',
+        summary: '你带了些旧书到工作地点。',
+        specialName: '旧书',
+        cost: -30
+      },
+      {
+        name: '跑步机',
+        summary: '你有一台跑步机。',
+        specialName: '跑步机',
+        cost: -30
       }
     ]
   }
-  setVar('health', 100)
-  setVar('hair', 100)
+  // setVar('health', 100)
+  setVar('hair', 150)
   store.dispatch('sys/setStarter', starter)
   changePage({path: '/starter', query: {mainPage: '/SJYStory'}})
   // router.push({path: '/starter', query: {mainPage: '/SJYStory'}})

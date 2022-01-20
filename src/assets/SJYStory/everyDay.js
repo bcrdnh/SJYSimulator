@@ -1,44 +1,7 @@
-import { randomNum, randomArr, judge } from "../utils"
-import store from '../../store'
+import { randomNum, randomArr, judge, stateObj, randomState } from "../utils"
+import { store } from '../../store'
 const getVar = store.getters['sys/getStates']
 const special = store.state.sys.globalVariable.special
-
-const powerCorrection = () => {
-  const correction = 0
-  if (special.has('power+')) correction += 0.4
-  if (special.has('power-')) correction -= 0.4
-  return correction
-}
-const staminaCorrection = () => {
-  if (special.has('stamina+')) return 0.4
-  if (special.has('stamina-')) return -0.4
-  return 0
-}
-const inteCorrection = () => {
-  if (special.has('inte+')) return 0.4
-  if (special.has('inte-')) return -0.4
-  return 0
-}
-const braveCorrection = () => {
-  if (special.has('brave+')) return 0.4
-  if (special.has('brave-')) return -0.4
-  return 0
-}
-const charmCorrection = () => {
-  if (special.has('charm+')) return 0.4
-  if (special.has('charm-')) return -0.4
-  return 0
-}
-const moneyCorrection = () => {
-  if (special.has('money+')) return 0.1
-  if (special.has('money-')) return -0.1
-  return 0
-}
-const bodyCorrection = () => {
-  if (special.has('body+')) return 0.4
-  if (special.has('body-')) return -0.4
-  return 0
-}
 
 export const endStartStage = [
   '23岁，你大学毕业了，参加了这次面试',
@@ -69,26 +32,26 @@ export const dayMorning_labels = () => {
   return labels
 }
 export const dayMorning_Darams = () => {
-  let darams = [[''], ['']]
-  darams[0] = doWork()
-  darams[1] = doSleep()
+  let darams = []
+  darams.push(doWork())
+  darams.push(doSleep())
   let evpool = [0]
   if (randomNum() < 20) {
     darams.push(fail) // 失败事件
     return darams
   }
-  if (!getVar('jigongbao')) {
+  if (!getVar('鸡公煲')) {
     evpool.push(1)
   }
-  if (!getVar('moyu')) {
+  if (!getVar('究极摸鱼')) {
     evpool.push(2)
   }
-  if (!getVar('ff14')) {
+  if (!getVar('FF14')) {
     evpool.push(3)
   }
   switch (evpool[randomNum(0, evpool.length - 1)]) {
     case 0:
-      darams.push() // 普通事件
+      darams.push(randomArr(normalEvent)) // 普通事件
       break;
     case 1:
       darams.push(findFood())
@@ -169,7 +132,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj(hair, 40)
+      stateObj('hair', 40)
     ] // 初次找到事件
   }
   if (!getVar('麦当劳')) {
@@ -189,7 +152,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj(hair, 45)
+      stateObj('hair', 45)
     ]
   }
   if (!getVar('盖浇饭')) {
@@ -207,7 +170,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj(hair, 40)
+      stateObj('hair', 40)
     ] // 初次找到事件
   }
   if (!getVar('海底捞')) {
@@ -221,7 +184,7 @@ const findFood = () => {
         content: true
       }
     },
-    stateObj(hair, 60),
+    stateObj('hair', 60),
     randomState(),
     randomState()
   }
@@ -242,19 +205,170 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj(hair, 50),
+      stateObj('hair', 50),
       randomState(),
       randomState()      
     ]
   }
+  return randomArr(normalEvent)
 }
 const findFish = () => {
-  if (!getVar('bajielindao')) {
-    return ['']
+  if (!getVar('玩手机')) {
+    return [
+      '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
+      '你决定去公司找找有没有什么下午空闲时可以做的事情。',
+      '你决定观察你旁边的同事。',
+      '他在......玩手机！',
+      {
+        content: '学会了玩手机！下午可以玩手机了！',
+        setVar: {
+          varName: '玩手机',
+          content: true
+        }
+      },
+    ]
   }
+  if (!getVar('锻炼身体')) {
+    return [
+      '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
+      '你决定去公司找找有没有什么下午空闲时可以做的事情。',
+      '你决定观察你旁边的同事。',
+      '他在......闲逛！',
+      {
+        content: '学会了锻炼身体！下午可以锻炼身体了！',
+        setVar: {
+          varName: '玩手机',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('休息')) {
+    return [
+      '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
+      '你决定去公司找找有没有什么下午空闲时可以做的事情。',
+      '你决定观察你旁边的同事。',
+      '他在......睡觉！',
+      {
+        content: '学会了休息！下午可以休息了！',
+        setVar: {
+          varName: '休息',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('锻炼身体')) {
+    return [
+      '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
+      '你决定去公司找找有没有什么下午空闲时可以做的事情。',
+      '你决定观察你旁边的同事。',
+      '他在......巴结领导！',
+      {
+        content: '学会了巴结领导！下午可以巴结领导了！',
+        setVar: {
+          varName: '巴结领导',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('究极摸鱼') && randomNum() < 33) {
+    return [
+      '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
+      '你决定去公司找找有没有什么下午空闲时可以做的事情。',
+      '你决定观察你旁边的同事。',
+      '他在......他什么也没干！',
+      '隔壁的同事：我已经......没有什么好教你的了。',
+      '原来这一切他都知道！',
+      '隔壁的同事：这已经，是我全部的摸鱼绝学了。',
+      '隔壁的同事：记住啊{playerName}，摸鱼的真谛！',
+      '隔壁的同事：就是放下一切。',
+      '说完，他便离职了。',
+      {
+        content: '学会了终极的摸鱼技巧！下午可以使用究极摸鱼了！',
+        setVar: {
+          varName: '究极摸鱼',
+          content: true
+        }
+      },
+    ]
+  }
+  return randomArr(normalEvent)
 }
 const findPlace = () => {
-
+  if (!getVar('健身房')) {
+    return [
+      '你在住所附近转了转。',
+      '发现了一家健身房。',
+      '也许可以在下班之后来锻炼锻炼？',
+      {
+        content: '发现了健身房！下班后可以去健身房了！',
+        setVar: {
+          varName: '健身房',
+          content: true
+        }
+      },
+    ]
+  } 
+  if (!getVar('酒吧')) {
+    return [
+      '你在住所附近转了转。',
+      '发现了一家酒吧。',
+      '也许可以在下班之后来玩玩？',
+      {
+        content: '发现了酒吧！下班后可以去酒吧了！',
+        setVar: {
+          varName: '酒吧',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('美发店')) {
+    return [
+      '你在住所附近转了转。',
+      '发现了一家美发店。',
+      '也许可以在下班之后来做做头发？',
+      {
+        content: '发现了美发店！下班后可以去美发店了！',
+        setVar: {
+          varName: '美发店',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('工地')) {
+    return [
+      '你在住所附近转了转。',
+      '发现了一家工地。',
+      '没想到公司居然还有房地产业务...而且还正在招募搬砖的工人？',
+      {
+        content: '发现了工地！下班后可以去工地了！',
+        setVar: {
+          varName: '工地',
+          content: true
+        }
+      },
+    ]
+  }
+  if (!getVar('FF14') && randomNum() < 33) {
+    return [
+      '你在住所附近转了转。',
+      '......',
+      '什么也没发现？这里已经没什么好玩的地方了。',
+      '还是回家打游戏吧。',
+      {
+        content: '发现了FF14！下班后可以去FF14了！',
+        setVar: {
+          varName: 'FF14',
+          content: true
+        }
+      },
+    ]
+  }
+  return randomArr(normalEvent)
 }
 const fail = [
   '你出想出门逛逛，毕竟自从你来到这个城市你还没有怎么出去玩玩。',
@@ -277,27 +391,39 @@ const normalEvent = [
   ],
   [
     '也没什么好玩的，去看电影吧。',
-    randomArr(['看了电影《》']),
+    randomArr(['看了电影《北京堡垒》。'],
+    ['看了电影《流浪火星》。'],
+    ['看了电影《狼出没之没有熊》。'],
+    ['看了电影《逐梦洋葱圈》。']),
     stateObj('hair', 15),
     randomState(3),
     randomState(3),
   ],
   [
     '去运动一下吧。',
-    randomArr(['去羽毛球馆打了羽毛球。']),
+    randomArr(['去羽毛球馆打了羽毛球。'],
+    ['和别人一起打了篮球。'],
+    ['去体育场一口气跑了1200米'],
+    ['去体育场一口气跑了3200米']),
     stateObj('hair', 15),
     stateObj('power', 3),
     stateObj('stamina', 3),
   ],
   [
     '好累啊，还是玩玩游戏算了。',
-    randomArr(['玩了']),
+    randomArr(['玩了神兽世界。'],
+    ['玩了刺客鸡条'],
+    ['玩了GTA6'],
+    ['玩了荒野之吹']),
     stateObj('hair', 15),
     stateObj('inte', 6)
   ],
   [
     '出去找找有没有什么娱乐项目吧。',
-    randomArr(['找到了一家宠物店。']),
+    randomArr(['找到了一家宠物店。享受了撸猫的快感。'],
+    ['发现了一家KTV，尽情歌唱了。'],
+    ['发现了一家网吧，玩了游戏。为什么不在家玩呢？'],
+    ['发现了剧本杀，和其它人一起剧本杀了。']),
     stateObj('hair', 15),
     stateObj('charm', 3),
     stateObj('brave', 3),
@@ -411,7 +537,7 @@ export const dayNoon_Darams = () => {
       }
     }
   }
-  if (getVar('gaijiaofan')) {
+  if (getVar('盖浇饭')) {
     if (special.has('MDCAddiction')) {
       darams.push(MCDAddictionDaram)
     } else {
@@ -466,21 +592,21 @@ export const dayNoon_Darams = () => {
 }
 
 export const dayAfternoon_labels = () => {
-  const labels = ['jixugongzuo']
-  if (getVar('wanshouji')) {
-    label.push('')
+  const labels = ['继续工作']
+  if (getVar('玩手机')) {
+    label.push('玩手机')
   }
-  if (getVar('duanlianshenti')) {
-    label.push('')
+  if (getVar('锻炼身体')) {
+    label.push('锻炼身体')
   }
-  if (getVar('xiuxi')) {
-    label.push('')
+  if (getVar('休息')) {
+    label.push('休息')
   }
-  if (getVar('bajielindao')) {
-    label.push('')
+  if (getVar('巴结领导')) {
+    label.push('巴结领导')
   }
-  if (getVar('jiujimoyu')) {
-    label.push('')
+  if (getVar('究极摸鱼')) {
+    label.push('究极摸鱼')
   }
   return labels
 }
@@ -488,27 +614,27 @@ export const dayAfternoon_labels = () => {
 export const dayAfternoon_Darams = () => {
   const darams = [
     [
-      '', 
-      '', 
-      stateObj('work', 1)
+      '也没什么别的想干的。', 
+      '还是继续工作吧', 
+      stateObj('work', 1),
+      stateObj('money', 50)
     ],
   ]
-  if (getVar('wanshouji')) {
+  if (getVar('玩手机')) {
     darams.push([
-      '',
-      '',
+      '你开始一边躲避老板的检查一边玩手机。',
       ...randomArr([
         [
           stateObj('charm', 5),
           stateObj('brave', 5)
         ],
         [
-          '',
+          '很好，老板根本没有发现。',
           stateObj('charm', 6),
           stateObj('brave', 6)
         ],
         [
-          '',
+          '今天老板来的次数非常的多。',
           stateObj('charm', 4),
           stateObj('brave', 4)
         ]
@@ -516,45 +642,39 @@ export const dayAfternoon_Darams = () => {
       ...judge(() => {
         return getVar('inte') > 50
       }, [
-        '',
+        '你发挥了你的智力，更好地躲避了老板的检查。',
         stateObj('charm', 5),
         stateObj('brave', 5)
       ], [
         {
-          content: '',
+          content: '如果有更多智力的话，也许就能更好的躲避领导的检查了。',
           clas: ''
         }
       ]),
       ...judge(() => {
         return getVar('inte') > 80
       }, [
-        '',
+        '你充分发挥了你的智力，你完美躲避了老板的每一次检查。',
         stateObj('charm', 5),
         stateObj('brave', 5)
       ], [
-        {
-          content: '',
-          clas: ''
-        }
+        '......'
       ])
     ])
   }
-  if (getVar('duanlianshenti')) {
+  if (getVar('锻炼身体')) {
     darams.push([
-      '',
-      '',
+      '你站了起来，在办公室里闲逛。',
       ...randomArr([
         [
           stateObj('power', 5),
           stateObj('stamina', 5)
         ],
         [
-          '',
           stateObj('power', 6),
           stateObj('stamina', 6)
         ],
         [
-          '',
           stateObj('power', 4),
           stateObj('stamina', 4)
         ]
@@ -562,116 +682,102 @@ export const dayAfternoon_Darams = () => {
       ...judge(() => {
         return getVar('inte') > 50
       }, [
-        '',
+        '你发挥了你的智力，锻炼效果提升。',
         stateObj('power', 5),
         stateObj('stamina', 5)
       ], [
         {
-          content: '',
+          content: '有更多智力的话，锻炼效果也许提升。',
           clas: ''
         }
       ]),
       ...judge(() => {
         return getVar('inte') > 80
       }, [
-        '',
+        '你充分发挥了你的智力，锻炼效果进一步提升。',
         stateObj('power', 5),
         stateObj('stamina', 5)
       ], [
-        {
-          content: '',
-          clas: ''
-        }
+        '......'
       ])
     ])
   }
-  if (getVar('xiuxi')) {
+  if (getVar('休息')) {
     darams.push([
-      '',
-      '',
+      '你趴在桌子上，打算睡一会',
       ...randomArr([
         [
-          '',
+          '领导总是到办公室里巡视，你没睡好。',
           stateObj('hair', 10),
         ],
         [
-          '',
           stateObj('hair', 20)
         ]
       ], [75, 25]),
       ...judge(() => {
-        return getVar('inte') > 50
+        return getVar('brave') > 50
       }, [
-        '',
+        '你很勇敢，领导来了也不怕。',
         stateObj('hair', 10),
       ], [
         {
-          content: '',
+          content: '如果更勇敢的话，也许可以睡更久。',
           clas: ''
         }
       ]),
       ...judge(() => {
-        return getVar('inte') > 50
+        return getVar('brave') > 50
       }, [
-        '',
+        '你非常勇敢，甚至带着领导一起睡。',
         stateObj('hair', 10),
       ], [
-        {
-          content: '',
-          clas: ''
-        }
+        '......'
       ])
     ])
   }
-  if (getVar('bajielindao')) {
+  if (getVar('巴结领导')) {
     darams.push([
-      '',
-      '',
+      '你一下午都跟在领导后面。',
       stateObj('work', 2),
       ...randomArr([
         [
-          ''
+          '......'
         ],
         [
-          '',
+          '他看起来心情不错，给了你一点小费？',
           stateObj('money', 20)
         ]
       ], [75, 25]),
       ...judge(() => {
         return getVar('charm') > 50 && getVar('brave') > 50
       }, [
-        '',
+        '你的魅力与勇敢打动了他。',
         stateObj('work', 1),
         stateObj('money', 10),
       ], [
         {
-          content: '',
+          content: '要是有足够的魅力和勇敢的话，也许能让领导刮目相看？',
           clas: ''
         }
       ]),
       ...judge(() => {
-        return getVar('inte') > 50
+        return getVar('charm') > 80 && getVar('brave') > 80
       }, [
-        '',
+        '你的强大魅力与勇敢让领导折服。',
         stateObj('work', 1),
         stateObj('money', 10),
       ], [
-        {
-          content: '',
-          clas: ''
-        }
+        '......'
       ])
     ])
   }
-  if (getVar('jiujimoyu')) {
+  if (getVar('究极摸鱼')) {
     darams.push([
-      '',
-      '',
-      '',
+      '你想起曾今同事的面孔，闭上了眼睛。',
+      '在你睁开眼睛的时候，太阳已经快落山了。',
+      '这，就是究极的摸鱼，工作时间不过是眨眼之间。',
       stateObj('hair', 10),
-      '',
       stateObj('money', 10),
-      '',
       randomState(5),
       randomState(5),
       randomState(5),
@@ -683,21 +789,21 @@ export const dayAfternoon_Darams = () => {
 }
 
 export const dayEvening_labels = () => {
-  let labels = ['go home', 'jiaban']
-  if (getVar('jianshenfang')) {
-    labels.push('jianshenfang')
+  let labels = ['回家吧', '加班']
+  if (getVar('健身房')) {
+    labels.push('健身房')
   }
-  if (getVar('jiuba')) {
-    labels.push('jiuba')
+  if (getVar('酒吧')) {
+    labels.push('酒吧')
   }
-  if (getVar('meifadian')) {
-    labels.push('meifadian')
+  if (getVar('美发店')) {
+    labels.push('美发店')
   }
-  if (getVar('gongdi')) {
-    labels.push('gongdi')
+  if (getVar('工地')) {
+    labels.push('工地')
   }
-  if (getVar('ff14')) {
-    labels.push('ff14')
+  if (getVar('FF14')) {
+    labels.push('FF14')
   }
   return labels
 }
@@ -705,44 +811,48 @@ export const dayEvening_labels = () => {
 export const dayEvening_Darams = () => {
   let darams = [
     [
-      '',
+      '还是早点回家收拾收拾躺床上吧。',
+      '你哪里也没去，直接回家了。',
       stateObj('hair', 20)
     ],
     [
-      '',
+      '老板！',
+      '我要继续加班！',
+      '你这样喊道。',
+      '你加班到12点。',
       stateObj('hair', -10),
       stateObj('work', 1),
       stateObj('money', 50),
     ],
   ]
-  if (getVar('jianshenfang')) {
+  if (getVar('健身房')) {
     const gym = [
       stateObj('money', -30),
-      '',
-      '',
+      '你进入了健身房，每个器材都玩了玩。',
+      '不知道健身效果如何，但你确实练得满头大汗了。',
       stateObj('power', 15),
       stateObj('stamina', 15),
       ...judge(() => {
         return getVar('charm') > 70 && getVar('brave') > 70
       }, [
-        '',
+        '你出色的魅力和勇气让教练瞩目，他给你提了一些建议。',
         stateObj('power', 5),
         stateObj('stamina', 5),
       ], [
         {
-          content: '',
+          content: '如果有更多的魅力和勇气的话，就可以有更好的效果了吧。',
           clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
         return special.has('gymTalent')
       }, [
-        '',
+        '你是健身达人！你熟练地使用着这里的器材。效果提高。',
         stateObj('power', 5),
         stateObj('stamina', 5),
       ], [
         {
-          content: '',
+          content: '训练更多次的话，效果也许会提示。',
           clas: 'nes-text is-primary',
           changeVar: {
             varName: 'gymTime',
@@ -753,7 +863,7 @@ export const dayEvening_Darams = () => {
       ...judge(() => {
         return special.has('gymSuperman')
       }, [
-        '',
+        '你是健身超人！你可以跑跑步机上最高的速度，举起最重配重的杠铃！',
         stateObj('power', 5),
         stateObj('stamina', 5),
       ], [
@@ -762,7 +872,7 @@ export const dayEvening_Darams = () => {
     ]
     if (getVar('gymTime') > 3) {
       gym.push({
-        content: '',
+        content: '由于经常锻炼，变成了健身达人！',
         clas: 'nes-text is-primary',
         setSpecial: {
           name: 'gymTalent',
@@ -772,7 +882,7 @@ export const dayEvening_Darams = () => {
     }
     if (getVar('gymTime') > 6) {
       gym.push({
-        content: '',
+        content: '由于更经常的锻炼，变成了健身超人！',
         clas: 'nes-text is-primary',
         setSpecial: {
           name: 'gymSuperman',
@@ -782,36 +892,35 @@ export const dayEvening_Darams = () => {
     }
     darams.push(gym)
   }
-  if (getVar('jiuba')) {
+  if (getVar('酒吧')) {
     const bar = [
-      '',
-      '',
+      '你决定去酒吧玩玩。',
+      '陌生的人群在闪烁的灯光里狂乱舞动。',
+      '虽然你也不知道好玩在哪里，但你还是挤了进去。',
       stateObj('money', -30),
-      '',
-      '',
       stateObj('charm', 15),
       stateObj('brave', 15),
       ...judge(() => {
         return getVar('inte') > 100
       }, [
-        '',
+        '你的智力让你看起来有一种独特的气质，吸引了很多人。',
         stateObj('charm', 5),
         stateObj('brave', 5),
       ], [
         {
-          content: '',
+          content: '如果有更多的智力的话，就可以有更好的效果了吧。',
           clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
         return special.has('barTalent')
       }, [
-        '',
+        '你是酒吧达人！你懂得该怎么玩！',
         stateObj('charm', 5),
         stateObj('brave', 5),
       ], [
         {
-          content: '',
+          content: '如果来更多次的话，也许可以更习惯这里的氛围。',
           clas: 'nes-text is-primary',
           changeVar: {
             varName: 'barTime',
@@ -822,16 +931,16 @@ export const dayEvening_Darams = () => {
       ...judge(() => {
         return special.has('barSuperman')
       }, [
-        '',
+        '你是酒吧超人！你是全场最耀眼的那一个！',
         stateObj('charm', 5),
         stateObj('brave', 5),
       ], [
-        ''
+        '......'
       ])
     ]
     if (getVar('barTime') > 3) {
       gym.push({
-        content: '',
+        content: '你变得习惯酒吧的氛围，你是酒吧达人！',
         clas: 'nes-text is-primary',
         setSpecial: {
           name: 'barTalent',
@@ -841,7 +950,7 @@ export const dayEvening_Darams = () => {
     }
     if (getVar('barTime') > 6) {
       gym.push({
-        content: '',
+        content: '你变得更习惯酒吧的氛围，你是酒吧超人！',
         clas: 'nes-text is-primary',
         setSpecial: {
           name: 'barSuperman',
@@ -851,44 +960,42 @@ export const dayEvening_Darams = () => {
     }
     darams.push(bar)
   }
-  if (getVar('meifadian')) {
+  if (getVar('美发店')) {
     darams.push([
-      '',
-      '',
+      '你在街边看到了一家美发店。',
+      '最近高强度的工作让你掉了不少头发。',
+      '也许该保养一下头发了。',
       stateObj('money', -30),
-      '',
-      '',
       stateObj('hair', 45),
       ...judge(() => {
-        return getVar('day') > 14
+        return getVar('day') > 10
       }, [
-        '',
-        '',
-        '',
+        '你参加了店里的活动，买一送一。',
+        '你的两个头都得到了保养。',
         stateObj('hair', 45),
       ], [
         {
-          content: '',
+          content: '在第十天之后，店里似乎会举办活动呢。',
           clas: 'nes-text is-primary'
         }
       ])
     ])
   }
-  if (getVar('gongdi')) {
+  if (getVar('工地')) {
     let gongdi = [
-      '',
-      '',
+      '你想了想，为了生活，还是继续努力吧。',
+      '你前往了工地，顶着寒风，你开始搬砖。',
       stateObj('work', 1),
       stateObj('power', 3),
       stateObj('stamina', 3),
       ...judge(() => {
         return getVar('stamina') > 90
       }, [
-        '',
+        '你强大的耐力让你没有那么疲劳。',
         stateObj('hair', -10),
       ], [
         {
-          content: '',
+          content: '如果有更强大的耐力的话，也许就能不那么累了吧。',
           clas: 'nes-text is-primary'
         },
         stateObj('hair', -20),
@@ -896,23 +1003,21 @@ export const dayEvening_Darams = () => {
       ...judge(() => {
         return getVar('power') > 90
       }, [
-        '',
+        '你强大的力量让你多搬了两趟。',
         stateObj('money', 200),
       ], [
         {
-          content: '',
+          content: '如果有更强大的力量的话，也许就能多搬两趟了。',
           clas: 'nes-text is-primary'
         },
         stateObj('money', 100),
       ]),
     ]
   }
-  if (getVar('ff14')) {
+  if (getVar('FF14')) {
     darams.push([
-      '',
-      '',
+      '去哪里玩都没有在家打游戏好玩！',
       stateObj('hair', -10),
-      '',
       randomState(10),
       randomState(10),
       randomState(10),
@@ -994,87 +1099,87 @@ export const weekendMorning_darams = () => {
   return darams
 }
 
-const stateObj = (name, x) => {
-  switch (name) {
-    case 'power':
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'power',
-          num: x + Math.floor(powerCorrection() * Math.abs(x))
-        }
-      }
-    case 'stamina':
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'stamina',
-          num: x + Math.floor(staminaCorrection() * Math.abs(x))
-        }
-      }
-    case 'inte': 
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'inte',
-          num: x + Math.floor(inteCorrection() * Math.abs(x))
-        }
-      }
-    case 'charm':
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'charm',
-          num: x + Math.floor(charmCorrection() * Math.abs(x))
-        }
-      }
-    case 'barve': 
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'brave',
-          num: x + Math.floor(braveCorrection() * Math.abs(x))
-        }
-      }
-    case 'money':
-      return {
-          content: x > 0 ? '' : '',
-          clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-          changeVar: {
-            name: 'money',
-            num: x
-          }
-      }
-    case 'hair':
-      return {
-        content: x > 0 ? '' : '',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-        changeVar: {
-          name: 'hair',
-          num: x
-        }
-      }
-    case 'work':
-        return {
-          content: x > 0 ? '' : '',
-          clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-          changeVar: {
-            name: 'work',
-            num: x
-          }
-        }
-    default:
-      break;
-  }
-}
-const randomState = (x = 3) => {
-  return stateObj(['power', 'stamina', 'inte', 'charm', 'brave'][randomNum(0, 4)], x)
-}
+// const stateObj = (name, x) => {
+//   switch (name) {
+//     case 'power':
+//       return {
+//         content: x > 0 ? '力量上升' : '力量下降',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'power',
+//           num: x + Math.floor(powerCorrection() * Math.abs(x))
+//         }
+//       }
+//     case 'stamina':
+//       return {
+//         content: x > 0 ? '耐力上升' : '耐力下降',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'stamina',
+//           num: x + Math.floor(staminaCorrection() * Math.abs(x))
+//         }
+//       }
+//     case 'inte': 
+//       return {
+//         content: x > 0 ? '智力上升' : '智力下降',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'inte',
+//           num: x + Math.floor(inteCorrection() * Math.abs(x))
+//         }
+//       }
+//     case 'charm':
+//       return {
+//         content: x > 0 ? '魅力上升' : '魅力下降',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'charm',
+//           num: x + Math.floor(charmCorrection() * Math.abs(x))
+//         }
+//       }
+//     case 'barve': 
+//       return {
+//         content: x > 0 ? '勇气上升' : '勇气下降',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'brave',
+//           num: x + Math.floor(braveCorrection() * Math.abs(x))
+//         }
+//       }
+//     case 'money':
+//       return {
+//           content: x > 0 ? '获得金钱' : '付出金钱',
+//           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//           changeVar: {
+//             name: 'money',
+//             num: x
+//           }
+//       }
+//     case 'hair':
+//       return {
+//         content: x > 0 ? '脱发了' : '头发再生',
+//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//         changeVar: {
+//           name: 'hair',
+//           num: x
+//         }
+//       }
+//     case 'work':
+//         return {
+//           content: x > 0 ? '获得业绩' : '失去业绩',
+//           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+//           changeVar: {
+//             name: 'work',
+//             num: x
+//           }
+//         }
+//     default:
+//       break;
+//   }
+// }
+// const randomState = (x = 3) => {
+//   return stateObj(['power', 'stamina', 'inte', 'charm', 'brave'][randomNum(0, 4)], x)
+// }
 
 export const assessment = (player, sussesCallback, gameOver) => {
   const overWord = [
@@ -1202,7 +1307,7 @@ export const weekendEvening_darams = () => {
   }
 }
 
-const noHair1 = [
+export const noHair1 = [
   '快看那个人没有头发！',
   '你突然听到了有人在议论。',
   '......你感觉大家的目光都在你身上',
@@ -1212,7 +1317,7 @@ const noHair1 = [
   '......'
 ]
 
-const noHair2 = [
+export const noHair2 = [
   '快看那个人没有头发！',
   '你突然听到了有人在议论。',
   '......你感觉大家的目光都在你身上',
