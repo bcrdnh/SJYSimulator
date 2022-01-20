@@ -321,4 +321,81 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
+  ['power+', {
+    display: false,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['power-', {
+    display: false,
+    displayName: 'power-',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['stamina+', {
+    display: false,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['stamina-', {
+    display: false,
+    displayName: 'power-',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['inte+', {
+    display: false,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['inte-', {
+    display: false,
+    displayName: 'power-',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['charm+', {
+    display: false,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['charm-', {
+    display: false,
+    displayName: 'power-',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['barve+', {
+    display: false,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['brave-', {
+    display: false,
+    displayName: 'power-',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['MCD', {
+    display: true,
+    displayName: 'power+',
+    summary: '',
+    stackable: false,
+    color: 'pink'
+  }],
 ])

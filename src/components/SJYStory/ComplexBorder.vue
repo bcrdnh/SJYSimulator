@@ -3,9 +3,12 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 import xiangsu_aixin from '../../assets/png/xiangsu_aixin.png?url'
 import xiangsu_biaoqing from '../../assets/png/xiangsu_biaoqing.png?url'
+import xiangsu_mao from '../../assets/png/xiangsu_mao.png?url'
 import StateBorder from '../StateBorder.vue';
+import { getSpecialByName } from '../../assets/utils';
 const stateInStore = useStore().getters['sys/getStates']
 const sborder = ref()
+const store = useStore()
 
 // const maxHealth = ref(store.getters['sys/getStates']('maxHealth'))
 // const health = store.getters['sys/getStates']('health')
@@ -30,7 +33,7 @@ defineExpose({
   removeDisplayVar
 })
 </script>
-<script>
+<!-- <script>
 export default {
   methods: {
     addDisplayVar (name, displayName) {
@@ -45,7 +48,7 @@ export default {
     }
   }
 }
-</script>
+</script> -->
 
 <template>
   <div class="complexBorder">
@@ -57,6 +60,10 @@ export default {
       <label class="tabLine">
         <input type="radio" class="nes-radio" name="answer" v-model="nowBorder" :value="1" />
         <span><img :src="xiangsu_biaoqing" width="24" height="24" /></span>
+      </label>
+      <label class="tabLine">
+        <input type="radio" class="nes-radio" name="answer" v-model="nowBorder" :value="2" />
+        <span><img :src="xiangsu_mao" width="24" height="24" /></span>
       </label>
     </div>
     <div class="content">
@@ -78,6 +85,19 @@ export default {
       </div>
       <div v-show="1===nowBorder" class="heal">
         <StateBorder ref="sborder"></StateBorder>
+      </div>
+      <div v-show="2===nowBorder" class="special">
+        <span v-for="s in store.state.sys.globalVariable.special">
+          <a-tooltip placement="bottom" v-if="getSpecialByName(s[0]).display">
+            <template #title>{{getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]}}</template>
+            <!-- <a-tag :color="getSpecialByName(s[0]).color?getSpecialByName(s[0]).color:'blue'">
+            </a-tag> -->
+            <div class="nes-badge">
+              <span class="is-primary">{{getSpecialByName(s[0]).displayName?getSpecialByName(s[0]).displayName:s[0]}}</span>
+              <span class="is-primary" v-if="getSpecialByName(s[0]).stackable">:{{s[1]}}</span>
+            </div>
+          </a-tooltip>
+        </span>
       </div>
     </div>
   </div>
@@ -124,6 +144,11 @@ export default {
 .progress {
   flex: 1;
   height: auto;
+}
+.special {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 </style>
 <style>

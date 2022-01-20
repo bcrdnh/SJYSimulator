@@ -21,7 +21,12 @@ import {
   dayAfternoon_Darams,
   dayEvening_labels,
   dayEvening_Darams,
-  afterOneDay
+  afterOneDay,
+  assessment,
+  weekendStartPlot,
+  beforeWeekendEvening,
+  nohair1,
+  nohair2
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -46,6 +51,8 @@ function beforeEvenyThingStart () {
   setVar('day', 1)
   setVar('reganmianTime', 0)
   setVar('MDCTime', 0)
+  setVar('gymTime', 0)
+  setVar('barTime', 0)
   setVar('热干面', false)
   setVar('麦当劳', false)
   setVar('盖浇饭', false)
@@ -54,6 +61,8 @@ function beforeEvenyThingStart () {
   border.value.addDisplayVar('power', '力量')
   border.value.addDisplayVar('stamina', '耐力')
   border.value.addDisplayVar('inte', '智力')
+  border.value.addDisplayVar('charm', '魅力')
+  border.value.addDisplayVar('brave', '勇气')
   tiggerPool.addTigger('破屋', [
     '由于昨晚住在破屋中，没能睡好，头发-2',
     {
@@ -64,7 +73,7 @@ function beforeEvenyThingStart () {
         num: -2
       }
     }
-  ], 100, true)
+  ], 10, true)
   tiggerPool.addTigger('永恒霸王', [
     '使用霸王洗发液洗头，由于洗发液用不完所以不会心疼，多洗了两次头。头发增加了一些',
     {
@@ -75,7 +84,7 @@ function beforeEvenyThingStart () {
         num: 2
       }
     }
-  ], 15, true)
+  ], 10, true)
   if (special.has('yq0')) luckCorrection = -10
   if (special.has('yq1')) luckCorrection = -5
   if (special.has('yq3')) luckCorrection = 5
@@ -108,69 +117,94 @@ function dayStart () {
       tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
     })    
   } else {
-
+    player.value.setDaram(weekendStartPlot, () => {
+      tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
+    })
   }
-  checkEnd()
+  // checkEnd()
 }
 
 function dayP1 () {
+  if (getStates('hair') <= 0) {
+    player.value.setDaram(nohair1, dayOver)
+    return
+  }
   if (getStates('day') % 7 !== 0) {
     player.value.setDaram(['你决定......'], () => {
       bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
     })
   } else {
-
+    player.value.setDaram(['你决定......'], () => {
+      bondingSelect(weekendMorning_labels(), weekendMorning_darams(), player, selector, dayP2)
+    })
   }
 }
 
 function dayP2 () {
-  if (getStates('day') % 7 !== 0) {
-    player.value.setDaram(['到午休时间了。'], () => {
-      bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
-    })
-  } else {
-
+  if (getStates('hair') <= 0) {
+    player.value.setDaram(nohair1, dayOver)
+    return
   }
-  checkEnd()
+  player.value.setDaram(['到中午了。'], () => {
+    bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
+  })
+  // checkEnd()
 }
 
 function dayP3 () {
+  if (getStates('hair') <= 0) {
+    player.value.setDaram(nohair2, dayStart)
+    return
+  }
   if (getStates('day') % 7 !== 0) {
-    player.value.setDaram(['午休结束了。'], () => {
+    player.value.setDaram(['下午了。'], () => {
       bondingSelect(dayAfternoon_labels(), dayAfternoon_Darams(), player, selector, dayP4)
     })
   } else {
-
+    assessment(player.value, dayP4, gameOver)
   }
-  checkEnd()
+  // checkEnd()
 }
 
 function dayP4 () {
+  if (getStates('hair') <= 0) {
+    player.value.setDaram(nohair2, dayStart)
+    return
+  }
   if (getStates('day') % 7 !== 0) {
     player.value.setDaram(['下班了，你决定.....'], () => {
       bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, dayOver)
     })
   } else {
-
+    if (getStates('money') < 400) {
+      player.value.setDaram(beforeWeekendEvening(), dayOver)
+    } else {
+      player.value.setDaram(beforeWeekendEvening(), () => {
+        bondingSelect(weekendEvening_labels(), weekendEvening_darams(), player, selector, dayOver)
+      })
+    }
   }
-  checkEnd()
+  // checkEnd()
 }
 
 function dayOver () {
   changeVar('day', 1)
-  checkEnd()
   player.value.setDaram(afterOneDay, () => {
     dayStart()
   })
 }
 
-function checkEnd () {
+function checkHair () {
   if (getStates('hair') <= 0) {
-      player.value.setDaram(['{playerName}短暂的一生结束了。'], () => {
-      router.push('/')
-    })
+    
   }  
   return false
+}
+
+function gameOver (word = ['{playerName}短暂的一生结束了。']) {
+  player.value.setDaram(word, () => {
+    router.push('/')
+  })
 }
 </script>
 

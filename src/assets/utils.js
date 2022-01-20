@@ -7,6 +7,30 @@ import { gsap } from "gsap"
 export function randomNum (minNum = 0, maxNum = 100) {
   return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
 }
+export function randomArr (arr, warr = []) {
+  if (warr.length === 0 || warr.length !== arr.length) {
+    return arr[randomNum(0, arr.length - 1)]
+  } else {
+    let sum = 0
+    for (const w of warr) {
+      sum += w
+    }
+    let target = randomNum(1, sum)
+    for (const index in warr) {
+      if (target < warr[index]) {
+        return arr[index]
+      }
+    }
+  }
+}
+
+export function judge (judgeFunc, truePlot = ['t'], falsePlot = ['f']) {
+  if (judgeFunc()) {
+    return truePlot
+  } else {
+    return falsePlot
+  }
+}
 
 // =====================
 // special糖
