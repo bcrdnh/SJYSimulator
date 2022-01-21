@@ -356,4 +356,25 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
+  ['yq1', {
+    display: false,
+    displayName: 'yq1',
+    summary: 'this is 测试0 summary',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq2', {
+    display: false,
+    displayName: 'yq2',
+    summary: 'this is 测试0 summary',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['yq3', {
+    display: false,
+    displayName: 'yq3',
+    summary: 'this is 测试0 summary',
+    stackable: false,
+    color: 'pink'
+  }],
 ])

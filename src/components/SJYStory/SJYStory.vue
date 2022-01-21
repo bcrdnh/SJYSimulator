@@ -6,6 +6,7 @@ import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect } f
 import Player from '../Player.vue'
 import StateBorder from '../StateBorder.vue'
 import SpecialBorder from '../SpecialBorder.vue'
+import InfoBorder from './InfoBorder.vue'
 import FixedSelector from '../FixedSelector.vue'
 import ComplexBorder from './ComplexBorder.vue'
 import { preloadPart0 } from '../../assets/SJYStory/preloadPlot.js'
@@ -49,6 +50,7 @@ function beforeEvenyThingStart () {
   setVar('playerName', store.state.sys.playerName)
   setVar('age', 6)
   setVar('day', 1)
+  setVar('work', 0)
   setVar('reganmianTime', 0)
   setVar('MDCTime', 0)
   setVar('gymTime', 0)
@@ -95,10 +97,8 @@ function beforeEvenyThingStart () {
       }
     }
   ], 10, true)
-  if (special.has('yq0')) luckCorrection = -10
   if (special.has('yq1')) luckCorrection = -5
   if (special.has('yq3')) luckCorrection = 5
-  if (special.has('yq4')) luckCorrection = 10
   preloadPart()
 }
 
@@ -122,6 +122,9 @@ function startStage () {
 }
 
 function dayStart () {
+  if (getStates('day') === 22) {
+
+  }
   if (getStates('day') % 7 !== 0) {
     player.value.setDaram(dayStartPlot, () => {
       tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
@@ -181,7 +184,7 @@ function dayP4 () {
     player.value.setDaram(noHair2, dayStart)
     return
   }
-  if (getStates('day') % 7 !== 0) {
+  if (getStates('day') !== 6 && getStates('day') !== 13 && getStates('day') !== 20) {
     player.value.setDaram(['下班了，你决定.....'], () => {
       bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, dayOver)
     })
@@ -224,7 +227,9 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
     <SpecialBorder v-if="false"></SpecialBorder> -->
     <div class="mediaPart">
       <ComplexBorder ref="border" class="complexBorder"></ComplexBorder>
-      <div class="placeholder">预留</div>
+      <div class="info-border-content">
+        <InfoBorder></InfoBorder>
+      </div>
     </div>
     <FixedSelector ref="selector"></FixedSelector>
     <Player ref="player" class="player"></Player>
@@ -258,7 +263,7 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
   width: 40%;
   margin-right: 8px;
 }
-.placeholder {
+.info-border-content {
   flex: 1;
   border: 4px solid #000000;
 }

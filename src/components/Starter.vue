@@ -182,6 +182,24 @@ function next () {
   overflow: auto;
   background-color: #ffffff;
 }
+.starter::-webkit-scrollbar {
+  width: 6px;
+  height: 100%;
+  transition: all .3s;
+}
+.starter::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  /* border-radius: 20px; */
+  box-shadow: inset 0 0 5px #d8d8d8;
+  background: #535353;
+}
+/*滚动条轨道*/
+.starter::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px #d8d8d8;
+  /* border-radius: 20px; */
+  background: #ededed;
+}
 .restPoint {
   position: fixed;
   top: 24px;

@@ -32,8 +32,10 @@ function toCocos () {
     <!-- <a-button @click="toCocos()">test Cocos</a-button> -->
     <div>版本号：3.0.0</div>
   </a-space>
-  <div class="root nes-container is-rounded">
-    <router-view></router-view>
+  <div  class="root nes-container is-rounded">
+    <div class="anime-div">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -49,6 +51,10 @@ body {
   width: 90%;
   min-width: 420px;
   overflow: hidden;
+}
+.anime-div {
+  height: 100%;
+  width: 100%;
 }
 #app {
   height: 100vh;

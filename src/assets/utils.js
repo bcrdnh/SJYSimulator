@@ -41,24 +41,28 @@ export const stateObj = (name, x) => {
     return correction
   }
   const staminaCorrection = () => {
-    if (special.has('stamina+')) return 0.4
-    if (special.has('stamina-')) return -0.4
-    return 0
+    let correction = 0
+    if (special.has('stamina+')) correction += 0.4
+    if (special.has('stamina-')) correction -= 0.4
+    return correction
   }
   const inteCorrection = () => {
-    if (special.has('inte+')) return 0.4
-    if (special.has('inte-')) return -0.4
-    return 0
+    let correction = 0
+    if (special.has('inte+')) correction += 0.4
+    if (special.has('inte-')) correction -= 0.4
+    return correction
   }
   const braveCorrection = () => {
-    if (special.has('brave+')) return 0.4
-    if (special.has('brave-')) return -0.4
-    return 0
+    let correction = 0
+    if (special.has('brave+')) correction += 0.4
+    if (special.has('brave-')) correction -= 0.4
+    return correction
   }
   const charmCorrection = () => {
-    if (special.has('charm+')) return 0.4
-    if (special.has('charm-')) return -0.4
-    return 0
+    let correction = 0
+    if (special.has('charm+')) correction += 0.4
+    if (special.has('charm-')) correction -= 0.4
+    return correction
   }
   switch (name) {
     case 'power':
@@ -142,7 +146,7 @@ export const randomState = (x = 3) => {
 }
 
 // =====================
-// special糖
+// special
 export function getSpecialByName (name) {
   if (!specialMap.has(name)) console.error('[util/getSpecialByName]:no this special:' + name)
   return specialMap.get(name)
@@ -158,7 +162,7 @@ export function changeSpecial (name, num) {
 }
 
 // =====================
-// states糖
+// states
 export function setVar (varName, content) {
   store.dispatch('sys/setVar', {varName, content})
 }
@@ -167,7 +171,7 @@ export function changeVar (varName, content) {
 }
 
 // ===================
-// 显示选项糖
+// 显示选项
 export function bondingSelect (labels, darams, player, selector, next) {
   let param = []
   const setSelect = selector.value.setSelect ? selector.value.setSelect : selector.setSelect
@@ -206,20 +210,20 @@ export function newTiggerPool () {
 // 动画效果
 //   每次切换页面加个动画效果,固定找类叫root的dom操作
 export function changePage (path) {
-  gsap.fromTo(".root", {
-    y: '0'
+  gsap.fromTo(".anime-div", {
+    opacity: 1
   },{
-    y: '110%',
-    duration: 0.5,
-    ease: "back.in(1.7)",
+    opacity: 0,
+    duration: 1.5,
+    ease: "steps(4)",
     onComplete: () => {
       router.push(path)
-      gsap.fromTo(".root", {
-        y: '-110%'
+      gsap.fromTo(".anime-div", {
+        opacity: 0
       }, {
-        y: '0%',
-        duration: 0.3,
-        ease: "power1.out",
+        opacity: 1,
+        duration: 1.5,
+        ease: "steps(4)",
         delay: 0.3
       })
     }

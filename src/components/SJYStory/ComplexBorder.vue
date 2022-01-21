@@ -83,8 +83,12 @@ export default {
           </a-tooltip>
         </div>
         <div class="healLine">
-          <span class="progressName">金钱: </span>
+          <span class="progressName"><i class="nes-icon coin"></i>: </span>
           <span style="margin: auto 0;">{{stateInStore('money')}}</span>
+        </div>
+        <div class="healLine">
+          <span class="progressName"><i class="nes-icon trophy"></i>: </span>
+          <span style="margin: auto 0;">{{stateInStore('work')}}</span>
         </div>
       </div>
       <div v-show="1===nowBorder" class="heal">
@@ -113,6 +117,7 @@ export default {
   flex-direction: column;
   border: 4px solid #000000;
   min-width: 220px;
+  user-select: none;
 }
 .tab {
   display: flex;
@@ -135,6 +140,27 @@ export default {
   flex: 1;
   padding: 8px;
   height: calc(100% - 50px);
+  overflow-y: auto;
+  user-select: none;
+  padding: 0 24px;
+}
+.content::-webkit-scrollbar {
+  width: 6px;
+  height: 100%;
+  transition: all .3s;
+}
+.content::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  /* border-radius: 20px; */
+  box-shadow: inset 0 0 5px #d8d8d8;
+  background: #535353;
+}
+/*滚动条轨道*/
+.content::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px #d8d8d8;
+  /* border-radius: 20px; */
+  background: #ededed;
 }
 .heal {
   max-width: 320px;
@@ -155,7 +181,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   height: 100%;
 }
 </style>

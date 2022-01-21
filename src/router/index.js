@@ -14,6 +14,10 @@ export const router = createRouter({
       component: DefaultDaram
     },
     {
+      path: '/',
+      component: () => import('../components/SJYStory/StartGame.vue')
+    },
+    {
       path: '/SJYStoryEnter',
       component: () => import('../components/SJYStory/SJYStoryEnter.vue')
     },

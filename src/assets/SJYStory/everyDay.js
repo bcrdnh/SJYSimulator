@@ -1248,19 +1248,19 @@ export const assessment = (player, sussesCallback, gameOver) => {
   ]
   switch (getVar('day')) {
     case 7:
-      if (getVar('work') < 15) {
+      if (getVar('work') < getVar('workCheck0')) {
         gameOver(randomArr(overWord))
       }
       player.setDaram(pass, sussesCallback())
       break
     case 14:
-      if (getVar('work') < 15) {
+      if (getVar('work') < getVar('workCheck1')) {
         gameOver(randomArr(overWord))
       }
       player.setDaram(pass, sussesCallback())
       break
     case 21:
-      if (getVar('work') < 15) {
+      if (getVar('work') < getVar('workCheck2')) {
         gameOver(randomArr(overWord))
       }
       player.setDaram(pass, sussesCallback())
@@ -1272,20 +1272,20 @@ export const assessment = (player, sussesCallback, gameOver) => {
 
 export const beforeWeekendEvening = () => {
   let p1 =  [
-    '通过了考核你心情很不错。',
-    '晚上了，你到附近的公园逛了逛，你发现有一个可疑的小摊。',
+    '下班了，明天就是休息日了。你感到轻松了写。',
+    '你到附近的公园逛了逛，你发现有一个可疑的小摊。',
     '你凑近看了看，发现有很多奇奇怪怪的东西。',
   ]
   if (getVar('money') < 400) {
     p1.push('你实在是没什么钱了，你看了看就离开了。')
   } else {
-    p1.push('而且价格还挺贵。你今天心情不错，你决定买一个...')
+    p1.push('均价400，价格还挺贵。你发现还是有些有用的东西，你决定买一个...')
   }
 }
 
 export const weekendEvening_labels = () => {
   if (getVar('day') === 7) {
-    return ['', '', '']
+    return ['电子书', '枕头', '电饼铛']
   }
   if (getVar('day') === 14) {
     return ['', '', '']
@@ -1296,14 +1296,107 @@ export const weekendEvening_labels = () => {
 }
 
 export const weekendEvening_darams = () => {
-  if (getVar('day') === 7) {
-    return [[], [], []]
+  if (getVar('day') < 7) {
+    return [
+      [
+        '电子书和其它两个东西完全不在一个价位上啊。',
+        '你毫不犹豫的选择了电子书。',
+        '虽然现在的生活中，看书已经不怎么常见了。',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '电子书',
+            num: 1
+          }
+        }
+      ],
+      [
+        '买个枕头吧，最近比较疲劳，提升下睡眠质量吧。',
+        '你选择了枕头，你发现......这个枕头？！不是一般的枕头！',
+        '这柔软的手感......这是早已失传的技术！超级枕头！',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '超级枕头',
+            num: 1
+          }
+        }
+      ],
+      [
+        '你想想自己每天早上起床后急急忙忙地就去上班了，也没时间吃点东西。',
+        '就买个电饼铛吧。',
+        '',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '',
+            num: 1
+          }
+        }
+      ]
+    ]
   }
-  if (getVar('day') === 14) {
-    return [[], [], []]
+  if (7 < getVar('day') < 14) {
+    return [
+      [
+        '',
+        '',
+        '',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '',
+            num: 1
+          }
+        }
+      ],
+      [
+        '',
+        '',
+        '',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '',
+            num: 1
+          }
+        }
+      ],
+      [
+        '',
+        '',
+        '',
+        {
+          content: '',
+          clas: '',
+          setSpecial: {
+            name: '',
+            num: 1
+          }
+        }
+      ]
+    ]
   }
-  if (getVar('day') === 21) {
-    return [[], [], []]
+  if (14 < getVar('day') < 21) {
+    return [
+      [
+        '',
+        '',
+        '',
+        stateObj('', 1000)
+      ],
+      [
+
+      ],
+      [
+
+      ]
+    ]
   }
 }
 
@@ -1325,4 +1418,17 @@ export const noHair2 = [
   '你赶紧找了面镜子，发现自己的头发全都掉光了。',
   '你震惊得晕倒了过去，醒来的时候已经第二天早上了。',
   '......'
+]
+
+export const endGame = [
+  '',
+  '',
+  '',
+  ...judge(() => {
+
+  }, [
+
+  ], [
+
+  ])
 ]

@@ -259,6 +259,14 @@ function start () {
   }
   // setVar('health', 100)
   setVar('hair', 150)
+  if (store.getters['sys/getStates']('difficulty') === 0) {
+    setVar('workCheck0', 15)
+    setVar('workCheck1', 35)
+    setVar('workCheck2', 80)
+  } else if () {
+    
+  }
+
   store.dispatch('sys/setStarter', starter)
   changePage({path: '/starter', query: {mainPage: '/SJYStory'}})
   // router.push({path: '/starter', query: {mainPage: '/SJYStory'}})
@@ -315,6 +323,7 @@ function saveVampireSJY () {
 
 <template>
   <div class="sjyEnter">
+    <div>选择你的家翊！</div>
     <swiper :effect="'cards'" :grabCursor="true" class="mySwiper" :loop="true">
         <swiper-slide>
           <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
