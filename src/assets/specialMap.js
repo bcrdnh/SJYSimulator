@@ -335,9 +335,9 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
-  ['奇怪的股票', {
+  ['奇怪的彩票', {
     display: true,
-    displayName: '奇怪的股票',
+    displayName: '奇怪的彩票',
     summary: '购买后获得大量现金。',
     stackable: false,
     color: 'pink'
@@ -376,5 +376,5 @@ export const specialMap = new Map([
     summary: 'this is 测试0 summary',
     stackable: false,
     color: 'pink'
-  }],
+  }]
 ])

@@ -1272,7 +1272,7 @@ export const assessment = (player, sussesCallback, gameOver) => {
 
 export const beforeWeekendEvening = () => {
   let p1 =  [
-    '下班了，明天就是休息日了。你感到轻松了写。',
+    '下班了，明天就是休息日了。你感到轻松了些。',
     '你到附近的公园逛了逛，你发现有一个可疑的小摊。',
     '你凑近看了看，发现有很多奇奇怪怪的东西。',
   ]
@@ -1288,7 +1288,7 @@ export const weekendEvening_labels = () => {
     return ['电子书', '枕头', '电饼铛']
   }
   if (getVar('day') === 14) {
-    return ['', '', '']
+    return ['易筋经', '自拍杆', '存钱罐']
   }
   if (getVar('day') === 21) {
     return ['', '', '']
@@ -1303,8 +1303,8 @@ export const weekendEvening_darams = () => {
         '你毫不犹豫的选择了电子书。',
         '虽然现在的生活中，看书已经不怎么常见了。',
         {
-          content: '',
-          clas: '',
+          content: '获得特质“电子书”',
+          clas: 'nes-text is-primary',
           setSpecial: {
             name: '电子书',
             num: 1
@@ -1316,8 +1316,8 @@ export const weekendEvening_darams = () => {
         '你选择了枕头，你发现......这个枕头？！不是一般的枕头！',
         '这柔软的手感......这是早已失传的技术！超级枕头！',
         {
-          content: '',
-          clas: '',
+          content: '获得特质“超级枕头”',
+          clas: 'nes-text is-primary',
           setSpecial: {
             name: '超级枕头',
             num: 1
@@ -1327,10 +1327,10 @@ export const weekendEvening_darams = () => {
       [
         '你想想自己每天早上起床后急急忙忙地就去上班了，也没时间吃点东西。',
         '就买个电饼铛吧。',
-        '',
+        '你可以每天早上做早饭吃了！',
         {
-          content: '',
-          clas: '',
+          content: '获得特质“电饼铛”',
+          clas: 'nes-text is-primary',
           setSpecial: {
             name: '',
             num: 1
@@ -1342,40 +1342,39 @@ export const weekendEvening_darams = () => {
   if (7 < getVar('day') < 14) {
     return [
       [
-        '',
-        '',
-        '',
+        '这个...怎么看都是那种。',
+        '只有封面，里面其实是空白的笔记本。',
+        '......',
+        '你抱着怀疑的态度翻开了它',
+        '里面居然密密麻麻得写满了字！居然是真货！',
         {
-          content: '',
-          clas: '',
+          content: '你学会了易筋经！',
+          clas: 'nes-text is-primary',
           setSpecial: {
-            name: '',
+            name: '易筋经',
             num: 1
           }
         }
       ],
       [
-        '',
-        '',
-        '',
+        '你购买了自拍杆。',
         {
-          content: '',
-          clas: '',
+          content: '获得特质“自拍杆”',
+          clas: 'nes-text is-primary',
           setSpecial: {
-            name: '',
+            name: '自拍杆',
             num: 1
           }
         }
       ],
       [
-        '',
-        '',
-        '',
+        '存点钱吧，每天这么辛苦，挣来的钱要好好珍惜。',
+        '用辛苦挣来的钱买了存钱罐！',
         {
-          content: '',
-          clas: '',
+          content: '获得特质“存钱罐”',
+          clas: 'nes-text is-primary',
           setSpecial: {
-            name: '',
+            name: '存钱罐',
             num: 1
           }
         }
@@ -1385,16 +1384,40 @@ export const weekendEvening_darams = () => {
   if (14 < getVar('day') < 21) {
     return [
       [
-        '',
-        '',
-        '',
-        stateObj('', 1000)
+        '连手机都有卖的吗...',
+        '你购买了奇怪的手机。',
+        '等等，这个奇怪的APP是？是可以催眠别人的邪恶APP！上面写着只可以使用一次。',
+        '这么好的机会，可要好好利用啊。你的心中升起了一股邪念。',
+        '领导天天让你加班，你觉得该治治它了！你催眠了你的领导！让它狠狠地...',
+        '替你加班！',
+        '获得大量业绩。',
+        stateObj('work', 10)
       ],
       [
-
+        '你买了来路不明的药丸。',
+        '要吃下去吗？你的内心有点犹豫，但不吃的话钱就浪费了。',
+        '你吃了下去。',
+        '你的视野开始扭曲，头也开始痛了起来，世界仿佛颠倒了过来，你晕了过去。',
+        '你醒来的时候已经到家了。',
+        '你赶紧检查了一下自己的身体状况，你发现自己没有什么异常。',
+        '甚至感觉...轻松了不少。还变英俊了。',
+        '身体素质大幅度上升！',
+        stateObj('power', 20),
+        stateObj('stamina', 20),
+        stateObj('inte', 20),
+        stateObj('charm', 20),
+        stateObj('brave', 20),
       ],
       [
-
+        '你购买了奇怪的彩票。',
+        '为什么要买彩票啊，能中奖的话，就不会拿来卖而是直接去兑奖了吧...',
+        '但你还是抱着一丝希望查了查。',
+        '果然没中。',
+        '你失望地叹了口气。',
+        '突然，彩票上的数字发生了变化，变成了中奖的号码，金额是...1400',
+        '你感到有些震惊，你赶紧去兑奖，兑换成功了。',
+        stateObj('money', 1400),
+        '你非常开心，但还是有一丝丝遗憾，反正都可以自己变了，为什么不多中点呢？'
       ]
     ]
   }
@@ -1420,7 +1443,7 @@ export const noHair2 = [
   '......'
 ]
 
-export const endGame = [
+export const endGamePlot = [
   '',
   '',
   '',
@@ -1432,3 +1455,18 @@ export const endGame = [
 
   ])
 ]
+
+const lastTurnWork = (s1, s2 = 0) => {
+  let work = 0
+  const state = s1 + s2
+  if (state <= 60) return Math.floor(state / 25)
+  // const Stage2 = state - 75
+  // const Stage3 = Stage2 - 60 // 75 ~ 135
+  // const Stage4 = Stage3 - 60 // 135 ~ 195
+  // const Stage5 = Stage4 - 60 // 255 ~
+  return 3 + Math.max(0, Stage2 / 20)
+}
+
+const lastTurnWork_2 = (s1, s2) => {
+  
+}

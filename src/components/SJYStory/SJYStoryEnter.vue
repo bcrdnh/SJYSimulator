@@ -254,19 +254,36 @@ function start () {
         summary: '你有一台跑步机。',
         specialName: '跑步机',
         cost: -30
+      },
+      {
+        name: '愉快的童年',
+        summary: '你的童年虽然不够完美，但足够幸运。',
+        specialName: '跑步机',
+        cost: -30
+      },
+      {
+        name: '糟糕的童年',
+        summary: '你承担了那个年纪不应该经历的事情。',
+        specialName: '跑步机',
+        cost: -30
       }
     ]
   }
   // setVar('health', 100)
   setVar('hair', 150)
-  if (store.getters['sys/getStates']('difficulty') === 0) {
-    setVar('workCheck0', 15)
+  if (store.getters['sys/getStates']('difficulty') === 2) {
+    setVar('workCheck0', 25)
+    setVar('workCheck1', 45)
+    setVar('workCheck2', 100)
+  } else if (store.getters['sys/getStates']('difficulty') === 1) {
+    setVar('workCheck0', 20)
     setVar('workCheck1', 35)
     setVar('workCheck2', 80)
-  } else if () {
-    
+  } else {
+    setVar('workCheck0', 15)
+    setVar('workCheck1', 30)
+    setVar('workCheck2', 70)
   }
-
   store.dispatch('sys/setStarter', starter)
   changePage({path: '/starter', query: {mainPage: '/SJYStory'}})
   // router.push({path: '/starter', query: {mainPage: '/SJYStory'}})

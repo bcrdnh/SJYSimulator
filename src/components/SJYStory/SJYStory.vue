@@ -27,7 +27,8 @@ import {
   weekendStartPlot,
   beforeWeekendEvening,
   noHair1,
-  noHair2
+  noHair2,
+  endGamePlot
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -148,7 +149,11 @@ function dayP1 () {
     })
   } else {
     player.value.setDaram(['你决定......'], () => {
-      bondingSelect(weekendMorning_labels(), weekendMorning_darams(), player, selector, dayP2)
+      bondingSelect(weekendMorning_labels(),
+      weekendMorning_darams(),
+      player,
+      selector,
+      getStates('day') === 21 ? lastTurn : dayP2)
     })
   }
 }
@@ -198,6 +203,60 @@ function dayP4 () {
     }
   }
   // checkEnd()
+}
+
+function lastTurn () {
+  const power = getStates('power')
+  const stamina = getStates('stamina')
+  const inte = getStates('inte')
+  const charm = getStates('charm')
+  const brave = getStates('brave')
+  player.value.setDaram([
+    '终于，你来到了最后的一次考核',
+    '这次考核是你能否通过试用期的关键，同时也是最难的一次考核。',
+    '最终的考核将从多方面评定你的业绩。',
+    '毕竟你需要经常加班，所以首先是对你的体能进行检测！',
+    '你拥有{power}点力量，{stamina}点耐力！',
+    {
+      'content': '你获得了' + stateToWork(power, stamina) + '点业绩！',
+      'clas': 'nes-text is-primary',
+      'changeVar': {
+        'varName': 'work',
+        'num': stateToWork(power, stamina)
+      }
+    },
+    '接下来是对工作能力的评定，你拥有{}点智力。',
+    {
+      'content': '你获得了' + stateToWork(inte) + '点业绩！',
+      'clas': 'nes-text is-primary',
+      'changeVar': {
+        'varName': 'work',
+        'num': stateToWork(inte)
+      }
+    },
+    '接下来是对人际关系的评定，你拥有{charm}点魅力，{brave}点勇气。',
+    {
+      'content': '你获得了' + stateToWork(inte) + '点业绩！',
+      'clas': 'nes-text is-primary',
+      'changeVar': {
+        'varName': 'work',
+        'num': stateToWork(inte)
+      }
+    },
+    '接下来是对你经济状况的考察，你拥有{money}点金币。',
+    {
+      'content': '你获得了' + stateToWork(inte) + '点业绩！',
+      'clas': 'nes-text is-primary',
+      'changeVar': {
+        'varName': 'work',
+        'num': stateToWork(inte)
+      }
+    },
+  ])
+}
+
+function stateToWork (s1, s2 = 0) {
+
 }
 
 function dayOver () {
