@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { changePage } from './assets/utils';
-import fontURL from './assets/aura.ttf?url'
-console.log(fontURL)
-const router = useRouter()
+
 const showDev = ref(true)
 
 function defaultDaram () {
@@ -30,7 +27,7 @@ function toCocos () {
     <a-button @click="defaultDaram()">test</a-button>
     <a-button @click="SJYStory()">SJY Story</a-button>
     <!-- <a-button @click="toCocos()">test Cocos</a-button> -->
-    <div>版本号：3.0.0</div>
+    <div>版本号：3.0.1</div>
   </a-space>
   <div  class="root nes-container is-rounded">
     <div class="anime-div">
@@ -72,5 +69,8 @@ body {
   position: fixed;
   top: 0px;
   left: 40px;
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
 }
 </style>

@@ -1,5 +1,5 @@
 import { store } from '../../store'
-const special = store.state.sys.globalVariable.special
+import { stateObj } from '../utils'
 
 export const SSRGoodEv = {
   SSRGoodEv01: [
@@ -11,12 +11,30 @@ export const SSRGoodEv = {
     '岁，这意味着你岁了，为什么你的年龄在不断的增长？',
     '这说明时间在不停地前进，无法阻止。',
     '你领悟了时间的本质。',
+    stateObj('inte', 3),
+    {
+      content: '获得特质“哲学家”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '哲学家',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv02: [
     '{age}岁那年，你在家里看到了电视剧《田园的诱惑》。',
     '剧中的田园同时和20个长得很帅的男朋友维持关系还没有暴露。',
     '你学到田园的策略并被田园的魄力所折服。',
     '你觉得自己也可以成为田园这样的人。',
+    stateObj('charm', 3),
+    {
+      content: '获得特质“田园”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '田园',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv03: [
     '{age}岁那年，你突然对python很感兴趣。',
@@ -25,18 +43,29 @@ export const SSRGoodEv = {
     '你决定参加竞赛来证明一下自己。',
     '竞赛上，你的速度让所有的参赛选手震惊。',
     '最终你夺得了冠军。',
+    stateObj('inte', 5),
   ],
   SSRGoodEv04: [
     '{age}岁那年，你在家看动画片《烤羊羊与大灰狼》。',
     '你开始模仿动画当中大灰狼的动作。',
     '你开车前往了西藏，在草原上与羊搏斗并打败了它。',
     '然后你开始烤羊肉，现的羊肉确实非常好吃。',
+    stateObj('power', 3),
+    stateObj('stamina', 3),
   ],
   SSRGoodEv05: [
     '{age}岁那年，你第一次吃到了麦当劳。',
     '你直接吐了出来。',
     '怎么会有人吃这种东西。真的难以理解。',
     '你发誓自己就算饿死，也不会再吃这种东西。',
+    {
+      content: '获得特质“讨厌麦当劳”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '讨厌麦当劳',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv06: [
     '{age}岁那年，你在路边见到了一条蛇。',
@@ -44,6 +73,8 @@ export const SSRGoodEv = {
     '你难以理解，突然，你听到蛇好像在说话！',
     '它说它快冻死了，求你救救它。',
     '你上去就是一脚，它死了。',
+    stateObj('power', 3),
+    stateObj('brave', 3),
   ],
   SSRGoodEv07: [
     '{age}岁那年，你沉迷于斗音。',
@@ -52,6 +83,7 @@ export const SSRGoodEv = {
     '拥有了大量粉丝的你开始带货变现流量。',
     '很快就赚得盆满钵满。',
     '但后来就因为偷税漏税被查处，没赚到几个钱。',
+    stateObj('money', 100),
   ],
   SSRGoodEv08: [
     '{age}岁那年，你遇到了漫画书《上海贼王》。',
@@ -59,11 +91,20 @@ export const SSRGoodEv = {
     '你觉得他非常帅，你也想成为贼王。',
     '于是你开始模仿它，一夜之间，你居住的城市没有剩下一个电瓶。',
     '警察开始追捕你，你不得不过上了一段时间的逃亡生活。',
+    {
+      content: '获得特质“上海贼王”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '上海贼王',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv09: [
     '{age}岁那年，你发现自己可以在水下憋气很久。',
     '于是你去和别人比拼。',
     '你赢了，和你比的人没有一个活着回来。',
+    stateObj('stamina', 5),
   ],
   SSRGoodEv10: [
     '{age}岁那年，你到山上玩。',
@@ -71,6 +112,14 @@ export const SSRGoodEv = {
     '你并没有死，在你醒来的时候你发现你正躺在病床上，眼前是陌生的天花板。',
     '旁边是变态怪医，他说他发现了濒死的你，并把你全身的部位都换成了机械。',
     '你给了他一拳并让他少看点动画，然后回家了。',
+    {
+      content: '获得特质“机器人”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '机器人',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv11: [
     '{age}岁那年，你去了迪士尼乐园。',
@@ -81,6 +130,7 @@ export const SSRGoodEv = {
     '米奇的头套很难摘下来，你使出了全力，将米奇的头拔了下来。',
     '奇怪的是里面并没有人，是实心的，而且使用的是红色的棉花。',
     '看来并不是布偶装，只是普通的等身玩偶，你安心地离开了迪士尼。',
+    stateObj('power', 5),
   ],
   SSRGoodEv12: [
     '{age}岁那年，你第一次有了自己的女朋友。',
@@ -93,6 +143,8 @@ export const SSRGoodEv = {
     '听你说完了你的故事，她的眼角闪着泪光，感动地对你说',
     '你可少看点动画吧。',
     '你说好的。',
+    stateObj('stamina', 3),
+    stateObj('brave', 3),
   ],
   SSRGoodEv13: [
     '{age}岁那年，你遇到了外星人。',
@@ -110,6 +162,14 @@ export const SSRGoodEv = {
     '你只好努力研究外星科技，三十年后，你终于制造出了可以返回地球的飞船。',
     '最终，你回到了地球，此时的地球时间才过去了两周。',
     '而地球上并没有人相信你的故事。',
+    {
+      content: '获得特质“宇宙传说”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '宇宙传说',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv14: [
     '{age}岁那年，你沉迷于玩《光明破坏神》。',
@@ -123,6 +183,7 @@ export const SSRGoodEv = {
     '于是你从洞口进去了。起初洞口很狭窄，仅容一人通过。又走了几十步，突然变得开阔明亮了。',
     '在你眼前的是一片平坦宽广的土地，一排排整齐的房舍。还有肥沃的田地、美丽的池沼，桑树竹林之类的。田间小路交错相通，鸡鸣狗叫到处可以听到。',
     '村里的人邀请你去做客，但你发现这里连个插座都没有，实在是无聊，便拒绝了他们。',
+    stateObj('stamina', 5),
   ],
   SSRGoodEv15: [
     '{age}岁那年，新闻里说近期陨石会撞击地球！',
@@ -135,9 +196,10 @@ export const SSRGoodEv = {
     '就在这时你被安保系统抓住了，一个坏人出现在了你的眼前！',
     '他说真亏你能找到这里！这里确实有一台可以将陨石吸引到地球上的机器，而且已经启动了！再过两天地球就毁灭了！警察中也有埋伏的人，地球已经玩完了！',
     '你觉得那你也没啥办法，回家打游戏吧。就剩两天了，快活一下。',
-    '他说好，就放你走了，反正警察里有卧底。',
+    '他说好，就放你走了。',
     '你回家打了两天游戏，什么也没有发生。',
     '看来他们的仪器是假冒伪劣产品。',
+    stateObj('inte', 5),
   ],
   SSRGoodEv16: [
     '{age}岁那年，你决定来一场说走就走的旅行。',
@@ -145,6 +207,14 @@ export const SSRGoodEv = {
     '到了北极你第一件事就是挑战北极熊。',
     '你几乎打趴了所有的北极熊，在北极熊圈子里非常出名。',
     '你心满意足的回了家。',
+    {
+      content: '获得特质“北极熊克星”',
+      clas: 'nes-text is-primary',
+      setSpecial: {
+        name: '北极熊克星',
+        num: 1
+      }
+    }
   ],
   SSRGoodEv17: [
     '{age}岁那年，你努力锻炼身体。',

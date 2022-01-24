@@ -376,5 +376,54 @@ export const specialMap = new Map([
     summary: 'this is 测试0 summary',
     stackable: false,
     color: 'pink'
-  }]
+  }],
+  ['哲学家', {
+    display: true,
+    displayName: '哲学家',
+    summary: '你经常思考宇宙的本质。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['田园', {
+    display: true,
+    displayName: '田园',
+    summary: '你简直是田园在世。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['讨厌麦当劳', {
+    display: true,
+    displayName: '讨厌麦当劳',
+    summary: '你对麦当劳有一种说不上来的讨厌。免疫麦当劳的诅咒效果。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['上海贼王', {
+    display: true,
+    displayName: '上海贼王',
+    summary: '只要你愿意，明天就没有人能骑车上班。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['机器人', {
+    display: true,
+    displayName: '机器人',
+    summary: '你是机器人。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['宇宙传说', {
+    display: true,
+    displayName: '宇宙传说',
+    summary: '在宇宙中，你的故事无人不知无人不晓。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['北极熊克星', {
+    display: true,
+    displayName: '北极熊克星',
+    summary: '北极熊克星',
+    stackable: false,
+    color: 'pink'
+  }],
 ])

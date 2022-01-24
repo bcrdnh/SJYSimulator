@@ -1,6 +1,7 @@
 <script setup>
-import { getCurrentInstance, ref } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
+import Typed from './Typed.vue';
 const store = useStore()
 
 const msgList = ref([])
@@ -98,7 +99,10 @@ defineExpose({
 <template>
   <div class="player">
     <div ref="msgBox" class="msgBox" @click="play()">
-      <div v-for="p in msgList" :class="p.clas">{{ p.content }}</div>
+      <div v-for="p in msgList">
+        <Typed :text="p.content" :class="p.clas" @onStart="locked=true" @onEnd="locked=false"></Typed>
+      </div>
+      <!-- <div v-for="p in msgList" :class="p.clas">{{ p.content }}</div> -->
     </div>
   </div>
 </template>
