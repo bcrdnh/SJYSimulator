@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect } from '../../assets/utils.js'
+import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect, randomNum, randomArr } from '../../assets/utils.js'
 import Player from '../Player.vue'
 import StateBorder from '../StateBorder.vue'
 import SpecialBorder from '../SpecialBorder.vue'
@@ -27,7 +27,9 @@ import {
   weekendStartPlot,
   beforeWeekendEvening,
   noHair1,
-  noHair2
+  noHair2,
+  beforeDayP1,
+  beforeDayP1SSR
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -122,9 +124,6 @@ function startStage () {
 }
 
 function dayStart () {
-  if (getStates('day') === 22) {
-
-  }
   if (getStates('day') % 7 !== 0) {
     player.value.setDaram(dayStartPlot, () => {
       tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
@@ -142,15 +141,22 @@ function dayP1 () {
     player.value.setDaram(noHair1, dayOver)
     return
   }
+  if (randomNum() < 40) {
+    player.value.setDaram(randomArr(beforeDayP1), () => {})
+  }
+  if (randomNum() < 3) {
+    player.value.setDaram(randomArr(beforeDayP1SSR), () => {})
+  }
   if (getStates('day') % 7 !== 0) {
     player.value.setDaram(['你决定......'], () => {
-      bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
+      bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, () => {})
     })
   } else {
     player.value.setDaram(['你决定......'], () => {
-      bondingSelect(weekendMorning_labels(), weekendMorning_darams(), player, selector, dayP2)
+      bondingSelect(weekendMorning_labels(), weekendMorning_darams(), player, selector, () => {})
     })
   }
+  dayP2()
 }
 
 function dayP2 () {

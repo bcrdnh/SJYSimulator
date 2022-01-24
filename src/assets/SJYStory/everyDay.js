@@ -463,7 +463,7 @@ export const dayNoon_Darams = () => {
       '你来到了那家热干面。',
       '虽然不是很好吃，但足够饱腹。',
     ]
-    if (special.has('MDCAddiction')) {
+    if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
       eatReganmian = MCDAddictionDaram
     } else if (special.has('dislikeReganmian')) {
       eatReganmian.push('你实在是吃腻了这家热干面。')
@@ -502,7 +502,7 @@ export const dayNoon_Darams = () => {
       '好像也没什么不一样，和其它麦当劳一样的味道。',
       '看来是你想多了。'
     ]
-    if (special.has('MDCAddiction')) {
+    if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
       eatMCD = [
         '是麦当劳！',
         '必须...进食...',
@@ -538,7 +538,7 @@ export const dayNoon_Darams = () => {
     }
   }
   if (getVar('盖浇饭')) {
-    if (special.has('MDCAddiction')) {
+    if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
       darams.push(MCDAddictionDaram)
     } else {
       if (randomNum() < 75) {
@@ -560,7 +560,7 @@ export const dayNoon_Darams = () => {
     }
   }
   if (getVar('海底捞')) {
-    if (special.has('MDCAddiction')) {
+    if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
       darams.push(MCDAddictionDaram)
     } else {
       let eatHDL = [
@@ -578,7 +578,7 @@ export const dayNoon_Darams = () => {
     }
   }
   if (getVar('鸡公煲')) {
-    if (special.has('MDCAddiction')) {
+    if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
       darams.push(MCDAddictionDaram)
     } else {
       darams.push([
@@ -1431,4 +1431,22 @@ export const endGame = [
   ], [
 
   ])
+]
+
+export const beforeDayP1 = [
+  [
+
+  ],
+  [
+
+  ]
+]
+
+export const beforeDayP1SSR = [
+  [
+
+  ],
+  [
+    
+  ]
 ]
