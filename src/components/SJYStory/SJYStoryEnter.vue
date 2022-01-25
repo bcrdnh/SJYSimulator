@@ -258,13 +258,13 @@ function start () {
       {
         name: '愉快的童年',
         summary: '你的童年虽然不够完美，但足够幸运。',
-        specialName: '跑步机',
-        cost: -30
+        specialName: 'yq3',
+        cost: 30
       },
       {
         name: '糟糕的童年',
         summary: '你承担了那个年纪不应该经历的事情。',
-        specialName: '跑步机',
+        specialName: 'yq1',
         cost: -30
       }
     ]
@@ -340,7 +340,7 @@ function saveVampireSJY () {
 
 <template>
   <div class="sjyEnter">
-    <div>选择你的家翊！</div>
+    <h2>选择你的家翊！</h2>
     <swiper :effect="'cards'" :grabCursor="true" class="mySwiper" :loop="true">
         <swiper-slide>
           <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">
@@ -369,8 +369,7 @@ function saveVampireSJY () {
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <button type="button" class="nes-btn is-disabled">开发中</button>
-              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
+              <button type="button" class="nes-btn is-disabled">再也做不好了</button>
             </div>
           </div>
         </swiper-slide>
@@ -399,8 +398,7 @@ function saveVampireSJY () {
               <div class="divid"></div>          
             </div>
             <div class="pageFooter">
-              <button type="button" class="nes-btn is-disabled">开发中</button>
-              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
+              <button type="button" class="nes-btn is-disabled">再也做不好了</button>
             </div>
           </div>
         </swiper-slide>
@@ -431,8 +429,7 @@ function saveVampireSJY () {
               <div class="divid"></div>
             </div>
             <div class="pageFooter">
-              <button type="button" class="nes-btn is-disabled">开发中</button>
-              <!-- <a-button class="chosethisBtn" block disabled>开发中</a-button> -->
+              <button type="button" class="nes-btn is-disabled">再也做不好了</button>
             </div>
           </div>
         </swiper-slide>
@@ -460,7 +457,6 @@ function saveVampireSJY () {
             </div>
             <div class="pageFooter">
               <button type="button" class="nes-btn" @click="start()">选择这个！</button>
-              <!-- <a-button class="chosethisBtn" @click="start()" block>选择这个！</a-button> -->
             </div>
           </div>
         </swiper-slide>
@@ -473,6 +469,7 @@ function saveVampireSJY () {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

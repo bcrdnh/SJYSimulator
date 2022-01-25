@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
-import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { changePage } from '../assets/utils'
 const store = useStore()
@@ -69,9 +68,13 @@ function changeState (change, varName) {
   }
 }
 
+function random () {
+  
+}
+
 function next () {
   if (restPoint.value < 0) {
-    message.error('not enought point')
+    console.error('not enought point')
   } else {
     store.commit('sys/setPlayerName', playerName.value)
     store.dispatch('sys/finishStarter', startOptions.value)
@@ -94,7 +97,6 @@ function next () {
       <div class="starterContent">
         <div class="nes-container with-title outerBox">
           <div class="title">{{ starter.pname&&starter.pname.name?starter.pname.name:'name' }}</div>
-          <!-- <a-input v-model:value="playerName" :bordered="false" placeholder="请输入......" /> -->
           <input type="text" id="name_field" class="nes-input" v-model="playerName" placeholder="请输入......">
         </div>
         <div class="nes-container with-title outerBox">
@@ -102,7 +104,6 @@ function next () {
           <div v-for="baseState in starter.baseStates" class="baseState">
             <span style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</span>
             <span>
-              <!-- <a-button @click="changeState(-1,baseState.varName)"> - </a-button> -->
               <button type="button" class="nes-btn" @click="changeState(-10,baseState.varName)"> -10 </button>
               <button type="button" class="nes-btn" @click="changeState(-1,baseState.varName)" style="margin-left: 24px;"> - </button>
             </span>
@@ -110,7 +111,6 @@ function next () {
               {{ startOptions.baseStates.get(baseState.varName) }}
             </span>
             <span>
-              <!-- <a-button @click="changeState(1,baseState.varName)"> + </a-button> -->
               <button type="button" class="nes-btn" @click="changeState(1,baseState.varName)" style="margin-right: 24px;"> + </button>
               <button type="button" class="nes-btn" @click="changeState(10,baseState.varName)"> +10 </button>
             </span>          
@@ -162,8 +162,9 @@ function next () {
           </div>
         </div>
       </div>
-      <button type="button" class="nes-btn" @click="next()">OK</button>
-      <!-- <a-button @click="next()">ok</a-button> -->
+      <button type="button" :class="restPoint>=0?'is-disabled':'nes-btn'" @click="next()">
+        OK{{restPoint>=0?'开始':'点数不足'}}
+      </button>
     </div>
     
   </div>

@@ -60,7 +60,7 @@ defineProps({
     opacity: 0;
     transform: translate3d(0,0,0);
     transition: all .3s ease .05s;
-    color: #b4a078; /* 决定箭头的颜色 */
+    color: #333333; /* 决定箭头的颜色 */
   }
   .cell[class*=poptip--]:hover::before,
   .cell[class*=poptip--]:hover::after {
@@ -76,7 +76,7 @@ defineProps({
   .cell[class*=poptip--]::after {
     content: attr(aria-controls);
     position: absolute;
-    background: #b4a078; /* 决定框的背景颜色 */
+    background: #333333; /* 决定框的背景颜色 */
     font-size: 12px;
     font-weight: normal;
     color: white;
@@ -84,7 +84,7 @@ defineProps({
     padding: 6px 12px;
     white-space: nowrap;
     border-radius: 2px;
-    box-shadow: 0px 0px 3px #b4a078;
+    box-shadow: 0px 0px 3px #333333;
   }
   .cell[class*=poptip--top]::before {
     border-top-color: inherit;

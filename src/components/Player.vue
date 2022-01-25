@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
-import Typed from './Typed.vue';
+import Typed from './Typed.vue'
 const store = useStore()
 
 const msgList = ref([])

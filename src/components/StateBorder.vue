@@ -24,21 +24,21 @@ defineExpose({
 </script>
 
 <template>
-  <a-space class="stateBorder" v-if="varList.length>0" direction="vertical">
+  <dev class="stateBorder" v-if="varList.length>0">
     <span v-for="v in varList">
       {{ varMap.has(v) ? varMap.get(v) : v }} : 
       {{ store.getters['sys/getStates'](v) }}
     </span>
-  </a-space>
+  </dev>
 </template>
 
 <style scoped>
 .stateBorder {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  flex-wrap: wrap;
   width: 100%;
 }
 </style>

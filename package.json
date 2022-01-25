@@ -7,14 +7,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ant-design-vue": "^3.0.0-alpha.14",
     "gsap": "^3.9.1",
     "nes.css": "^2.3.0",
-    "pixi.js": "^6.2.1",
     "swiper": "^7.4.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
-    "vue-typed-js": "^0.1.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

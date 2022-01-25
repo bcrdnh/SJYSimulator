@@ -422,7 +422,42 @@ export const specialMap = new Map([
   ['北极熊克星', {
     display: true,
     displayName: '北极熊克星',
-    summary: '北极熊克星',
+    summary: '你是一名冷酷的北极熊杀手。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['国家反诈APP', {
+    display: true,
+    displayName: '国家反诈APP',
+    summary: '你的手机上安装了国家反诈APP。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['亡命暴徒', {
+    display: true,
+    displayName: '亡命暴徒',
+    summary: '太可怕了，你还是应该待在牢房里！',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['世界的本质', {
+    display: true,
+    displayName: '世界的本质',
+    summary: '你了解了世界的本质。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['知情人士', {
+    display: true,
+    displayName: '知情人士',
+    summary: '嘘，不要让别人知道鲁迅和周树人的关系。',
+    stackable: false,
+    color: 'pink'
+  }],
+  ['北极熊克星', {
+    display: true,
+    displayName: '北极熊克星',
+    summary: '你是一名冷酷的北极熊杀手。',
     stackable: false,
     color: 'pink'
   }],

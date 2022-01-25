@@ -12,26 +12,26 @@ const getStates = useStore().getters['sys/getStates']
     </div>
     <div class="chat-content">
       <div class="nes-balloon from-left">
-        今天是第{{getStates('day')}}天！将在本周日下午进行！
-        <span class="nes-text is-primary">需要的为{{getStates('workCheck0')}}</span>
-        2
+        今天是第{{getStates('day')}}天！考核将在本周日下午进行！
+        <span class="nes-text is-primary">需要的业绩为{{getStates('workCheck0')}}点。</span>
+        加油吧！
       </div>
       <div class="nes-balloon from-left" v-if="getStates('day')<=7">
-        2
-        <span class="nes-text is-primary"></span>
-        2
+        通知：本周工作剩余很多，可以在周日上午自愿加班，来点聪明人，
+        <span class="nes-text is-primary">可以根据智力获得更多业绩。</span>
+        @全体成员
       </div>
       <div class="nes-balloon from-left" v-if="getStates('day')>7&&getStates('day')<=14">
-        2
-        <span class="nes-text is-primary"></span>
-        2
+        通知：本周日需要拍摄公司宣传片，可以在周日上午自愿加班，
+        <span class="nes-text is-primary">可以根据魅力和勇气获得更多业绩。</span>
+        @全体成员
       </div>
       <div class="nes-balloon from-left" v-if="getStates('day')>14">
-        2
-        <span class="nes-text is-primary"></span>
-        2
+        通知：本周日部门办公地点调动，需要搬家，来点力气大的帮忙。
+        <span class="nes-text is-primary">可以根据力量和耐力获得更多业绩。</span>
+        @全体成员
       </div>
-      <div class="nes-balloon from-right margin-left-auto">33</div>
+      <div class="nes-balloon from-right margin-left-auto">收到</div>
     </div>
   </div>
 </template>

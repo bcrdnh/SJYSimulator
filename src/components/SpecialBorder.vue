@@ -1,6 +1,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import { getSpecialByName } from '../assets/utils'
+import Poptip from './Poptip.vue';
 const store = useStore()
 for (const s of store.state.sys.globalVariable.special) {
   console.log(s)
@@ -8,17 +9,19 @@ for (const s of store.state.sys.globalVariable.special) {
 </script>
 
 <template>
-  <a-space class="stateBorder">
+  <div class="stateBorder">
     <span v-for="s in store.state.sys.globalVariable.special">
-      <a-tooltip placement="bottom" v-if="getSpecialByName(s[0]).display">
-        <template #title>{{getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]}}</template>
-        <a-tag :color="getSpecialByName(s[0]).color?getSpecialByName(s[0]).color:'blue'">
+      <Poptip
+        placement="bottom" v-if="getSpecialByName(s[0]).display"
+        :title="getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]"
+      >
+        <div class="nes-badge" :color="getSpecialByName(s[0]).color?getSpecialByName(s[0]).color:'blue'">
           {{getSpecialByName(s[0]).displayName?getSpecialByName(s[0]).displayName:s[0]}}
           <span v-if="getSpecialByName(s[0]).stackable">:{{s[1]}}</span>
-        </a-tag>
-      </a-tooltip>
+        </div>
+      </Poptip>
     </span>
-  </a-space>
+  </div>
 </template>
 
 <style scoped>

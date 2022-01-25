@@ -6,9 +6,9 @@ import { setVar } from '../../assets/utils'
 
 const clicked = ref(false)
 const summarys = ref([
-  'a',
-  'b',
-  'c'
+  '大概率都可以通过最终的考核，运气不太差的话。',
+  '正常的难度，有一点点挑战。',
+  '几乎不可能通过的难度。'
 ])
 const difficulty = ref(0)
 const router = useRouter()
@@ -29,29 +29,27 @@ function changeSummary () {
   </div>
   <div v-if="clicked">
     <div class="start-menu-radio-box">
+      <h2>选择难度！</h2>
       <div class="start-menu-radio-box-line-radio" @mouseenter="changeSummary(0)">
         <label>
           <input type="radio" class="nes-radio" name="answer" v-model="difficulty" :value="0" checked />
-          <span>Yes</span>
+          <span>简单</span>
         </label>        
       </div>
-
 
       <div class="start-menu-radio-box-line-radio" @mouseenter="changeSummary(1)">
         <label>
           <input type="radio" class="nes-radio" name="answer" v-model="difficulty" :value="1" />
-          <span>No</span>
+          <span>普通</span>
         </label>
       </div>
-
 
       <div class="start-menu-radio-box-line-radio" @mouseenter="changeSummary(2)">
         <label>
           <input type="radio" class="nes-radio" name="answer" v-model="difficulty" :value="2" />
-          <span>Yes</span>
+          <span>噩梦</span>
         </label>        
       </div>
-
 
       <div class="start-menu-radio-box-line">
         {{summarys[difficulty]}}
@@ -72,9 +70,12 @@ function changeSummary () {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  position: relative;
 }
 .start-menu-logo {
-  margin: 15% 0 30% 0;
+  /* margin: 15% 0 160px 0; */
+  position: absolute;
+  top: 100px;
   font-style: italic;
   font-size: 44px;
 }
@@ -93,6 +94,8 @@ function changeSummary () {
 }
 .start-menu-menu {
   animation: flicker 1.5s step-start infinite ;
+  position: absolute;
+  bottom: 100px;
 }
 @keyframes flicker {
   0% {

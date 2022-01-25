@@ -1,11 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 import xiangsu_aixin from '../../assets/png/xiangsu_aixin.png?url'
 import xiangsu_biaoqing from '../../assets/png/xiangsu_biaoqing.png?url'
 import xiangsu_mao from '../../assets/png/xiangsu_mao.png?url'
-import StateBorder from '../StateBorder.vue';
-import { getSpecialByName } from '../../assets/utils';
+import StateBorder from '../StateBorder.vue'
+import Poptip from './../Poptip.vue'
+import { getSpecialByName } from '../../assets/utils'
 const stateInStore = useStore().getters['sys/getStates']
 const sborder = ref()
 const store = useStore()
@@ -33,22 +34,6 @@ defineExpose({
   removeDisplayVar
 })
 </script>
-<!-- <script>
-export default {
-  methods: {
-    addDisplayVar (name, displayName) {
-      console.log(this.$refs.sborder)
-      this.$refs.sborder.value.addDisplayVar(name, displayName)
-    },
-    addVar (name) {
-      this.$refs.sborder.value.addVar(name)
-    },
-    removeDisplayVar (name) {
-      this.$refs.sborder.value.removeDisplayVar(name)
-    }
-  }
-}
-</script> -->
 
 <template>
   <div class="complexBorder">
@@ -68,19 +53,14 @@ export default {
     </div>
     <div class="content">
       <div v-show="0===nowBorder" class="heal">
-        <!-- <div class="healLine">
-          <span class="progressName">生命: </span>
-          <a-tooltip placement="bottom">
-            <template #title style="font-family: zpix;">{{stateInStore('health')}}/{{stateInStore('maxHealth')}}</template>
-            <progress class="nes-progress is-primary progress" :value="stateInStore('health')" :max="stateInStore('maxHealth')"></progress>
-          </a-tooltip>
-        </div> -->
         <div class="healLine">
           <span class="progressName">头发: </span>
-          <a-tooltip placement="bottom">
-            <template #title style="font-family: zpix;">{{stateInStore('hair')}}/{{stateInStore('maxHair')}}</template>
+          <Poptip 
+            positon="bottom"
+            :title="stateInStore('hair') / stateInStore('maxHair')"
+          >
             <progress class="nes-progress progress" :value="stateInStore('hair')" :max="stateInStore('maxHair')"></progress>
-          </a-tooltip>
+          </Poptip>
         </div>
         <div class="healLine">
           <span class="progressName"><i class="nes-icon coin"></i>: </span>
@@ -96,15 +76,16 @@ export default {
       </div>
       <div v-show="2===nowBorder" class="special">
         <span v-for="s in store.state.sys.globalVariable.special" style="margin-right: 8px;">
-          <a-tooltip placement="bottom" v-if="getSpecialByName(s[0]).display">
-            <template #title>{{getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]}}</template>
-            <!-- <a-tag :color="getSpecialByName(s[0]).color?getSpecialByName(s[0]).color:'blue'">
-            </a-tag> -->
+          <Poptip
+            position="bottom"
+            v-if="getSpecialByName(s[0]).display"
+            :title="getSpecialByName(s[0]).summary?getSpecialByName(s[0]).summary:s[0]"
+          >
             <div class="nes-badge">
               <span class="is-primary">{{getSpecialByName(s[0]).displayName?getSpecialByName(s[0]).displayName:s[0]}}</span>
               <span class="is-primary" v-if="getSpecialByName(s[0]).stackable">:{{s[1]}}</span>
             </div>
-          </a-tooltip>
+          </Poptip>
         </span>
       </div>
     </div>

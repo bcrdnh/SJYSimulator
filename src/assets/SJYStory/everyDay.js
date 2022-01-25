@@ -1099,88 +1099,6 @@ export const weekendMorning_darams = () => {
   return darams
 }
 
-// const stateObj = (name, x) => {
-//   switch (name) {
-//     case 'power':
-//       return {
-//         content: x > 0 ? '力量上升' : '力量下降',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'power',
-//           num: x + Math.floor(powerCorrection() * Math.abs(x))
-//         }
-//       }
-//     case 'stamina':
-//       return {
-//         content: x > 0 ? '耐力上升' : '耐力下降',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'stamina',
-//           num: x + Math.floor(staminaCorrection() * Math.abs(x))
-//         }
-//       }
-//     case 'inte': 
-//       return {
-//         content: x > 0 ? '智力上升' : '智力下降',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'inte',
-//           num: x + Math.floor(inteCorrection() * Math.abs(x))
-//         }
-//       }
-//     case 'charm':
-//       return {
-//         content: x > 0 ? '魅力上升' : '魅力下降',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'charm',
-//           num: x + Math.floor(charmCorrection() * Math.abs(x))
-//         }
-//       }
-//     case 'barve': 
-//       return {
-//         content: x > 0 ? '勇气上升' : '勇气下降',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'brave',
-//           num: x + Math.floor(braveCorrection() * Math.abs(x))
-//         }
-//       }
-//     case 'money':
-//       return {
-//           content: x > 0 ? '获得金钱' : '付出金钱',
-//           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//           changeVar: {
-//             name: 'money',
-//             num: x
-//           }
-//       }
-//     case 'hair':
-//       return {
-//         content: x > 0 ? '脱发了' : '头发再生',
-//         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//         changeVar: {
-//           name: 'hair',
-//           num: x
-//         }
-//       }
-//     case 'work':
-//         return {
-//           content: x > 0 ? '获得业绩' : '失去业绩',
-//           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
-//           changeVar: {
-//             name: 'work',
-//             num: x
-//           }
-//         }
-//     default:
-//       break;
-//   }
-// }
-// const randomState = (x = 3) => {
-//   return stateObj(['power', 'stamina', 'inte', 'charm', 'brave'][randomNum(0, 4)], x)
-// }
-
 export const assessment = (player, sussesCallback, gameOver) => {
   const overWord = [
     [
@@ -1285,13 +1203,13 @@ export const beforeWeekendEvening = () => {
 
 export const weekendEvening_labels = () => {
   if (getVar('day') === 7) {
-    return ['电子书', '枕头', '电饼铛']
+    return ['陈旧的电子书', '陈旧的枕头', '陈旧的电饼铛']
   }
   if (getVar('day') === 14) {
-    return ['易筋经', '自拍杆', '存钱罐']
+    return ['崭新的易筋经', '崭新的自拍杆', '崭新的存钱罐']
   }
   if (getVar('day') === 21) {
-    return ['', '', '']
+    return ['奇怪的手机', '奇怪的药物', '奇怪的彩票']
   }
 }
 
@@ -1369,6 +1287,7 @@ export const weekendEvening_darams = () => {
       ],
       [
         '存点钱吧，每天这么辛苦，挣来的钱要好好珍惜。',
+        '虽然这年头存钱罐可不常见。',
         '用辛苦挣来的钱买了存钱罐！',
         {
           content: '获得特质“存钱罐”',
@@ -1444,16 +1363,47 @@ export const noHair2 = [
 ]
 
 export const endGamePlot = [
-  '',
-  '',
-  '',
-  ...judge(() => {
-
-  }, [
-
-  ], [
-
-  ])
+  '终于，你来到了最后的一次考核',
+  '这次考核是你能否通过试用期的关键，同时也是最难的一次考核。',
+  '最终的考核将从多方面评定你的业绩。',
+  '毕竟你需要经常加班，所以首先是对你的体能进行检测！',
+  '你拥有{power}点力量，{stamina}点耐力！',
+  {
+    'content': '你获得了' + lastTurnWork(getVar('power'), getVar('stamina')) + '点业绩！',
+    'clas': 'nes-text is-primary',
+    'changeVar': {
+      'varName': 'work',
+      'num': lastTurnWork(getVar('power'), getVar('stamina'))
+    }
+  },
+  '接下来是对工作能力的评定，你拥有{inte}点智力。',
+  {
+    'content': '你获得了' + lastTurnWork(getVar('inte') * 1.8) + '点业绩！',
+    'clas': 'nes-text is-primary',
+    'changeVar': {
+      'varName': 'work',
+      'num': lastTurnWork(getVar('inte') * 1.8)
+    }
+  },
+  '接下来是对人际关系的评定，你拥有{charm}点魅力，{brave}点勇气。',
+  {
+    'content': '你获得了' + lastTurnWork(getVar('charm') + getVar('brave')) + '点业绩！',
+    'clas': 'nes-text is-primary',
+    'changeVar': {
+      'varName': 'work',
+      'num': lastTurnWork(getVar('charm') + getVar('brave'))
+    }
+  },
+  '接下来是对你经济状况的考察，你拥有{money}点金币。',
+  {
+    'content': '你获得了' + lastTurnWork(getVar('money') * 0.2) + '点业绩！',
+    'clas': 'nes-text is-primary',
+    'changeVar': {
+      'varName': 'work',
+      'num': lastTurnWork(getVar('money') * 0.2)
+    }
+  },
+  // TODO:加点结束语
 ]
 
 const lastTurnWork = (s1, s2 = 0) => {
@@ -1467,9 +1417,6 @@ const lastTurnWork = (s1, s2 = 0) => {
   return 3 + Math.max(0, Stage2 / 20)
 }
 
-const lastTurnWork_2 = (s1, s2) => {
-  
-}
 export const beforeDayP1 = [
   [
 
@@ -1485,5 +1432,23 @@ export const beforeDayP1SSR = [
   ],
   [
     
+  ]
+]
+
+export const beforeDayP2 = [
+  [
+
+  ],
+  [
+
+  ]
+]
+
+export const afterDayP4 = [
+  [
+
+  ],
+  [
+
   ]
 ]

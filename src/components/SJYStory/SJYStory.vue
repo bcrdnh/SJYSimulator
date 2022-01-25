@@ -4,8 +4,6 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect, randomNum, randomArr } from '../../assets/utils.js'
 import Player from '../Player.vue'
-import StateBorder from '../StateBorder.vue'
-import SpecialBorder from '../SpecialBorder.vue'
 import InfoBorder from './InfoBorder.vue'
 import FixedSelector from '../FixedSelector.vue'
 import ComplexBorder from './ComplexBorder.vue'
@@ -30,7 +28,8 @@ import {
   noHair2,
   endGamePlot,
   beforeDayP1,
-  beforeDayP1SSR
+  beforeDayP1SSR,
+  beforeDayP2
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -142,26 +141,32 @@ function dayP1 () {
     player.value.setDaram(noHair1, dayOver)
     return
   }
-  if (randomNum() < 40) {
-    player.value.setDaram(randomArr(beforeDayP1), () => {})
+  const beforeDayP1Event = () => {
+    if (randomNum() < 40) {
+      player.value.setDaram(randomArr(beforeDayP1), beforeDayP1SSREvent)
+    }
   }
-  if (randomNum() < 3) {
-    player.value.setDaram(randomArr(beforeDayP1SSR), () => {})
+  const beforeDayP1SSREvent = () => {
+    if (randomNum() < 3) {
+      player.value.setDaram(randomArr(beforeDayP1SSR), dayP1Event)
+    }
   }
-  if (getStates('day') % 7 !== 0) {
-    player.value.setDaram(['你决定......'], () => {
-      bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, () => {})
-    })
-  } else {
-    player.value.setDaram(['你决定......'], () => {
-      bondingSelect(weekendMorning_labels(),
-      weekendMorning_darams(),
-      player,
-      selector,
-      getStates('day') === 21 ? lastTurn : dayP2)
-    })
+  const dayP1Event = () => {
+    if (getStates('day') % 7 !== 0) {
+      player.value.setDaram(['你决定......'], () => {
+        bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
+      })
+    } else {
+      player.value.setDaram(['你决定......'], () => {
+        bondingSelect(weekendMorning_labels(),
+        weekendMorning_darams(),
+        player,
+        selector,
+        getStates('day') === 21 ? lastTurn : dayP2)
+      })
+    }
   }
-  dayP2()
+  beforeDayP1Event()
 }
 
 function dayP2 () {
@@ -169,10 +174,17 @@ function dayP2 () {
     player.value.setDaram(noHair1, dayOver)
     return
   }
-  player.value.setDaram(['到中午了。'], () => {
-    bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
-  })
-  // checkEnd()
+  const beforeDayP2Event = () => {
+    if (randomNum() < 40) {
+      player.value.setDaram(randomArr(beforeDayP2), dayP2Event)
+    }
+  }
+  const dayP2Event = () => {
+    player.value.setDaram(['到中午了。'], () => {
+      bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
+    })
+  }
+  beforeDayP2Event()
 }
 
 function dayP3 () {
@@ -187,7 +199,6 @@ function dayP3 () {
   } else {
     assessment(player.value, dayP4, gameOver)
   }
-  // checkEnd()
 }
 
 function dayP4 () {
@@ -195,74 +206,33 @@ function dayP4 () {
     player.value.setDaram(noHair2, dayStart)
     return
   }
-  if (getStates('day') !== 6 && getStates('day') !== 13 && getStates('day') !== 20) {
-    player.value.setDaram(['下班了，你决定.....'], () => {
-      bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, dayOver)
-    })
-  } else {
-    if (getStates('money') < 400) {
-      player.value.setDaram(beforeWeekendEvening(), dayOver)
-    } else {
-      player.value.setDaram(beforeWeekendEvening(), () => {
-        bondingSelect(weekendEvening_labels(), weekendEvening_darams(), player, selector, dayOver)
+  const dayP4Event = () => {
+    if (getStates('day') !== 6 && getStates('day') !== 13 && getStates('day') !== 20) {
+      player.value.setDaram(['下班了，你决定.....'], () => {
+        bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, afterDayP4Event)
       })
+    } else {
+      if (getStates('money') < 400) {
+        player.value.setDaram(beforeWeekendEvening(), afterDayP4Event)
+      } else {
+        player.value.setDaram(beforeWeekendEvening(), () => {
+          bondingSelect(weekendEvening_labels(), weekendEvening_darams(), player, selector, afterDayP4Event)
+        })
+      }
+    }    
+  }
+  const afterDayP4Event = () => {
+    if (randomNum() < 40) {
+      player.value.setDaram(randomArr(beforeDayP2), dayOver)
     }
   }
-  // checkEnd()
+  dayP4Event()
 }
 
 function lastTurn () {
-  const power = getStates('power')
-  const stamina = getStates('stamina')
-  const inte = getStates('inte')
-  const charm = getStates('charm')
-  const brave = getStates('brave')
-  player.value.setDaram([
-    '终于，你来到了最后的一次考核',
-    '这次考核是你能否通过试用期的关键，同时也是最难的一次考核。',
-    '最终的考核将从多方面评定你的业绩。',
-    '毕竟你需要经常加班，所以首先是对你的体能进行检测！',
-    '你拥有{power}点力量，{stamina}点耐力！',
-    {
-      'content': '你获得了' + stateToWork(power, stamina) + '点业绩！',
-      'clas': 'nes-text is-primary',
-      'changeVar': {
-        'varName': 'work',
-        'num': stateToWork(power, stamina)
-      }
-    },
-    '接下来是对工作能力的评定，你拥有{}点智力。',
-    {
-      'content': '你获得了' + stateToWork(inte) + '点业绩！',
-      'clas': 'nes-text is-primary',
-      'changeVar': {
-        'varName': 'work',
-        'num': stateToWork(inte)
-      }
-    },
-    '接下来是对人际关系的评定，你拥有{charm}点魅力，{brave}点勇气。',
-    {
-      'content': '你获得了' + stateToWork(inte) + '点业绩！',
-      'clas': 'nes-text is-primary',
-      'changeVar': {
-        'varName': 'work',
-        'num': stateToWork(inte)
-      }
-    },
-    '接下来是对你经济状况的考察，你拥有{money}点金币。',
-    {
-      'content': '你获得了' + stateToWork(inte) + '点业绩！',
-      'clas': 'nes-text is-primary',
-      'changeVar': {
-        'varName': 'work',
-        'num': stateToWork(inte)
-      }
-    },
-  ])
-}
-
-function stateToWork (s1, s2 = 0) {
-
+  player.value.setDaram(endGamePlot, () => {
+    router.push('/')
+  })
 }
 
 function dayOver () {

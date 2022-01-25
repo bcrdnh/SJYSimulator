@@ -6,7 +6,7 @@ import { setVar, newEventPool, newTiggerPool, newWeightEventPool } from '../asse
 import Player from './Player.vue'
 import StateBorder from './StateBorder.vue'
 import SpecialBorder from './SpecialBorder.vue'
-import Selector from './Selector.vue'
+import Selector from './FixedSelector.vue'
 import ev0to5 from '../assets/defaultDaram/event.js'
 const player = ref(null)
 const border = ref(null)
