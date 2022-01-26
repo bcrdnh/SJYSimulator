@@ -57,7 +57,7 @@ defineExpose({
           <span class="progressName">头发: </span>
           <Poptip 
             positon="bottom"
-            :title="stateInStore('hair') / stateInStore('maxHair')"
+            :title="stateInStore('hair') + '/' + stateInStore('maxHair')"
           >
             <progress class="nes-progress progress" :value="stateInStore('hair')" :max="stateInStore('maxHair')"></progress>
           </Poptip>
@@ -156,14 +156,15 @@ defineExpose({
 }
 .progress {
   flex: 1;
-  height: auto;
+  height: 24px;
+  margin-top: 12px;
 }
 .special {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   /* overflow-y: auto; */
-  height: 100%;
+  /* height: 100%; */
 }
 </style>
 <style>

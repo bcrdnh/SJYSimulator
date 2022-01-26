@@ -223,7 +223,7 @@ export const specialMap = new Map([
     stackable: false,
     color: 'pink'
   }],
-  ['barve+', {
+  ['brave+', {
     display: false,
     displayName: 'power+',
     summary: '',
@@ -296,7 +296,7 @@ export const specialMap = new Map([
   ['电饼铛', {
     display: true,
     displayName: '电饼铛',
-    summary: '你拥有电饼铛，可以自己做点早饭吃了。',
+    summary: '你拥有电饼铛，可以自己做点吃的了。',
     stackable: false,
     color: 'pink'
   }],

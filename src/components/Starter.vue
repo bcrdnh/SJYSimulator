@@ -162,8 +162,8 @@ function next () {
           </div>
         </div>
       </div>
-      <button type="button" :class="restPoint>=0?'is-disabled':'nes-btn'" @click="next()">
-        OK{{restPoint>=0?'开始':'点数不足'}}
+      <button type="button" :class="restPoint>=0?'nes-btn':'nes-btn is-disabled'" @click="next()">
+        {{restPoint>=0?'开始':'点数不足'}}
       </button>
     </div>
     

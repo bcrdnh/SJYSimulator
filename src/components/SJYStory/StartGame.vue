@@ -21,7 +21,8 @@ function changeSummary () {
 <template>
   <div class="start-menu" v-if="!clicked" @click="clicked=true">
     <div class="start-menu-logo">
-      logo
+      家翊模拟器
+      <img src="./../../assets/png/strong_SJY.png">
     </div>
     <div class="start-menu-menu">
       press any button to start
@@ -64,6 +65,7 @@ function changeSummary () {
 
 <style scoped>
 .start-menu {
+  font-family: zpix;
   height: 100%;
   width: 100%;
   display: flex;
@@ -80,6 +82,7 @@ function changeSummary () {
   font-size: 44px;
 }
 .start-menu-radio-box {
+  font-family: zpix;
   margin: 15% 0 0 0;
   display: flex;
   flex-direction: column;

@@ -12,7 +12,18 @@ export const endStartStage = [
   '大叔：你回去等通知吧。',
   '你离开了公司。',
   '两天后，你收到了正式入职的通知。',
-  '试用期三个月，这家公司是你居住的城市内对你而言最好的选择了。',
+  {
+    content: '试用期为三周，单休。',
+    clas: 'nes-text is-primary'
+  },
+  {
+    content: '每周日的下午都会对你的业绩进行考核。',
+    clas: 'nes-text is-primary'
+  },
+  {
+    content: '每次考核都通过就可以转正了！',
+    clas: 'nes-text is-primary'
+  },
   '为了成功转正你下定决心，要在工作中好好展现自己。',
   '入职前一天晚上，你早早地就睡了。',
 ]
@@ -28,7 +39,7 @@ export const weekendStartPlot = [
 ]
 
 export const dayMorning_labels = () => {
-  let labels = ['继续睡', '上班', '出门探险']
+  let labels = ['上班', '继续睡', '出门探险']
   return labels
 }
 export const dayMorning_Darams = () => {
@@ -37,7 +48,7 @@ export const dayMorning_Darams = () => {
   darams.push(doSleep())
   let evpool = [0]
   if (randomNum() < 20) {
-    darams.push(fail) // 失败事件
+    darams.push(fail()) // 失败事件
     return darams
   }
   if (!getVar('鸡公煲')) {
@@ -51,7 +62,7 @@ export const dayMorning_Darams = () => {
   }
   switch (evpool[randomNum(0, evpool.length - 1)]) {
     case 0:
-      darams.push(randomArr(normalEvent)) // 普通事件
+      darams.push(randomArr(normalEvent())) // 普通事件
       break;
     case 1:
       darams.push(findFood())
@@ -79,8 +90,7 @@ const doWork = () => {
     ],
     [
       '你随便收拾了下就出门上班了。',
-      '你昨天好像没没睡好。',
-      '不太能集中注意力。',
+      '注意力不是很集中。犯了不少错误。',
       stateObj('money', 180),
       stateObj('work', 1),
       stateObj('hair', -70),
@@ -127,12 +137,14 @@ const findFood = () => {
       '这附近也没有什么好吃的了，也许之后午餐可以选择热干面？',
       {
         content: '可以在午餐时选择吃热干面了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '热干面',
           content: true
         }
       },
-      stateObj('hair', 40)
+      stateObj('hair', 40),
+      '之后你返回了公司',
     ] // 初次找到事件
   }
   if (!getVar('麦当劳')) {
@@ -147,12 +159,14 @@ const findFood = () => {
       '你感到有些有些诡异，离开了这个地方。',
       {
         content: '可以在午餐时选择吃麦当劳了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '麦当劳',
           content: true
         }
       },
-      stateObj('hair', 45)
+      stateObj('hair', 45),
+      '之后你返回了公司',
     ]
   }
   if (!getVar('盖浇饭')) {
@@ -165,28 +179,34 @@ const findFood = () => {
       '你试了试，味道确实不错，你决定以后多光顾光顾。',
       {
         content: '可以在午餐时选择吃盖浇饭了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '盖浇饭',
           content: true
         }
       },
-      stateObj('hair', 40)
+      stateObj('hair', 40),
+      '之后你返回了公司',
     ] // 初次找到事件
   }
   if (!getVar('海底捞')) {
-    '你有一次去了公司附近的商场。',
-    '那里有一家海底捞。',
-    '你想起你的校园时光，你曾经还经常和室友一起吃。',
-    {
-      content: '可以在午餐时选择吃海底捞了！',
-      setVar: {
-        varName: '海底捞',
-        content: true
-      }
-    },
-    stateObj('hair', 60),
-    randomState(),
-    randomState()
+    return [
+      '你有一次去了公司附近的商场。',
+      '那里有一家海底捞。',
+      '你想起你的校园时光，你曾经还经常和室友一起吃。',
+      {
+        content: '可以在午餐时选择吃海底捞了！',
+        clas: 'nes-text is-primary',
+        setVar: {
+          varName: '海底捞',
+          content: true
+        }
+      },
+      stateObj('hair', 60),
+      randomState(),
+      randomState(),
+      '之后你返回了公司',      
+    ]
   }
   if (!getVar('鸡公煲') && randomNum() < 33) {
     return [
@@ -200,6 +220,7 @@ const findFood = () => {
       '你发现了鸡公煲。',
       {
         content: '可以在午餐时选择吃鸡公煲了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '鸡公煲',
           content: true
@@ -207,10 +228,11 @@ const findFood = () => {
       },
       stateObj('hair', 50),
       randomState(),
-      randomState()      
+      randomState(),
+      '之后你返回了公司',     
     ]
   }
-  return randomArr(normalEvent)
+  return randomArr(normalEvent())
 }
 const findFish = () => {
   if (!getVar('玩手机')) {
@@ -221,11 +243,13 @@ const findFish = () => {
       '他在......玩手机！',
       {
         content: '学会了玩手机！下午可以玩手机了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '玩手机',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('锻炼身体')) {
@@ -236,11 +260,13 @@ const findFish = () => {
       '他在......闲逛！',
       {
         content: '学会了锻炼身体！下午可以锻炼身体了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '玩手机',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('休息')) {
@@ -251,11 +277,13 @@ const findFish = () => {
       '他在......睡觉！',
       {
         content: '学会了休息！下午可以休息了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '休息',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('锻炼身体')) {
@@ -266,11 +294,13 @@ const findFish = () => {
       '他在......巴结领导！',
       {
         content: '学会了巴结领导！下午可以巴结领导了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '巴结领导',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('究极摸鱼') && randomNum() < 33) {
@@ -287,14 +317,16 @@ const findFish = () => {
       '说完，他便离职了。',
       {
         content: '学会了终极的摸鱼技巧！下午可以使用究极摸鱼了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '究极摸鱼',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
-  return randomArr(normalEvent)
+  return randomArr(normalEvent())
 }
 const findPlace = () => {
   if (!getVar('健身房')) {
@@ -304,11 +336,13 @@ const findPlace = () => {
       '也许可以在下班之后来锻炼锻炼？',
       {
         content: '发现了健身房！下班后可以去健身房了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '健身房',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   } 
   if (!getVar('酒吧')) {
@@ -318,11 +352,13 @@ const findPlace = () => {
       '也许可以在下班之后来玩玩？',
       {
         content: '发现了酒吧！下班后可以去酒吧了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '酒吧',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('美发店')) {
@@ -332,11 +368,13 @@ const findPlace = () => {
       '也许可以在下班之后来做做头发？',
       {
         content: '发现了美发店！下班后可以去美发店了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '美发店',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('工地')) {
@@ -346,11 +384,13 @@ const findPlace = () => {
       '没想到公司居然还有房地产业务...而且还正在招募搬砖的工人？',
       {
         content: '发现了工地！下班后可以去工地了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: '工地',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
   if (!getVar('FF14') && randomNum() < 33) {
@@ -361,74 +401,80 @@ const findPlace = () => {
       '还是回家打游戏吧。',
       {
         content: '发现了FF14！下班后可以去FF14了！',
+        clas: 'nes-text is-primary',
         setVar: {
           varName: 'FF14',
           content: true
         }
       },
+      '之后你返回了公司',
     ]
   }
-  return randomArr(normalEvent)
+  return randomArr(normalEvent())
 }
-const fail = [
-  '你出想出门逛逛，毕竟自从你来到这个城市你还没有怎么出去玩玩。',
-  '生活一直被工作所占满。',
-  '你跟着网上的推荐出门走了走。',
-  '......',
-  '实在是有点无聊，看来这次的推荐不太靠谱。',
-  '你失望地回家了。',
-  stateObj('hair', -5)
-]
-const normalEvent = [
-  [
-    '你出了门，坐上了与公司方向相反的公交。',
-    '你没有安排目的地，期待着会到达什么样的地方。',
+const fail = () => {
+    return [
+    '你出想出门逛逛，毕竟自从你来到这个城市你还没有怎么出去玩玩。',
+    '生活一直被工作所占满。',
+    '你跟着网上的推荐出门走了走。',
     '......',
-    '堵车了。',
-    '你一上午都堵在路上。',
-    '你在车上休息了一上午。',
-    stateObj('hair', 30)
-  ],
-  [
-    '也没什么好玩的，去看电影吧。',
-    randomArr(['看了电影《北京堡垒》。'],
-    ['看了电影《流浪火星》。'],
-    ['看了电影《狼出没之没有熊》。'],
-    ['看了电影《逐梦洋葱圈》。']),
-    stateObj('hair', 15),
-    randomState(3),
-    randomState(3),
-  ],
-  [
-    '去运动一下吧。',
-    randomArr(['去羽毛球馆打了羽毛球。'],
-    ['和别人一起打了篮球。'],
-    ['去体育场一口气跑了1200米'],
-    ['去体育场一口气跑了3200米']),
-    stateObj('hair', 15),
-    stateObj('power', 3),
-    stateObj('stamina', 3),
-  ],
-  [
-    '好累啊，还是玩玩游戏算了。',
-    randomArr(['玩了神兽世界。'],
-    ['玩了刺客鸡条'],
-    ['玩了GTA6'],
-    ['玩了荒野之吹']),
-    stateObj('hair', 15),
-    stateObj('inte', 6)
-  ],
-  [
-    '出去找找有没有什么娱乐项目吧。',
-    randomArr(['找到了一家宠物店。享受了撸猫的快感。'],
-    ['发现了一家KTV，尽情歌唱了。'],
-    ['发现了一家网吧，玩了游戏。为什么不在家玩呢？'],
-    ['发现了剧本杀，和其它人一起剧本杀了。']),
-    stateObj('hair', 15),
-    stateObj('charm', 3),
-    stateObj('brave', 3),
+    '实在是有点无聊，看来这次的推荐不太靠谱。',
+    '你失望地回家了。',
+    stateObj('hair', -5)
   ]
-]
+}
+const normalEvent = () => {
+    return [
+    [
+      '你出了门，坐上了与公司方向相反的公交。',
+      '你没有安排目的地，期待着会到达什么样的地方。',
+      '......',
+      '堵车了。',
+      '你一上午都堵在路上。',
+      '你在车上休息了一上午。',
+      stateObj('hair', 30)
+    ],
+    [
+      '也没什么好玩的，去看电影吧。',
+      ...randomArr([['看了电影《北京堡垒》。'],
+      ['看了电影《流浪火星》。'],
+      ['看了电影《狼出没之没有熊》。'],
+      ['看了电影《逐梦洋葱圈》。']]),
+      stateObj('hair', 15),
+      randomState(3),
+      randomState(3),
+    ],
+    [
+      '去运动一下吧。',
+      ...randomArr([['去羽毛球馆打了羽毛球。'],
+      ['和别人一起打了篮球。'],
+      ['去体育场一口气跑了1200米'],
+      ['去体育场一口气跑了3200米']]),
+      stateObj('hair', 15),
+      stateObj('power', 3),
+      stateObj('stamina', 3),
+    ],
+    [
+      '好累啊，还是玩玩游戏算了。',
+      ...randomArr([['玩了神兽世界。'],
+      ['玩了刺客鸡条'],
+      ['玩了GTA6'],
+      ['玩了荒野之吹']]),
+      stateObj('hair', 15),
+      stateObj('inte', 6)
+    ],
+    [
+      '出去找找有没有什么娱乐项目吧。',
+      ...randomArr([['找到了一家宠物店。享受了撸猫的快感。'],
+      ['发现了一家KTV，尽情歌唱了。'],
+      ['发现了一家网吧，玩了游戏。为什么不在家玩呢？'],
+      ['发现了剧本杀，和其它人一起剧本杀了。']]),
+      stateObj('hair', 15),
+      stateObj('charm', 3),
+      stateObj('brave', 3),
+    ]
+  ]
+}
 
 export const dayNoon_labels = () => {
   let labels = ['公司食堂']
@@ -450,21 +496,23 @@ export const dayNoon_labels = () => {
   return labels
 }
 
-const MCDAddictionDaram = [
-  '只有麦当劳才能被称作食物！',
-  '只有麦当劳才能拯救我们！',
-  '只有麦当劳！',
-  stateObj('hair', -10)
-]
+const MCDAddictionDaram = () => {
+    return [
+    '只有麦当劳才能被称作食物！',
+    '只有麦当劳才能拯救我们！',
+    '只有麦当劳！',
+    stateObj('hair', -10)
+  ]
+}
 export const dayNoon_Darams = () => {
-  let darams = [['你选择去公司食堂吃饭。', '虽然不是很好吃，但好在不要钱', '你吃完了。']]
+  let darams = [['你选择去公司食堂吃饭。', '虽然不是很好吃，但好在不要钱。', '你吃完了。']]
   if (getVar('热干面')) {
     let eatReganmian = [
       '你来到了那家热干面。',
       '虽然不是很好吃，但足够饱腹。',
     ]
     if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
-      eatReganmian = MCDAddictionDaram
+      eatReganmian = MCDAddictionDaram()
     } else if (special.has('dislikeReganmian')) {
       eatReganmian.push('你实在是吃腻了这家热干面。')
       eatReganmian.push('你硬着头皮吃完了。')
@@ -511,10 +559,10 @@ export const dayNoon_Darams = () => {
         stateObj('money', -30)
       ]
     } else {
-      eatReganmian.push(stateObj('hair', 45))
-      eatReganmian.push(stateObj('money', -30))
+      eatMCD.push(stateObj('hair', 45))
+      eatMCD.push(stateObj('money', -30))
       if (getVar('MDCTime') <= 10) {
-        eatReganmian.push({
+        eatMCD.push({
           content: '你吃完了。',
           changeVar: {
             varName: 'MDCTime',
@@ -522,12 +570,12 @@ export const dayNoon_Darams = () => {
           }
         })
       } else {
-        eatReganmian.push('你感到...似乎有什么东西变得不一样了。')
-        eatReganmian.push('吃了这么多次，你已经不再抵触这家麦当劳。')
-        eatReganmian.push('应该说...你好像...变得越来越想吃。')
-        eatReganmian.push('你开始无法思考，在你的脑中只有三个字在回响。')
-        eatReganmian.push('麦当劳。')
-        eatReganmian.push({
+        eatMCD.push('你感到...似乎有什么东西变得不一样了。')
+        eatMCD.push('吃了这么多次，你已经不再抵触这家麦当劳。')
+        eatMCD.push('应该说...你好像...变得越来越想吃。')
+        eatMCD.push('你开始无法思考，在你的脑中只有三个字在回响。')
+        eatMCD.push('麦当劳。')
+        eatMCD.push({
           content: '得到特质“麦当劳的诅咒”',
           setSpecial: {
             name: 'MDCAddiction',
@@ -536,10 +584,11 @@ export const dayNoon_Darams = () => {
         })
       }
     }
+    darams.push(eatMCD)
   }
   if (getVar('盖浇饭')) {
     if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
-      darams.push(MCDAddictionDaram)
+      darams.push(MCDAddictionDaram())
     } else {
       if (randomNum() < 75) {
         darams.push([
@@ -561,7 +610,7 @@ export const dayNoon_Darams = () => {
   }
   if (getVar('海底捞')) {
     if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
-      darams.push(MCDAddictionDaram)
+      darams.push(MCDAddictionDaram())
     } else {
       let eatHDL = [
         '真的要吃这么奢侈吗？',
@@ -579,7 +628,7 @@ export const dayNoon_Darams = () => {
   }
   if (getVar('鸡公煲')) {
     if (special.has('MDCAddiction') && !special.has('讨厌麦当劳')) {
-      darams.push(MCDAddictionDaram)
+      darams.push(MCDAddictionDaram())
     } else {
       darams.push([
         '你享用了鸡公煲。',
@@ -592,27 +641,27 @@ export const dayNoon_Darams = () => {
 }
 
 export const dayAfternoon_labels = () => {
-  const labels = ['继续工作']
+  let labels = ['继续工作']
   if (getVar('玩手机')) {
-    label.push('玩手机')
+    labels.push('玩手机')
   }
   if (getVar('锻炼身体')) {
-    label.push('锻炼身体')
+    labels.push('锻炼身体')
   }
   if (getVar('休息')) {
-    label.push('休息')
+    labels.push('休息')
   }
   if (getVar('巴结领导')) {
-    label.push('巴结领导')
+    labels.push('巴结领导')
   }
   if (getVar('究极摸鱼')) {
-    label.push('究极摸鱼')
+    labels.push('究极摸鱼')
   }
   return labels
 }
 
 export const dayAfternoon_Darams = () => {
-  const darams = [
+  let darams = [
     [
       '也没什么别的想干的。', 
       '还是继续工作吧', 
@@ -648,7 +697,7 @@ export const dayAfternoon_Darams = () => {
       ], [
         {
           content: '如果有更多智力的话，也许就能更好的躲避领导的检查了。',
-          clas: ''
+          clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
@@ -688,7 +737,7 @@ export const dayAfternoon_Darams = () => {
       ], [
         {
           content: '有更多智力的话，锻炼效果也许提升。',
-          clas: ''
+          clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
@@ -722,7 +771,7 @@ export const dayAfternoon_Darams = () => {
       ], [
         {
           content: '如果更勇敢的话，也许可以睡更久。',
-          clas: ''
+          clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
@@ -757,7 +806,7 @@ export const dayAfternoon_Darams = () => {
       ], [
         {
           content: '要是有足够的魅力和勇敢的话，也许能让领导刮目相看？',
-          clas: ''
+          clas: 'nes-text is-primary'
         }
       ]),
       ...judge(() => {
@@ -826,7 +875,7 @@ export const dayEvening_Darams = () => {
     ],
   ]
   if (getVar('健身房')) {
-    const gym = [
+    let gym = [
       stateObj('money', -30),
       '你进入了健身房，每个器材都玩了玩。',
       '不知道健身效果如何，但你确实练得满头大汗了。',
@@ -893,7 +942,7 @@ export const dayEvening_Darams = () => {
     darams.push(gym)
   }
   if (getVar('酒吧')) {
-    const bar = [
+    let bar = [
       '你决定去酒吧玩玩。',
       '陌生的人群在闪烁的灯光里狂乱舞动。',
       '虽然你也不知道好玩在哪里，但你还是挤了进去。',
@@ -939,7 +988,7 @@ export const dayEvening_Darams = () => {
       ])
     ]
     if (getVar('barTime') > 3) {
-      gym.push({
+      bar.push({
         content: '你变得习惯酒吧的氛围，你是酒吧达人！',
         clas: 'nes-text is-primary',
         setSpecial: {
@@ -949,7 +998,7 @@ export const dayEvening_Darams = () => {
       })
     }
     if (getVar('barTime') > 6) {
-      gym.push({
+      bar.push({
         content: '你变得更习惯酒吧的氛围，你是酒吧超人！',
         clas: 'nes-text is-primary',
         setSpecial: {
@@ -982,7 +1031,7 @@ export const dayEvening_Darams = () => {
     ])
   }
   if (getVar('工地')) {
-    let gongdi = [
+    darams.push([
       '你想了想，为了生活，还是继续努力吧。',
       '你前往了工地，顶着寒风，你开始搬砖。',
       stateObj('work', 1),
@@ -1012,7 +1061,7 @@ export const dayEvening_Darams = () => {
         },
         stateObj('money', 100),
       ]),
-    ]
+    ])
   }
   if (getVar('FF14')) {
     darams.push([
@@ -1027,10 +1076,17 @@ export const dayEvening_Darams = () => {
   return darams
 }
 
-export const afterOneDay = [
+export const afterOneDay = () => [
   '时间不早了，你躺倒在床上。',
   '积攒了一天的疲劳让你很快就睡着了......',
-  '......',
+  ...judge(() => {
+    return special.has('超级枕头')
+  }, [
+    '你睡在超级枕头上！超级爽。',
+    stateObj('hair', 10)
+  ], [
+    '......',
+  ]),
   '......',
   '......'
 ]
@@ -1199,6 +1255,7 @@ export const beforeWeekendEvening = () => {
   } else {
     p1.push('均价400，价格还挺贵。你发现还是有些有用的东西，你决定买一个...')
   }
+  return p1
 }
 
 export const weekendEvening_labels = () => {
@@ -1362,7 +1419,16 @@ export const noHair2 = [
   '......'
 ]
 
-export const endGamePlot = [
+const lastTurnWork = (s1, s2 = 0) => {
+  let state = s1 + s2
+  const stage1 = Math.min(100, state) // 4 50:2
+  const stage2 = Math.min(50, state -= stage1) // 2.5 50:2.5
+  const stage3 = Math.min(50, state -= stage2) // 3.33 50:3.33
+  const stage4 = state - stage3 // 50: 5
+  return Math.floor(stage1 / 25 + stage2 / 20 + stage3 / 15 + stage4 / 10)
+}
+
+export const endGamePlot = () => [
   '终于，你来到了最后的一次考核',
   '这次考核是你能否通过试用期的关键，同时也是最难的一次考核。',
   '最终的考核将从多方面评定你的业绩。',
@@ -1406,49 +1472,232 @@ export const endGamePlot = [
   // TODO:加点结束语
 ]
 
-const lastTurnWork = (s1, s2 = 0) => {
-  let work = 0
-  const state = s1 + s2
-  if (state <= 60) return Math.floor(state / 25)
-  // const Stage2 = state - 75
-  // const Stage3 = Stage2 - 60 // 75 ~ 135
-  // const Stage4 = Stage3 - 60 // 135 ~ 195
-  // const Stage5 = Stage4 - 60 // 255 ~
-  return 3 + Math.max(0, Stage2 / 20)
-}
 
-export const beforeDayP1 = [
+
+export const beforeDayP1 = () => [
   [
-
+    '你昨晚做了个噩梦，你梦到自己被吃掉了。',
+    stateObj('hair', -5)
   ],
   [
+    '你昨晚做了个噩梦，你梦到自己在外面裸奔。',
+    stateObj('charm', -3)
+  ],
+  [
+    '你昨晚做了个噩梦，你梦到自己脑袋被电梯门夹住了。',
+    stateObj('inte', -3)
+  ],
+  [
+    '你昨晚做了个噩梦，你梦到自己被判一辈子只能吃热干面。',
+    stateObj('stamina', -3)
+  ],
+  [
+    '你昨晚做了个噩梦，你梦到自己被开除了。',
+    stateObj('work', -1)
+  ],
+  [
+    '你昨晚做了个梦，你梦到自己成功通过了试用期。',
+    stateObj('work', 1)
+  ],
+  [
+    '你昨晚做了个梦，你梦到你是领导，而你现在的领导被你呼来唤去。',
+    stateObj('brave', 3)
+  ],
+  [
+    '你昨晚做了个梦，你梦到自己在上高数课。',
+    stateObj('inte', 3)
+  ],
+  [
+    '你昨晚做了个梦，你在梦里吃了很多炸鸡。',
+    stateObj('hair', 5)
+  ],
+  [
+    '你昨晚做了个梦，你梦到自己加班到凌晨。',
+    '淦，你是真的加班到凌晨。',
+    stateObj('work', 1)
+  ],
+  [
+    '昨晚睡前你喝了一杯热牛奶。',
+    '这使你昨晚睡得很香。',
+    stateObj('hair', 5)
+  ],
+  [
+    '昨晚睡前你喝了一杯热牛奶。',
+    '奶里有毒！',
+    stateObj('stamina', 3)
+  ],
+  [
+    '今天起得比平时早了些。',
+    '你用这些时间打理了一下自己。',
+    stateObj('charm', 3)
+  ],
+  [
+    '今天起得比平时早了些。',
+    '你用这些时间锻炼了一下身体。',
+    stateObj('power', 3)
+  ],
+  [
+    '今天起得比平时早了些。',
+    '你用这些时间有睡了一觉，成功起得比平时晚了点。',
+    stateObj('brave', 3)
+  ],
+  [
+    '今天起得比平时早了些。',
+    '你用这些时间拯救了地球，顺便吃了个早饭。',
+    randomState(),
+    randomState(),
+    randomState()
+  ],
+  [
+    '今天起得比平时晚了点。',
+    '你顾不上整理一下，不修边幅地出门了。',
+    stateObj('charm', -3)
+  ],
+  [
+    '今天起得比平时晚了点。',
+    '完全没时间吃早餐，甚至还要跑着上楼。',
+    stateObj('stamina', -3)
+  ],
+  [
+    '今天起得比平时晚了点。',
+    '一大早就非常疲劳。',
+    stateObj('hair', -5)
+  ],
+  [
+    '因为你起得晚了点，引起了美国德克萨斯州的一场龙卷风。',
+    '美国向你发出了警告。',
+    randomState(-3),
+    randomState(-3),
+    randomState(-3)
+  ],
+]
 
+export const beforeDayP1SSR = () => [
+  [
+    '这里应该是一个稀有事件。',
+    '但我还没想好怎么写，总之先给奖励。',
+    randomState(5),
+    randomState(5),
+    randomState(5)
   ]
 ]
 
-export const beforeDayP1SSR = [
+export const beforeDayP2 = () => [
   [
-
+    '11：59，下班前领导突然又加了很多工作。',
+    '你不得不加班。',
+    stateObj('stamina', 3)
   ],
   [
-    
-  ]
+    '11：59，甲方突然提出了修改的要求。',
+    '你不得不推迟吃饭。',
+    stateObj('stamina', -3)
+  ],
+  [
+    '11：59，电梯突然坏了。',
+    '你不得不饿一会了。',
+    stateObj('hair', -5)
+  ],
+  [
+    '11：59。',
+    '你早就干完了，好好地休息了下。',
+    stateObj('hair', 5)
+  ],
+  [
+    '11：59，甲方突然提出了修改的要求。',
+    '你暴打了他，现在没要求了。',
+    stateObj('power', 3),
+    stateObj('charm', -3)
+  ],
+  [
+    '11：59，甲方突然提出了修改的要求。',
+    '你暴打了他，现在没要求也没甲方了。',
+    stateObj('power', 3),
+    stateObj('charm', -3)
+  ],
+  [
+    '11：59，公司突然来了一群北极熊，原来他们是甲方，你们吵了起来。',
+    stateObj('charm', -3)
+  ],
+  [
+    '11：59，公司突然来了一群北极熊，他们吃了几个人就离开了。',
+    '它们觉得你很好吃。',
+    '公司觉得你还有价值，没有让北极熊吃掉你。',
+    stateObj('brave', -3),
+    stateObj('charm', 3)
+  ],
+  [
+    '11：59，公司突然来了一群北极熊，他们是来食堂吃饭的。',
+    '它们觉得你很好吃。',
+    '公司觉得你还有价值，没有让北极熊吃掉你。',
+    stateObj('brave', -3),
+    stateObj('charm', 3)
+  ],
+  [
+    '11：59，公司突然来了一群北极熊，他们到处挑衅。',
+    '你实在看不惯，与北极熊开始了搏斗。',
+    ...judge(() => {
+      return special.has('北极熊克星')
+    }, [
+      '你暴打了北极熊，他们灰头土脸地离开了。',
+      stateObj('power', 5),
+      stateObj('brave', 5),
+      stateObj('charm', 5)
+    ], [
+      '你没打过它们，毕竟它们是熊，你被吃了两口。',
+      stateObj('hair', -10),
+    ])
+  ],
 ]
 
-export const beforeDayP2 = [
+export const afterDayP4 = () => [
   [
-
+    '走在回家的路上，你突然感觉很饿。',
+    '你决定去吃点肯缺德基，吃得很爽。',
+    stateObj('hair', 5),
   ],
   [
-
-  ]
-]
-
-export const afterDayP4 = [
-  [
-
+    '走在回家的路上，你突然感觉很饿。',
+    '你决定喝一杯蜜雪溜冰城，喝得很爽。',
+    stateObj('hair', 5),
   ],
   [
-
-  ]
+    '走在回家的路上，你突然感觉很饿。',
+    '你吃了华菜士，肚子…不行了…',
+    stateObj('hair', -5),
+  ],
+  [
+    '走在回家的路上，你突然感觉很饿。',
+    '你吃了麦当劳。',
+    '不要…吃…麦当劳…',
+    '你听到了奇怪的声音，你感觉很恐怖。',
+    stateObj('hair', -5),
+  ],
+  [
+    '走在回家的小路上，突然跳出来两个蒙面的人！',
+    '他们说要想过去的话，就交出身上的钱！',
+    ...judge(() => {
+      return special.has('大力')
+    }, [
+      '你力气很大！',
+      '你与他们开始战斗！你打败了他们！',
+      '还抢走了他们的钱！太坏了！',
+      stateObj('money', 100),
+      stateObj('brave', 5),
+      stateObj('charm', 5)
+    ], ...randomArr([
+        [
+          '你立刻报警并协助警察将他们缉拿归案。',
+          '警察叔叔表扬了你。',
+          stateObj('brave', 3),
+          stateObj('charm', 3)
+        ],
+        [
+          '你与他们开始了战斗！你被打败了。',
+          '只有乖乖交出身上的钱。',
+          stateObj('hair', -150),
+        ]
+      ])
+    )
+  ],
 ]

@@ -24,12 +24,12 @@ defineExpose({
 </script>
 
 <template>
-  <dev class="stateBorder" v-if="varList.length>0">
+  <div class="stateBorder" v-if="varList.length>0">
     <span v-for="v in varList">
       {{ varMap.has(v) ? varMap.get(v) : v }} : 
       {{ store.getters['sys/getStates'](v) }}
     </span>
-  </dev>
+  </div>
 </template>
 
 <style scoped>

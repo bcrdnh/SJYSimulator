@@ -231,8 +231,7 @@ const mutations = {
     }
   },
   setVar (state, {varName, content}) {
-    // console.log(varName)
-    // console.log(content)
+    // console.log(varName + ':' + content)
     let baseStates = state.globalVariable.baseStates
     baseStates.set(varName, content)
   },

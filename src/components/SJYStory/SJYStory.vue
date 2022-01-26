@@ -2,7 +2,17 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { setVar, changeVar, newTiggerPool, newWeightEventPool, bondingSelect, randomNum, randomArr } from '../../assets/utils.js'
+import {
+  setVar,
+  changeVar,
+  newTiggerPool,
+  newWeightEventPool,
+  bondingSelect,
+  randomNum,
+  randomArr,
+  randomState,
+  stateObj
+} from '../../assets/utils.js'
 import Player from '../Player.vue'
 import InfoBorder from './InfoBorder.vue'
 import FixedSelector from '../FixedSelector.vue'
@@ -24,12 +34,15 @@ import {
   assessment,
   weekendStartPlot,
   beforeWeekendEvening,
+  weekendEvening_labels,
+  weekendEvening_darams,
   noHair1,
   noHair2,
   endGamePlot,
   beforeDayP1,
   beforeDayP1SSR,
-  beforeDayP2
+  beforeDayP2,
+  afterDayP4
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -78,27 +91,91 @@ function beforeEvenyThingStart () {
   border.value.addDisplayVar('charm', '魅力')
   border.value.addDisplayVar('brave', '勇气')
   tiggerPool.addTigger('破屋', [
-    '由于昨晚住在破屋中，没能睡好，头发-2',
+    '破屋四处漏风，你感到很冷。头发减少。',
     {
       content: "头发-2",
-      clas: "red",
+      clas: "nes-text is-error",
       changeVar: {
         varName: "hair",
         num: -2
       }
     }
-  ], 10, true)
-  tiggerPool.addTigger('永恒霸王', [
-    '使用霸王洗发液洗头，由于洗发液用不完所以不会心疼，多洗了两次头。头发增加了一些',
+  ], 15, true)
+  tiggerPool.addTigger('大豪斯', [
+    '你看着自己的大房子，感觉非常爽。',
     {
       content: "头发+2",
-      clas: "blue",
+      clas: "nes-text is-primary",
       changeVar: {
         varName: "hair",
         num: 2
       }
     }
-  ], 10, true)
+  ], 15, true)
+  tiggerPool.addTigger('永恒霸王', [
+    '使用霸王洗发液洗头！头发增加了一些。',
+    {
+      content: "头发+2",
+      clas: "nes-text is-primary",
+      changeVar: {
+        varName: "hair",
+        num: 2
+      }
+    }
+  ], 20, true)
+  tiggerPool.addTigger('帅', [
+    '你被自己帅哭了。',
+    {
+      content: "魅力上升！",
+      clas: "nes-text is-primary",
+      changeVar: {
+        varName: "charm",
+        num: 2
+      }
+    }
+  ], 20, true)
+  tiggerPool.addTigger('旧书', [
+    '你翻了翻你的旧书，你感受到了知识的力量！',
+    {
+      content: "力量上升！",
+      clas: "nes-text is-primary",
+      changeVar: {
+        varName: "power",
+        num: 2
+      }
+    }
+  ], 20, true)
+  tiggerPool.addTigger('跑步机', [
+    '你久违地打算用用跑步机。',
+    '跑步机太久不用，坏了...',
+    '你尝试修复它。',
+    {
+      content: "智力上升！",
+      clas: "nes-text is-primary",
+      changeVar: {
+        varName: "inte",
+        num: 2
+      }
+    }
+  ], 20, true)
+  tiggerPool.addTigger('存钱罐', [
+    '你检查了下存钱罐，哇，有好多钱。',
+    '不存钱也会有钱吗？',
+    {
+      content: "获得金钱！",
+      clas: "nes-text is-primary",
+      changeVar: {
+        varName: "money",
+        num: 50
+      }
+    }
+  ], 20, true)
+  tiggerPool.addTigger('电饼铛', [
+    '你用电饼铛做了两个手抓饼。加了四根香肠。',
+    '吃得很爽。随机属性上升！',
+    randomState(3),
+    randomState(3)
+  ], 40, true)
   if (special.has('yq1')) luckCorrection = -5
   if (special.has('yq3')) luckCorrection = 5
   preloadPart()
@@ -115,7 +192,7 @@ function startStage () {
   SSWEP.addWEventObj(SRGoodEv, 15 + luckCorrection)
   SSWEP.addWEventObj(SSRGoodEv, 5 + luckCorrection)
   SSWEP.addWEventObj(SRBadEv, 15 - luckCorrection)
-  if (getStates('age') < 22) {
+  if (getStates('age') < 8) {
     player.value.setDaram(SSWEP.getWEvent(), startStage)
     changeVar('age', 1)
   } else {
@@ -125,13 +202,9 @@ function startStage () {
 
 function dayStart () {
   if (getStates('day') % 7 !== 0) {
-    player.value.setDaram(dayStartPlot, () => {
-      tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
-    })    
+    player.value.setDaram(dayStartPlot, dayP1)
   } else {
-    player.value.setDaram(weekendStartPlot, () => {
-      tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, dayP1)
-    })
+    player.value.setDaram(weekendStartPlot, dayP1)
   }
   // checkEnd()
 }
@@ -140,16 +213,6 @@ function dayP1 () {
   if (getStates('hair') <= 0) {
     player.value.setDaram(noHair1, dayOver)
     return
-  }
-  const beforeDayP1Event = () => {
-    if (randomNum() < 40) {
-      player.value.setDaram(randomArr(beforeDayP1), beforeDayP1SSREvent)
-    }
-  }
-  const beforeDayP1SSREvent = () => {
-    if (randomNum() < 3) {
-      player.value.setDaram(randomArr(beforeDayP1SSR), dayP1Event)
-    }
   }
   const dayP1Event = () => {
     if (getStates('day') % 7 !== 0) {
@@ -166,6 +229,21 @@ function dayP1 () {
       })
     }
   }
+  const beforeDayP1SSREvent = () => {
+    if (randomNum() < 3) {
+      player.value.setDaram(randomArr(beforeDayP1SSR()), dayP1Event)
+    } else {
+      dayP1Event()
+    }
+  }
+  const beforeDayP1Event = () => {
+    if (randomNum() < 40 && getStates('day') !== 1) {
+      player.value.setDaram(randomArr(beforeDayP1()), beforeDayP1SSREvent)
+    } else {
+      beforeDayP1SSREvent()
+    }
+
+  }
   beforeDayP1Event()
 }
 
@@ -176,11 +254,13 @@ function dayP2 () {
   }
   const beforeDayP2Event = () => {
     if (randomNum() < 40) {
-      player.value.setDaram(randomArr(beforeDayP2), dayP2Event)
+      player.value.setDaram(randomArr(beforeDayP2()), dayP2Event)
+    } else {
+      dayP2Event()
     }
   }
   const dayP2Event = () => {
-    player.value.setDaram(['到中午了。'], () => {
+    player.value.setDaram(['该找个地方吃饭了...'], () => {
       bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
     })
   }
@@ -209,7 +289,9 @@ function dayP4 () {
   const dayP4Event = () => {
     if (getStates('day') !== 6 && getStates('day') !== 13 && getStates('day') !== 20) {
       player.value.setDaram(['下班了，你决定.....'], () => {
-        bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, afterDayP4Event)
+        bondingSelect(dayEvening_labels(), dayEvening_Darams(), player, selector, () => {
+          tiggerPool.tigger(player.value, store.state.sys.globalVariable.special, afterDayP4Event)
+        })
       })
     } else {
       if (getStates('money') < 400) {
@@ -223,21 +305,23 @@ function dayP4 () {
   }
   const afterDayP4Event = () => {
     if (randomNum() < 40) {
-      player.value.setDaram(randomArr(beforeDayP2), dayOver)
+      player.value.setDaram(randomArr(afterDayP4()), dayOver)
+    } else {
+      dayOver()
     }
   }
   dayP4Event()
 }
 
 function lastTurn () {
-  player.value.setDaram(endGamePlot, () => {
+  player.value.setDaram(endGamePlot(), () => {
     router.push('/')
   })
 }
 
 function dayOver () {
   changeVar('day', 1)
-  player.value.setDaram(afterOneDay, () => {
+  player.value.setDaram(afterOneDay(), () => {
     dayStart()
   })
 }

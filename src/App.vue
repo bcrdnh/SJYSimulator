@@ -1,9 +1,25 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
+import Poptip from './components/Poptip.vue';
+import { router } from './router';
+const store = useStore()
+
+onMounted(() => {
+  store.dispatch('sys/resetStarter')
+})
+function restart () {
+  router.push('/')
+  store.dispatch('sys/resetStarter')
+}
 </script>
 
 <template>
   <div class="devMenu">
-    <div>版本号：3.0.1</div>
+    <Poptip title="重开">
+      <img src="./assets/png/buxudong.png" alt="重开" width="24" @click="restart()">
+    </Poptip>
+    <div>版本号：4.0.1</div>
   </div>
   <div  class="root nes-container is-rounded">
     <div class="anime-div">
@@ -24,6 +40,7 @@ body {
   width: 90%;
   min-width: 420px;
   overflow: hidden;
+  user-select: none;
 }
 .anime-div {
   height: 100%;

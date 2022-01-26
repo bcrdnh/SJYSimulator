@@ -14,7 +14,6 @@ const router = useRouter()
 
 onMounted(() => {
   fadeIn('.mySwiper', 0.3)
-  store.dispatch('sys/resetStarter')
 })
 
 function start () {
@@ -247,13 +246,13 @@ function start () {
         name: '旧书',
         summary: '你带了些旧书到工作地点。',
         specialName: '旧书',
-        cost: -30
+        cost: 30
       },
       {
         name: '跑步机',
         summary: '你有一台跑步机。',
         specialName: '跑步机',
-        cost: -30
+        cost: 30
       },
       {
         name: '愉快的童年',
@@ -271,6 +270,7 @@ function start () {
   }
   // setVar('health', 100)
   setVar('hair', 150)
+  setVar('work', 0)
   if (store.getters['sys/getStates']('difficulty') === 2) {
     setVar('workCheck0', 25)
     setVar('workCheck1', 45)
@@ -340,7 +340,7 @@ function saveVampireSJY () {
 
 <template>
   <div class="sjyEnter">
-    <h2>选择你的家翊！</h2>
+    <h2 style="font-family: zipx;">选择你的家翊！</h2>
     <swiper :effect="'cards'" :grabCursor="true" class="mySwiper" :loop="true">
         <swiper-slide>
           <div class="page nes-container with-title is-centered" :bodyStyle="{height: '100%'}">

@@ -17,10 +17,13 @@ export function randomArr (arr, warr = []) {
     }
     let target = randomNum(1, sum)
     for (const index in warr) {
+      console.log(index + ':' + target)
       if (target < warr[index]) {
         return arr[index]
       }
+      target -= warr[index]
     }
+    // return arr[randomNum(0, arr.length - 1)]
   }
 }
 
@@ -34,40 +37,54 @@ export function judge (judgeFunc, truePlot = ['t'], falsePlot = ['f']) {
 
 export const stateObj = (name, x) => {
   const special = store.state.sys.globalVariable.special
+  if (name === 'hair') {
+    x = Math.min(
+      store.getters['sys/getStates']('maxHair') - store.getters['sys/getStates']('hair'),
+      x
+    )
+    // console.log('hair:' + x)
+  }
   const powerCorrection = () => {
     let correction = 0
     if (special.has('power+')) correction += 0.4
+    if (special.has('易筋经')) correction += 0.2
     if (special.has('power-')) correction -= 0.4
     return correction
   }
   const staminaCorrection = () => {
     let correction = 0
     if (special.has('stamina+')) correction += 0.4
+    if (special.has('易筋经')) correction += 0.2
     if (special.has('stamina-')) correction -= 0.4
     return correction
   }
   const inteCorrection = () => {
     let correction = 0
     if (special.has('inte+')) correction += 0.4
+    if (special.has('电子书')) correction += 0.4
     if (special.has('inte-')) correction -= 0.4
     return correction
   }
   const braveCorrection = () => {
     let correction = 0
     if (special.has('brave+')) correction += 0.4
+    if (special.has('自拍杆')) correction += 0.2
     if (special.has('brave-')) correction -= 0.4
     return correction
   }
   const charmCorrection = () => {
     let correction = 0
     if (special.has('charm+')) correction += 0.4
+    if (special.has('自拍杆')) correction += 0.2
     if (special.has('charm-')) correction -= 0.4
     return correction
   }
   switch (name) {
     case 'power':
       return {
-        content: x > 0 ? '力量上升' : '力量下降',
+        content: x > 0 ?
+          '力量上升！力量上升了' + Math.abs(x + Math.floor(powerCorrection() * Math.abs(x))) + '点' :
+          '力量下降...力量下降了' + Math.abs(x + Math.floor(powerCorrection() * Math.abs(x))) + '点',
         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'power',
@@ -76,7 +93,9 @@ export const stateObj = (name, x) => {
       }
     case 'stamina':
       return {
-        content: x > 0 ? '耐力上升' : '耐力下降',
+        content: x > 0 ? 
+        '耐力上升！耐力上升了' + Math.abs(x + Math.floor(staminaCorrection() * Math.abs(x))) + '点' : 
+        '耐力下降...耐力下降了' + Math.abs(x + Math.floor(staminaCorrection() * Math.abs(x))) + '点',
         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'stamina',
@@ -85,7 +104,9 @@ export const stateObj = (name, x) => {
       }
     case 'inte': 
       return {
-        content: x > 0 ? '智力上升' : '智力下降',
+        content: x > 0 ? 
+        '智力上升！智力上升了' + Math.abs(x + Math.floor(inteCorrection() * Math.abs(x))) + '点' : 
+        '智力下降...智力下降了' + Math.abs(x + Math.floor(inteCorrection() * Math.abs(x))) + '点',
         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'inte',
@@ -94,16 +115,20 @@ export const stateObj = (name, x) => {
       }
     case 'charm':
       return {
-        content: x > 0 ? '魅力上升' : '魅力下降',
+        content: x > 0 ? 
+        '魅力上升！魅力上升了' + Math.abs(x + Math.floor(charmCorrection() * Math.abs(x))) + '点' : 
+        '魅力下降...魅力下降了' + Math.abs(x + Math.floor(charmCorrection() * Math.abs(x))) + '点',
         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'charm',
           num: x + Math.floor(charmCorrection() * Math.abs(x))
         }
       }
-    case 'barve': 
+    case 'brave': 
       return {
-        content: x > 0 ? '勇气上升' : '勇气下降',
+        content: x > 0 ? 
+        '勇气上升！勇气上升了' + Math.abs(x + Math.floor(braveCorrection() * Math.abs(x))) + '点' : 
+        '勇气下降...勇气下降了' + Math.abs(x + Math.floor(braveCorrection() * Math.abs(x))) + '点',
         clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'brave',
@@ -112,7 +137,9 @@ export const stateObj = (name, x) => {
       }
     case 'money':
       return {
-          content: x > 0 ? '获得金钱' : '付出金钱',
+          content: x > 0 ? 
+          '获得' + x + '点金钱！' : 
+          '失去' + Math.abs(x) + '点金钱...',
           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
           changeVar: {
             varName: 'money',
@@ -121,8 +148,10 @@ export const stateObj = (name, x) => {
       }
     case 'hair':
       return {
-        content: x > 0 ? '头发再生' : '脱发了',
-        clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
+        content: x >= 0 ? 
+        '头发再生！长出了' + x + '根头发！' : 
+        '脱发了...掉了' + Math.abs(x) + '根头发。',
+        clas: x >= 0 ? 'nes-text is-primary' : 'nes-text is-error',
         changeVar: {
           varName: 'hair',
           num: x
@@ -130,7 +159,9 @@ export const stateObj = (name, x) => {
       }
     case 'work':
         return {
-          content: x > 0 ? '获得业绩' : '失去业绩',
+          content: x > 0 ? 
+          '获得业绩！' : 
+          '失去业绩！',
           clas: x > 0 ? 'nes-text is-primary' : 'nes-text is-error',
           changeVar: {
             varName: 'work',
@@ -164,6 +195,7 @@ export function changeSpecial (name, num) {
 // =====================
 // states
 export function setVar (varName, content) {
+  // console.log(varName + ':' + content)
   store.dispatch('sys/setVar', {varName, content})
 }
 export function changeVar (varName, content) {
@@ -302,7 +334,7 @@ class WeightEventPool {
     for (const w of this.weightList) {
       sumw += w
     }
-    const num = randomNum(0, sumw)
+    let num = randomNum(0, sumw)
     let index = 0
     for (let i = 0; i < this.weightList.length; i++) {
       const weight = this.weightList[i]
@@ -310,6 +342,7 @@ class WeightEventPool {
         index = i
         break
       }
+      num -= weight
     }
     return this.poolList[index].getEvent()
   }
@@ -341,6 +374,7 @@ class TiggerPool {
     let count = 0
     let event = ['didnt set tigger event']
     const setDaram = player.setDaram ? player.setDaram : player.value.setDaram
+    player.clear ? player.clear() : player.value.clear()
     for (const tig of this.pool) {
       // console.log('now comes to new loop, now count is ' + count +',now mark is ' + this.mark)
       if (count++ < this.mark) continue

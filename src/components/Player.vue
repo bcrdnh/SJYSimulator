@@ -100,7 +100,7 @@ defineExpose({
   <div class="player">
     <div ref="msgBox" class="msgBox" @click="play()">
       <div v-for="p in msgList">
-        <Typed :text="p.content" :class="p.clas" @onStart="locked=true" @onEnd="locked=false"></Typed>
+        <Typed :text="p.content" :speed="10" :class="p.clas" @onStart="locked=true" @onEnd="locked=false"></Typed>
       </div>
       <!-- <div v-for="p in msgList" :class="p.clas">{{ p.content }}</div> -->
     </div>

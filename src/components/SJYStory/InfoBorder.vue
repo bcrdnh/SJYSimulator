@@ -7,7 +7,7 @@ const getStates = useStore().getters['sys/getStates']
   <div class="info-border">
     <div class="chat-title">
       <div class="chat-title-exit">&lt;</div>
-      <div class="chat-title-title"></div>
+      <div class="chat-title-title">公司微信群</div>
       <div class="chat-title-option">...</div>
     </div>
     <div class="chat-content">
