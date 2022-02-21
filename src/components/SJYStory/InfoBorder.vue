@@ -44,6 +44,7 @@ const getStates = useStore().getters['sys/getStates']
 .info-border {
   height: 100%;
   width: 100%;
+  /* min-width: 380px; */
 }
 .chat-title {
   height: 50px;
@@ -61,7 +62,7 @@ const getStates = useStore().getters['sys/getStates']
 }
 .chat-content {
   height: calc(100% - 50px);
-  overflow-y: auto;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
