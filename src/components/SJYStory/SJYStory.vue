@@ -192,7 +192,7 @@ function startStage () {
   SSWEP.addWEventObj(SRGoodEv, 15 + luckCorrection)
   SSWEP.addWEventObj(SSRGoodEv, 5 + luckCorrection)
   SSWEP.addWEventObj(SRBadEv, 15 - luckCorrection)
-  if (getStates('age') < 8) {
+  if (getStates('age') < 23) {
     player.value.setDaram(SSWEP.getWEvent(), startStage)
     changeVar('age', 1)
   } else {
