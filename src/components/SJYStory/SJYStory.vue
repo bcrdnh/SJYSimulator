@@ -298,7 +298,7 @@ function dayP4 () {
         player.value.setDaram(beforeWeekendEvening(), afterDayP4Event())
       } else {
         player.value.setDaram(beforeWeekendEvening(), () => {
-          bondingSelect(weekendEvening_labels(), weekendEvening_darams(), player, selector, afterDayP4Event)
+          bondingSelect(weekendEvening_labels(), weekendEvening_darams(), player, selector, afterDayP4Event())
         })
       }
     }    
