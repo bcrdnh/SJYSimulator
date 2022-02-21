@@ -1259,13 +1259,13 @@ export const beforeWeekendEvening = () => {
 }
 
 export const weekendEvening_labels = () => {
-  if (getVar('day') === 7) {
+  if (getVar('day') === 6) {
     return ['陈旧的电子书', '陈旧的枕头', '陈旧的电饼铛']
   }
-  if (getVar('day') === 14) {
+  if (getVar('day') === 13) {
     return ['崭新的易筋经', '崭新的自拍杆', '崭新的存钱罐']
   }
-  if (getVar('day') === 21) {
+  if (getVar('day') === 20) {
     return ['奇怪的手机', '奇怪的药物', '奇怪的彩票']
   }
 }
