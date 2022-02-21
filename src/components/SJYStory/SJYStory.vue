@@ -345,10 +345,10 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
     <!-- <StateBorder v-if="false"></StateBorder>
     <SpecialBorder v-if="false"></SpecialBorder> -->
     <div class="mediaPart">
-      <ComplexBorder ref="border" class="complexBorder"></ComplexBorder>
       <div class="info-border-content">
         <InfoBorder></InfoBorder>
       </div>
+      <ComplexBorder ref="border" class="complexBorder"></ComplexBorder>
     </div>
     <FixedSelector ref="selector"></FixedSelector>
     <Player ref="player" class="player"></Player>
@@ -372,6 +372,7 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .player {
   flex: 1;

@@ -102,18 +102,18 @@ function next () {
         <div class="nes-container with-title outerBox">
           <div class="title">{{ starter.pname&&starter.pname.baseStates?starter.pname.baseStates:'baseStates' }}</div>
           <div v-for="baseState in starter.baseStates" class="baseState">
-            <span style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</span>
-            <span>
+            <div style="min-width: 64px;margin: auto 0px;">{{ baseState.name }}:</div>
+            <div>
               <button type="button" class="nes-btn" @click="changeState(-10,baseState.varName)"> -10 </button>
               <button type="button" class="nes-btn" @click="changeState(-1,baseState.varName)" style="margin-left: 24px;"> - </button>
-            </span>
-            <span style="min-width: 36px;margin: auto 24px;text-align: center;" class="nes-text is-primary">
+            </div>
+            <div style="min-width: 36px;margin: auto 24px;text-align: center;" class="nes-text is-primary">
               {{ startOptions.baseStates.get(baseState.varName) }}
-            </span>
-            <span>
+            </div>
+            <div>
               <button type="button" class="nes-btn" @click="changeState(1,baseState.varName)" style="margin-right: 24px;"> + </button>
               <button type="button" class="nes-btn" @click="changeState(10,baseState.varName)"> +10 </button>
-            </span>          
+            </div>          
           </div>
         </div>
         <div class="nes-container with-title outerBox">
@@ -215,6 +215,7 @@ function next () {
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 .outerBox {
   margin-bottom: 24px;
