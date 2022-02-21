@@ -19,7 +19,7 @@ function restart () {
     <Poptip title="重开">
       <img src="./assets/png/buxudong.png" alt="重开" width="24" @click="restart()">
     </Poptip>
-    <div>版本号：4.0.3</div>
+    <div>版本号：4.1.0</div>
   </div>
   <div  class="root nes-container is-rounded">
     <div class="anime-div">
@@ -39,11 +39,12 @@ body {
   height: 90%;
   width: 90%;
   min-width: 420px;
-  overflow: hidden;
+  overflow: hidden auto;
   user-select: none;
+  display: flex;
 }
 .anime-div {
-  height: 100%;
+  flex: 1;
   width: 100%;
 }
 #app {

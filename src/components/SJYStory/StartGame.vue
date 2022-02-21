@@ -80,6 +80,10 @@ function changeSummary () {
   top: 100px;
   font-style: italic;
   font-size: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .start-menu-radio-box {
   font-family: zpix;

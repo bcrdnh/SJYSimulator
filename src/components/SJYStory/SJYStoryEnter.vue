@@ -268,7 +268,6 @@ function start () {
       }
     ]
   }
-  // setVar('health', 100)
   setVar('hair', 150)
   setVar('work', 0)
   if (store.getters['sys/getStates']('difficulty') === 2) {

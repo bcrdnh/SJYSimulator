@@ -187,6 +187,12 @@ const actions = {
   setItems ({ commit }, { id, value }) {
     commit('setStates', { id, value })
   },
+  saveGlobalVariable ({ commit }) {
+    commit('saveGlobalVariable')
+  },
+  loadGlobalVariable ({ commit }) {
+    commit('loadGlobalVariable')
+  }
 }
 
 const mutations = {
@@ -256,6 +262,29 @@ const mutations = {
   },
   setPlayerName (state, name) {
     state.playerName = name
+  },
+  saveGlobalVariable (state) {
+    let gv = {
+      baseStates: null,
+      special: null,
+      items: null
+    }
+    gv.baseStates = Array.from(state.globalVariable.baseStates.entries())
+    gv.special = Array.from(state.globalVariable.special.entries())
+    gv.items = Array.from(state.globalVariable.items.entries())
+    window.localStorage.setItem('globalVariable', JSON.stringify(gv))
+  },
+  loadGlobalVariable (state) {
+    console.log(window.localStorage.getItem('globalVariable'))
+    if (window.localStorage.getItem('globalVariable')) {
+      state.globalVariable.baseStates =
+      new Map(JSON.parse(window.localStorage.getItem('globalVariable')).baseStates)
+      state.globalVariable.special =
+      new Map(JSON.parse(window.localStorage.getItem('globalVariable')).special)
+      state.globalVariable.items =
+      new Map(JSON.parse(window.localStorage.getItem('globalVariable')).items)
+      console.log(localStorage.getItem('globalVariable'))
+    }
   }
 }
 

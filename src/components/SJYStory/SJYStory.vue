@@ -42,7 +42,9 @@ import {
   beforeDayP1,
   beforeDayP1SSR,
   beforeDayP2,
-  afterDayP4
+  afterDayP4,
+  weekendMorning_labels,
+  weekendMorning_darams
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -61,8 +63,12 @@ onMounted(() => {
   beforeEvenyThingStart()
 })
 function beforeEvenyThingStart () {
-  // console.log(store.state.sys)
-  setVar('playerName', store.state.sys.playerName)
+  
+  if (!getStates('playerName')) {
+    // 说明是直接刷新或者通过URL进入
+    store.dispatch('sys/loadGlobalVariable')
+  }
+  // setVar('playerName', store.state.sys.playerName)
   setVar('age', 6)
   setVar('day', 1)
   setVar('work', 0)
@@ -75,12 +81,12 @@ function beforeEvenyThingStart () {
   setVar('盖浇饭', false)
   setVar('海底捞', false)
   setVar('鸡公煲', false)
-    setVar('玩手机', false)
+  setVar('玩手机', false)
   setVar('锻炼身体', false)
   setVar('休息', false)
   setVar('巴结领导', false)
   setVar('究极摸鱼', false)
-    setVar('健身房', false)
+  setVar('健身房', false)
   setVar('酒吧', false)
   setVar('美发店', false)
   setVar('工地', false)
@@ -367,7 +373,7 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
   padding: 24px;
 }
 .mediaPart {
-  height: 40%;
+  height: fit-content;
   margin-bottom: 8px;
   width: 100%;
   display: flex;
@@ -376,15 +382,18 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
 }
 .player {
   flex: 1;
-  width: 100%;
-  height: 60%;
+  width: calc(100% - 8px);
+  min-height: 350px;
+  margin: 0 8px 8px 0;
 }
 .complexBorder {
-  width: 40%;
-  margin-right: 8px;
+  flex: 1;
+  margin: 0 8px 8px 0;
 }
 .info-border-content {
   flex: 1;
+  max-height: 250px;
   border: 4px solid #000000;
+  margin: 0 8px 8px 0;
 }
 </style>

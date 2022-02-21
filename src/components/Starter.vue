@@ -76,8 +76,10 @@ function next () {
   if (restPoint.value < 0) {
     console.error('not enought point')
   } else {
-    store.commit('sys/setPlayerName', playerName.value)
+    // store.commit('sys/setPlayerName', playerName.value)
+    store.dispatch('sys/setVar', {varName: 'playerName', content: playerName.value})
     store.dispatch('sys/finishStarter', startOptions.value)
+    store.dispatch('sys/saveGlobalVariable')
     changePage(route.query.mainPage ? route.query.mainPage : '/defaultDaram')
   }
 }
@@ -215,7 +217,7 @@ function next () {
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 .outerBox {
   margin-bottom: 24px;
