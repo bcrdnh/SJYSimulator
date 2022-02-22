@@ -289,7 +289,7 @@ const findFish = () => {
         content: '学会了锻炼身体！下午可以锻炼身体了！',
         clas: 'nes-text is-primary',
         setVar: {
-          varName: '玩手机',
+          varName: '锻炼身体',
           content: true
         }
       },
@@ -313,7 +313,7 @@ const findFish = () => {
       '之后你返回了公司',
     ]
   }
-  if (!getVar('锻炼身体')) {
+  if (!getVar('巴结领导')) {
     return [
       '你想起来你每次都是在早上就完成每日任务，因此下午都很无聊。',
       '你决定去公司找找有没有什么下午空闲时可以做的事情。',

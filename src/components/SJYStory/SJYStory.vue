@@ -65,7 +65,7 @@ function beforeEvenyThingStart () {
   
   if (!getStates('playerName')) {
     // 说明是直接刷新或者通过URL进入
-    store.dispatch('sys/loadGlobalVariable')
+    store.commit('sys/loadGlobalVariable')
   }
   // setVar('playerName', store.state.sys.playerName)
   setVar('age', 6)
