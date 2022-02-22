@@ -71,9 +71,9 @@ function beforeEvenyThingStart () {
     setVar('money', 200)
   }
   // setVar('playerName', store.state.sys.playerName)
-  setVar('age', 22)
-  setVar('day', 6)
-  setVar('work', 99)
+  setVar('age', 6)
+  setVar('day', 1)
+  setVar('work', 0)
   setVar('reganmianTime', 0)
   setVar('MDCTime', 0)
   setVar('gymTime', 0)
