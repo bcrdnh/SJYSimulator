@@ -32,7 +32,6 @@ import {
   dayEvening_Darams,
   afterOneDay,
   assessment,
-  weekendStartPlot,
   beforeWeekendEvening,
   weekendEvening_labels,
   weekendEvening_darams,
@@ -44,8 +43,7 @@ import {
   beforeDayP2,
   afterDayP4,
   weekendMorning_labels,
-  weekendMorning_darams,
-  assessment
+  weekendMorning_darams
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
@@ -347,7 +345,7 @@ function gameOver (word = ['{playerName}短暂的一生结束了。']) {
     <!-- <StateBorder v-if="false"></StateBorder>
     <SpecialBorder v-if="false"></SpecialBorder> -->
     <div class="mediaPart">
-      <div class="info-border-content">
+      <div class="info-border-content" v-if="store.state.sys.globalVariable.baseStates.has('day')">
         <InfoBorder></InfoBorder>
       </div>
       <ComplexBorder ref="border" class="complexBorder"></ComplexBorder>
