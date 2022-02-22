@@ -208,12 +208,7 @@ function startStage () {
 }
 
 function dayStart () {
-  if (getStates('day') % 7 !== 0) {
-    player.value.setDaram(dayStartPlot, dayP1)
-  } else {
-    player.value.setDaram(weekendStartPlot, dayP1)
-  }
-  // checkEnd()
+  player.value.setDaram(dayStartPlot(), dayP1)
 }
 
 function dayP1 () {

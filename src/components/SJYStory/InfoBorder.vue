@@ -13,7 +13,13 @@ const getStates = useStore().getters['sys/getStates']
     <div class="chat-content">
       <div class="nes-balloon from-left">
         今天是第{{getStates('day')}}天！考核将在本周日下午进行！
-        <span class="nes-text is-primary">需要的业绩为{{getStates('workCheck0')}}点。</span>
+        <span class="nes-text is-primary">
+          需要的业绩为
+          <span v-if="getStates('day')<=7">{{getStates('workCheck0')}}</span>
+          <span v-if="getStates('day')>7&&getStates('day')<=14">{{getStates('workCheck1')}}</span>
+          <span v-if="getStates('day')>14">{{getStates('workCheck2')}}</span>
+          点
+        </span>
         加油吧！
       </div>
       <div class="nes-balloon from-left" v-if="getStates('day')<=7">

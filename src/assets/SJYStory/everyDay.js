@@ -28,15 +28,42 @@ export const endStartStage = [
   '入职前一天晚上，你早早地就睡了。',
 ]
 
-export const dayStartPlot = [
-  '新的一天开始了！',
-  '今天是你入职的第{day}天！'
-]
-export const weekendStartPlot = [
-  '新的一天开始了！',
-  '今天是你入职的第{day}天！',
-  '不过今天是周日，可以放松一下了。',
-]
+// export const dayStartPlot = [
+//   '新的一天开始了！',
+//   '今天是你入职的第{day}天！'
+// ]
+// export const weekendStartPlot = [
+//   '新的一天开始了！',
+//   '今天是你入职的第{day}天！',
+//   '不过今天是周日，可以放松一下了。',
+// ]
+
+export const dayStartPlot = () => {
+  const normalDay = [
+    '新的一天开始了！',
+    '今天是你入职的第{day}天！'
+  ]
+  const weekend = [
+    '新的一天开始了！',
+    '今天是你入职的第{day}天！',
+    '不过今天是周日，可以放松一下了。',
+  ]
+  const newWeek = [
+    '新的一天开始了！',
+    '今天是你入职的第{day}天！',
+    {
+      content: '微信群似乎更新了！',
+      clas: 'nes-text is-primary',
+    },
+  ]
+  if (getVar('day') === 7 || getVar('day') === 14 || getVar('day') === 21) {
+    return weekend
+  }
+  if (getVar('day') === 8 || getVar('day') === 15) {
+    return newWeek
+  }
+  return normalDay
+}
 
 export const dayMorning_labels = () => {
   let labels = ['上班', '继续睡', '出门探险']
@@ -1115,42 +1142,46 @@ export const weekendMorning_darams = () => {
     [
       '今天就要评定了，趁着这个机会，还是再努力一下吧。',
       '你起身前往公司。',
+      '周日早上的工作似乎与平时不太一样。',
     ]
   ]
   if (getVar('day') === 7 ) {
+    darams[1].push('今天的工作充分发挥了你的智力，你也获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '今天的工作充分发挥了你的智力，你获得了比平时多一些的业绩。',
+        content: '根据你的智力，你获得了' + Math.ceil((getVar('inte') * 2 - base1) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: getVar('inte') >= base1 ? Math.ceil((getVar('inte') * 2 - base1) / 10) : 1
+          num: Math.ceil((getVar('inte') * 2 - base1) / 10)
         }
       }
     )
   } 
   if (getVar('day') === 14) {
     const state = (getVar('charm') + getVar('brave')) / 2
+    darams[1].push('今天的工作充分发挥了你的魅力与勇气，你也获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '今天的工作充分发挥了你的魅力与勇气，你获得了比平时多一些的业绩。',
+        content: '根据你的魅力与勇气，你获得了' + Math.ceil((state - base2) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: state >= base2 ? Math.ceil((state - base2) / 10) : 1
+          num: Math.ceil((state - base2) / 10)
         }
       }
     )
   }
   if (getVar('day') === 21) {
     const state = (getVar('power') + getVar('stamina')) / 2
+    darams[1].push('今天的工作充分发挥了你的力量与耐力，你获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '今天的工作充分发挥了你的力量与耐力，你获得了比平时多一些的业绩。',
+        content: '根据你的力量与耐力，你获得了' + Math.ceil((state - base3) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: state >= base3 ? Math.ceil((state - base3) / 10) : 1
+          num: Math.ceil((state - base3) / 10)
         }
       }
     )
@@ -1704,7 +1735,7 @@ export const afterDayP4 = () => [
       stateObj('money', 100),
       stateObj('brave', 5),
       stateObj('charm', 5)
-    ], ...randomArr([
+    ], randomArr([
         [
           '你立刻报警并协助警察将他们缉拿归案。',
           '警察叔叔表扬了你。',
