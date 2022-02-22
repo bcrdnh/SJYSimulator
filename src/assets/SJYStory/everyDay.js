@@ -1096,6 +1096,9 @@ export const weekendMorning_labels = () => {
 }
 
 export const weekendMorning_darams = () => {
+  const base1 = 50
+  const base2 = 80
+  const base3 = 100
   const darams = [
     [
       '难得的周末，还是在家睡觉吧。',
@@ -1121,7 +1124,7 @@ export const weekendMorning_darams = () => {
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: getVar('inte') >= 50 ? Math.floor((getVar('inte') - 50) / 10) : 1
+          num: getVar('inte') >= base1 ? Math.ceil((getVar('inte') * 2 - base1) / 10) : 1
         }
       }
     )
@@ -1134,7 +1137,7 @@ export const weekendMorning_darams = () => {
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: state >= 50 ? Math.floor((state - 50) / 10) : 1
+          num: state >= base2 ? Math.ceil((state - base2) / 10) : 1
         }
       }
     )
@@ -1147,7 +1150,7 @@ export const weekendMorning_darams = () => {
         clas: 'nes-text is-primary',
         changeVar: {
           name: 'work',
-          num: state >= 50 ? Math.floor((state - 50) / 10) : 1
+          num: state >= base3 ? Math.ceil((state - base3) / 10) : 1
         }
       }
     )
@@ -1406,6 +1409,14 @@ export const noHair1 = [
   '该不会说的是......',
   '你赶紧找了面镜子，发现自己的头发全都掉光了。',
   '你震惊得晕倒了过去，醒来的时候已经晚上了。',
+  {
+    content: '短暂的休息让你恢复了30根头发。',
+    clas: 'nes-text is-primary',
+    changeVar: {
+      varName: 'hair',
+      num: 30
+    }
+  },
   '......'
 ]
 
@@ -1416,6 +1427,14 @@ export const noHair2 = [
   '该不会说的是......',
   '你赶紧找了面镜子，发现自己的头发全都掉光了。',
   '你震惊得晕倒了过去，醒来的时候已经第二天早上了。',
+  {
+    content: '短暂的休息让你恢复了30根头发。',
+    clas: 'nes-text is-primary',
+    changeVar: {
+      varName: 'hair',
+      num: 30
+    }
+  },
   '......'
 ]
 

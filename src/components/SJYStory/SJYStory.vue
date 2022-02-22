@@ -44,7 +44,8 @@ import {
   beforeDayP2,
   afterDayP4,
   weekendMorning_labels,
-  weekendMorning_darams
+  weekendMorning_darams,
+  assessment
 } from '../../assets/SJYStory/everyDay.js'
 const player = ref(null)
 const border = ref(null)
