@@ -18,7 +18,6 @@ const store = useStore()
 const nowBorder = ref(0)
 
 function addDisplayVar (name, displayName) {
-  console.log(sborder)
   sborder.value.addDisplayVar(name, displayName)
 }
 function addVar (name) {

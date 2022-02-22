@@ -73,31 +73,31 @@ export const dayMorning_Darams = () => {
   let darams = []
   darams.push(doWork())
   darams.push(doSleep())
-  let evpool = [0]
+  let evpool = ['normal event']
   if (randomNum() < 20) {
     darams.push(fail()) // 失败事件
     return darams
   }
   if (!getVar('鸡公煲')) {
-    evpool.push(1)
+    evpool.push('find food')
   }
   if (!getVar('究极摸鱼')) {
-    evpool.push(2)
+    evpool.push('find fish')
   }
   if (!getVar('FF14')) {
-    evpool.push(3)
+    evpool.push('find place')
   }
   switch (evpool[randomNum(0, evpool.length - 1)]) {
-    case 0:
+    case 'normal event':
       darams.push(randomArr(normalEvent())) // 普通事件
       break;
-    case 1:
+    case 'find food':
       darams.push(findFood())
       break;
-    case 2:
+    case 'find fish':
       darams.push(findFish())
       break;
-    case 3:
+    case 'find place':
       darams.push(findPlace())
       break;
     default:
@@ -170,8 +170,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj('hair', 40),
-      '之后你返回了公司',
+      stateObj('hair', 40)
     ] // 初次找到事件
   }
   if (!getVar('麦当劳')) {
@@ -192,8 +191,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj('hair', 45),
-      '之后你返回了公司',
+      stateObj('hair', 45)
     ]
   }
   if (!getVar('盖浇饭')) {
@@ -212,8 +210,7 @@ const findFood = () => {
           content: true
         }
       },
-      stateObj('hair', 40),
-      '之后你返回了公司',
+      stateObj('hair', 40)
     ] // 初次找到事件
   }
   if (!getVar('海底捞')) {
@@ -231,8 +228,7 @@ const findFood = () => {
       },
       stateObj('hair', 60),
       randomState(),
-      randomState(),
-      '之后你返回了公司',      
+      randomState()      
     ]
   }
   if (!getVar('鸡公煲') && randomNum() < 33) {
@@ -255,8 +251,7 @@ const findFood = () => {
       },
       stateObj('hair', 50),
       randomState(),
-      randomState(),
-      '之后你返回了公司',     
+      randomState(),   
     ]
   }
   return randomArr(normalEvent())
@@ -276,7 +271,6 @@ const findFish = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('锻炼身体')) {
@@ -293,7 +287,6 @@ const findFish = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('休息')) {
@@ -310,7 +303,6 @@ const findFish = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('巴结领导')) {
@@ -327,7 +319,6 @@ const findFish = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('究极摸鱼') && randomNum() < 33) {
@@ -350,7 +341,6 @@ const findFish = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   return randomArr(normalEvent())
@@ -369,7 +359,6 @@ const findPlace = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   } 
   if (!getVar('酒吧')) {
@@ -385,7 +374,6 @@ const findPlace = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('美发店')) {
@@ -401,7 +389,6 @@ const findPlace = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('工地')) {
@@ -417,7 +404,6 @@ const findPlace = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   if (!getVar('FF14') && randomNum() < 33) {
@@ -434,7 +420,6 @@ const findPlace = () => {
           content: true
         }
       },
-      '之后你返回了公司',
     ]
   }
   return randomArr(normalEvent())
@@ -446,7 +431,7 @@ const fail = () => {
     '你跟着网上的推荐出门走了走。',
     '......',
     '实在是有点无聊，看来这次的推荐不太靠谱。',
-    '你失望地回家了。',
+    '你失望地回去了。',
     stateObj('hair', -5)
   ]
 }
@@ -1134,7 +1119,7 @@ export const weekendMorning_darams = () => {
         content: '身体的疲劳清空了，头发恢复。',
         clas: 'nes-text is-primary',
         changeVar: {
-          name: 'hair',
+          varName: 'hair',
           num: 100
         }
       }
@@ -1149,11 +1134,11 @@ export const weekendMorning_darams = () => {
     darams[1].push('今天的工作充分发挥了你的智力，你也获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '根据你的智力，你获得了' + Math.ceil((getVar('inte') * 2 - base1) / 10) + '点业绩。',
+        content: '根据你的智力，你获得了' + Math.ceil(Math.max(getVar('inte') * 2 - base1, 1) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
-          name: 'work',
-          num: Math.ceil((getVar('inte') * 2 - base1) / 10)
+          varName: 'work',
+          num: Math.ceil(Math.max(getVar('inte') * 2 - base1, 1) / 10)
         }
       }
     )
@@ -1163,11 +1148,11 @@ export const weekendMorning_darams = () => {
     darams[1].push('今天的工作充分发挥了你的魅力与勇气，你也获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '根据你的魅力与勇气，你获得了' + Math.ceil((state - base2) / 10) + '点业绩。',
+        content: '根据你的魅力与勇气，你获得了' + Math.ceil(Math.max(state - base2, 1) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
-          name: 'work',
-          num: Math.ceil((state - base2) / 10)
+          varName: 'work',
+          num: Math.ceil(Math.max(state - base2, 1) / 10)
         }
       }
     )
@@ -1177,11 +1162,11 @@ export const weekendMorning_darams = () => {
     darams[1].push('今天的工作充分发挥了你的力量与耐力，你获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '根据你的力量与耐力，你获得了' + Math.ceil((state - base3) / 10) + '点业绩。',
+        content: '根据你的力量与耐力，你获得了' + Math.ceil(Math.max(state - base3, 1) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
-          name: 'work',
-          num: Math.ceil((state - base3) / 10)
+          varName: 'work',
+          num: Math.ceil(Math.max(state - base3, 1) / 10)
         }
       }
     )
@@ -1189,7 +1174,7 @@ export const weekendMorning_darams = () => {
   return darams
 }
 
-export const assessment = (player, sussesCallback, gameOver) => {
+export const assessmentPlot = (player, sussesCallback, gameOver) => {
   const overWord = [
     [
       '今天是考核你业绩的日子。',
@@ -1254,28 +1239,14 @@ export const assessment = (player, sussesCallback, gameOver) => {
     '太好了，你不禁松了一口气。',
     '你开心地离开了公司。'
   ]
-  switch (getVar('day')) {
-    case 7:
-      if (getVar('work') < getVar('workCheck0')) {
-        gameOver(randomArr(overWord))
-      }
-      player.setDaram(pass, sussesCallback())
-      break
-    case 14:
-      if (getVar('work') < getVar('workCheck1')) {
-        gameOver(randomArr(overWord))
-      }
-      player.setDaram(pass, sussesCallback())
-      break
-    case 21:
-      if (getVar('work') < getVar('workCheck2')) {
-        gameOver(randomArr(overWord))
-      }
-      player.setDaram(pass, sussesCallback())
-      break;
-    default:
-      break
-  }
+  const workCheck = ['workCheck0', 'workCheck1', 'workCheck2'][getVar('day') / 7 - 1]
+  return getVar('work') < getVar(workCheck) ? randomArr(overWord) : pass
+}
+
+export const assessment = () => {
+  const workCheck = ['workCheck0', 'workCheck1', 'workCheck2'][getVar('day') / 7 - 1]
+  console.log(workCheck)
+  return getVar('work') >= getVar(workCheck)
 }
 
 export const beforeWeekendEvening = () => {
@@ -1341,7 +1312,7 @@ export const weekendEvening_darams = () => {
           content: '获得特质“电饼铛”',
           clas: 'nes-text is-primary',
           setSpecial: {
-            name: '',
+            name: '电饼铛',
             num: 1
           }
         }
@@ -1485,7 +1456,7 @@ export const endGamePlot = () => [
   '毕竟你需要经常加班，所以首先是对你的体能进行检测！',
   '你拥有{power}点力量，{stamina}点耐力！',
   {
-    'content': '你获得了' + lastTurnWork(getVar('power'), getVar('stamina')) + '点业绩！',
+    'content': '你获得了' + lastTurnWork(getVar('power'), getVar('stamina')) + '点奖励业绩！',
     'clas': 'nes-text is-primary',
     'changeVar': {
       'varName': 'work',
@@ -1494,7 +1465,7 @@ export const endGamePlot = () => [
   },
   '接下来是对工作能力的评定，你拥有{inte}点智力。',
   {
-    'content': '你获得了' + lastTurnWork(getVar('inte') * 1.8) + '点业绩！',
+    'content': '你获得了' + lastTurnWork(getVar('inte') * 1.8) + '点奖励业绩！',
     'clas': 'nes-text is-primary',
     'changeVar': {
       'varName': 'work',
@@ -1503,7 +1474,7 @@ export const endGamePlot = () => [
   },
   '接下来是对人际关系的评定，你拥有{charm}点魅力，{brave}点勇气。',
   {
-    'content': '你获得了' + lastTurnWork(getVar('charm') + getVar('brave')) + '点业绩！',
+    'content': '你获得了' + lastTurnWork(getVar('charm') + getVar('brave')) + '点奖励业绩！',
     'clas': 'nes-text is-primary',
     'changeVar': {
       'varName': 'work',
@@ -1512,13 +1483,26 @@ export const endGamePlot = () => [
   },
   '接下来是对你经济状况的考察，你拥有{money}点金币。',
   {
-    'content': '你获得了' + lastTurnWork(getVar('money') * 0.2) + '点业绩！',
+    'content': '你获得了' + lastTurnWork(getVar('money') * 0.2) + '点奖励业绩！',
     'clas': 'nes-text is-primary',
     'changeVar': {
       'varName': 'work',
       'num': lastTurnWork(getVar('money') * 0.2)
     }
   },
+  '根据难度，你获得了业绩加成。',
+  {
+    'content': '你获得了' + Math.ceil(getVar('work') * ((getVar('difficulty') + 1) / 10)) + '点难度奖励！',
+    'clas': 'nes-text is-primary',
+    'changeVar': {
+      'varName': 'work',
+      'num': Math.ceil(getVar('work') * ((getVar('difficulty') + 1) / 10))
+    }
+  },
+  '对你的考察结束了。你的最终业绩为' + getVar('work') + '点！',
+  '辛苦了！{playerName}！',
+  '你的努力工作不会白费！老板已经换了新车！新房子！',
+  '而你，就要开始新的工作了！'
   // TODO:加点结束语
 ]
 

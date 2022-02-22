@@ -31,6 +31,7 @@ import {
   dayEvening_labels,
   dayEvening_Darams,
   afterOneDay,
+  assessmentPlot,
   assessment,
   beforeWeekendEvening,
   weekendEvening_labels,
@@ -66,11 +67,13 @@ function beforeEvenyThingStart () {
   if (!getStates('playerName')) {
     // 说明是直接刷新或者通过URL进入
     store.commit('sys/loadGlobalVariable')
+    setVar('hair', 150)
+    setVar('money', 200)
   }
   // setVar('playerName', store.state.sys.playerName)
-  setVar('age', 6)
-  setVar('day', 1)
-  setVar('work', 0)
+  setVar('age', 22)
+  setVar('day', 6)
+  setVar('work', 99)
   setVar('reganmianTime', 0)
   setVar('MDCTime', 0)
   setVar('gymTime', 0)
@@ -210,24 +213,33 @@ function dayStart () {
 }
 
 function dayP1 () {
-  if (getStates('hair') <= 0) {
+  let rate = 50
+  if (getStates('hair') <= 0 && getStates('day') % 7 !== 0) {
     player.value.setDaram(noHair1, dayOver)
     return
   }
   const dayP1Event = () => {
-    if (getStates('day') % 7 !== 0) {
-      player.value.setDaram(['你决定......'], () => {
-        bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
+    if (randomNum() < rate) {
+      player.value.setDaram(['还有些空闲时间，上班前你似乎还能再做点什么。', '你决定......'], () => {
+        bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, () => {
+          rate -= 20
+          dayP1Event()
+        })
       })
     } else {
-      player.value.setDaram(['你决定......'], () => {
-        bondingSelect(weekendMorning_labels(),
-        weekendMorning_darams(),
-        player,
-        selector,
-        getStates('day') === 21 ? lastTurn : dayP2)
+      player.value.setDaram(['还有些空闲时间，上班前你似乎还能再做点什么。', '你决定......'], () => {
+        bondingSelect(dayMorning_labels(), dayMorning_Darams(), player, selector, dayP2)
       })
     }
+  }
+  const dayP1WeekendEvent = () => {
+    player.value.setDaram(['你决定......'], () => {
+      bondingSelect(weekendMorning_labels(),
+      weekendMorning_darams(),
+      player,
+      selector,
+      getStates('day') === 21 ? lastTurn : dayP2)
+    })
   }
   const beforeDayP1SSREvent = () => {
     if (randomNum() < 3) {
@@ -237,18 +249,19 @@ function dayP1 () {
     }
   }
   const beforeDayP1Event = () => {
-    if (randomNum() < 40 && getStates('day') !== 1) {
+    if (getStates('day') % 7 === 0) {
+      dayP1WeekendEvent()
+    } else if (randomNum() < 40 && getStates('day') !== 1) {
       player.value.setDaram(randomArr(beforeDayP1()), beforeDayP1SSREvent)
     } else {
       beforeDayP1SSREvent()
     }
-
   }
   beforeDayP1Event()
 }
 
 function dayP2 () {
-  if (getStates('hair') <= 0) {
+  if (getStates('hair') <= 0 && getStates('day') % 7 !== 0) {
     player.value.setDaram(noHair1, dayOver)
     return
   }
@@ -260,7 +273,7 @@ function dayP2 () {
     }
   }
   const dayP2Event = () => {
-    player.value.setDaram(['该找个地方吃饭了...'], () => {
+    player.value.setDaram(['总之，你在公司度过了上午剩余的时间，而现在，到中午了。', '该找个地方吃饭了...'], () => {
       bondingSelect(dayNoon_labels(), dayNoon_Darams(), player, selector, dayP3)
     })
   }
@@ -268,7 +281,7 @@ function dayP2 () {
 }
 
 function dayP3 () {
-  if (getStates('hair') <= 0) {
+  if (getStates('hair') <= 0 && getStates('day') % 7 !== 0) {
     player.value.setDaram(noHair2, dayStart)
     return
   }
@@ -277,12 +290,12 @@ function dayP3 () {
       bondingSelect(dayAfternoon_labels(), dayAfternoon_Darams(), player, selector, dayP4)
     })
   } else {
-    assessment(player.value, dayP4, gameOver)
+    assessment() ? player.value.setDaram(assessmentPlot(), dayP4) : gameOver(assessmentPlot())
   }
 }
 
 function dayP4 () {
-  if (getStates('hair') <= 0) {
+  if (getStates('hair') <= 0 && getStates('day') % 7 !== 0) {
     player.value.setDaram(noHair2, dayStart)
     return
   }
@@ -315,6 +328,10 @@ function dayP4 () {
 
 function lastTurn () {
   player.value.setDaram(endGamePlot(), () => {
+    if (!localStorage.getItem('finalWork') || localStorage.getItem('finalWork') < getStates('work')) {
+      localStorage.setItem('finalWork', getStates('work'))
+      localStorage.setItem('finalPlayer', getStates('playerName'))
+    }
     router.push('/')
   })
 }

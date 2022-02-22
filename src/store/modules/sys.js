@@ -283,7 +283,7 @@ const mutations = {
       new Map(JSON.parse(window.localStorage.getItem('globalVariable')).special)
       state.globalVariable.items =
       new Map(JSON.parse(window.localStorage.getItem('globalVariable')).items)
-      console.log(localStorage.getItem('globalVariable'))
+      console.warn('load local over')
     }
   }
 }

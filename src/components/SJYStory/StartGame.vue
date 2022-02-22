@@ -11,6 +11,8 @@ const summarys = ref([
   '几乎不可能通过的难度。'
 ])
 const difficulty = ref(0)
+const finalWork = window.localStorage.getItem('finalWork')
+const finalPlayer = window.localStorage.getItem('finalPlayer')
 const router = useRouter()
 
 function changeSummary () {
@@ -26,6 +28,9 @@ function changeSummary () {
     </div>
     <div class="start-menu-menu">
       press any button to start
+    </div>
+    <div class="start-menu-socre" v-if="finalWork">
+      最高分：{{finalPlayer}} : {{finalWork}}
     </div>
   </div>
   <div v-if="clicked">
@@ -84,6 +89,11 @@ function changeSummary () {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+.start-menu-socre {
+  position: absolute;
+  top: 40px;
+  right: 40px;
 }
 .start-menu-radio-box {
   font-family: zpix;
