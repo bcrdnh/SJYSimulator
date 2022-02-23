@@ -271,17 +271,17 @@ function start () {
   setVar('hair', 150)
   setVar('work', 0)
   if (store.getters['sys/getStates']('difficulty') === 2) {
-    setVar('workCheck0', 25)
-    setVar('workCheck1', 45)
-    setVar('workCheck2', 100)
-  } else if (store.getters['sys/getStates']('difficulty') === 1) {
     setVar('workCheck0', 20)
-    setVar('workCheck1', 35)
-    setVar('workCheck2', 80)
-  } else {
-    setVar('workCheck0', 15)
     setVar('workCheck1', 30)
-    setVar('workCheck2', 70)
+    setVar('workCheck2', 40)
+  } else if (store.getters['sys/getStates']('difficulty') === 1) {
+    setVar('workCheck0', 15)
+    setVar('workCheck1', 25)
+    setVar('workCheck2', 35)
+  } else {
+    setVar('workCheck0', 10)
+    setVar('workCheck1', 20)
+    setVar('workCheck2', 30)
   }
   store.dispatch('sys/setStarter', starter)
   changePage({path: '/starter', query: {mainPage: '/SJYStory'}})

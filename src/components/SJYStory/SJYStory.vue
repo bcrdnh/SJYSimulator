@@ -101,36 +101,36 @@ function beforeEvenyThingStart () {
   tiggerPool.addTigger('破屋', [
     '破屋四处漏风，你感到很冷。头发减少。',
     {
-      content: "头发-2",
+      content: "头发-5",
       clas: "nes-text is-error",
       changeVar: {
         varName: "hair",
-        num: -2
+        num: -5
       }
     }
   ], 15, true)
   tiggerPool.addTigger('大豪斯', [
     '你看着自己的大房子，感觉非常爽。',
     {
-      content: "头发+2",
+      content: "头发+5",
       clas: "nes-text is-primary",
       changeVar: {
         varName: "hair",
-        num: 2
+        num: 5
       }
     }
-  ], 15, true)
+  ], 30, true)
   tiggerPool.addTigger('永恒霸王', [
     '使用霸王洗发液洗头！头发增加了一些。',
     {
-      content: "头发+2",
+      content: "头发+5",
       clas: "nes-text is-primary",
       changeVar: {
         varName: "hair",
-        num: 2
+        num: 5
       }
     }
-  ], 20, true)
+  ], 30, true)
   tiggerPool.addTigger('帅', [
     '你被自己帅哭了。',
     {
@@ -138,10 +138,10 @@ function beforeEvenyThingStart () {
       clas: "nes-text is-primary",
       changeVar: {
         varName: "charm",
-        num: 2
+        num: 3
       }
     }
-  ], 20, true)
+  ], 50, true)
   tiggerPool.addTigger('旧书', [
     '你翻了翻你的旧书，你感受到了知识的力量！',
     {
@@ -149,10 +149,10 @@ function beforeEvenyThingStart () {
       clas: "nes-text is-primary",
       changeVar: {
         varName: "power",
-        num: 2
+        num: 3
       }
     }
-  ], 20, true)
+  ], 50, true)
   tiggerPool.addTigger('跑步机', [
     '你久违地打算用用跑步机。',
     '跑步机太久不用，坏了...',
@@ -162,10 +162,10 @@ function beforeEvenyThingStart () {
       clas: "nes-text is-primary",
       changeVar: {
         varName: "inte",
-        num: 2
+        num: 5
       }
     }
-  ], 20, true)
+  ], 50, true)
   tiggerPool.addTigger('存钱罐', [
     '你检查了下存钱罐，哇，有好多钱。',
     '不存钱也会有钱吗？',
@@ -174,16 +174,17 @@ function beforeEvenyThingStart () {
       clas: "nes-text is-primary",
       changeVar: {
         varName: "money",
-        num: 50
+        num: 100
       }
     }
-  ], 20, true)
+  ], 80, true)
   tiggerPool.addTigger('电饼铛', [
     '你用电饼铛做了两个手抓饼。加了四根香肠。',
     '吃得很爽。随机属性上升！',
     randomState(3),
-    randomState(3)
-  ], 40, true)
+    randomState(3),
+    randomState(3),
+  ], 80, true)
   if (special.has('yq1')) luckCorrection = -5
   if (special.has('yq3')) luckCorrection = 5
   preloadPart()
@@ -307,7 +308,7 @@ function dayP4 () {
         })
       })
     } else {
-      if (getStates('money') < 400) {
+      if (getStates('money') < 500) {
         player.value.setDaram(beforeWeekendEvening(), afterDayP4Event)
       } else {
         player.value.setDaram(beforeWeekendEvening(), () => {
@@ -331,8 +332,10 @@ function lastTurn () {
     if (!localStorage.getItem('finalWork') || localStorage.getItem('finalWork') < getStates('work')) {
       localStorage.setItem('finalWork', getStates('work'))
       localStorage.setItem('finalPlayer', getStates('playerName'))
+      gameOver(['你的最终分数为' + getStates('work'), '你打破了最高纪录！', '将返回主菜单。'])
+      return
     }
-    router.push('/')
+    gameOver(['你的最终分数为' + getStates('work'), '将返回主菜单。'])
   })
 }
 

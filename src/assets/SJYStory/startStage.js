@@ -611,7 +611,7 @@ export const SRBadEv = {
     '{age}岁那年，你去了迪士尼乐园。',
     '你和米奇合了影。',
     '合影之后他才告诉你要收费，你被坑了。',
-    stateObj('money', -100),
+    stateObj('money', -10),
   ],
   SRBadEv12: [
     '{age}岁那年，你第一次有了自己的女朋友。',
