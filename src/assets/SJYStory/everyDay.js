@@ -1140,7 +1140,7 @@ export const dayEvening_Darams = () => {
 }
 
 export const afterOneDay = () => {
-  return special.has('超级枕头') ? 
+  return !special.has('超级枕头') ? 
     [
       '时间不早了，你躺倒在床上。',
       '积攒了一天的疲劳让你很快就睡着了......',
@@ -1163,9 +1163,9 @@ export const weekendMorning_labels = () => {
 }
 
 export const weekendMorning_darams = () => {
-  const base1 = 30
-  const base2 = 40
-  const base3 = 50
+  const base1 = 40
+  const base2 = 50
+  const base3 = 60
   const darams = [
     [
       '难得的周末，还是在家睡觉吧。',
@@ -1189,7 +1189,7 @@ export const weekendMorning_darams = () => {
     darams[1].push('今天的工作充分发挥了你的智力，你也获得了比平时多一些的业绩。')
     darams[1].push(
       {
-        content: '根据你的智力，你获得了' + Math.ceil(Math.max(getVar('inte') * 2 - base1, 1) / 10) + '点业绩。',
+        content: '根据你的智力，你获得了' + Math.ceil(Math.max(getVar('inte') - base1, 1) / 10) + '点业绩。',
         clas: 'nes-text is-primary',
         changeVar: {
           varName: 'work',
